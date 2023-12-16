@@ -1,4 +1,4 @@
-<a href="https://twitter-v2-sand.vercel.app/" target="_blank" rel="noopener">
+<a href="https://cascadia-twitter-black-web-dev.vercel.app" target="_blank" rel="noopener">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="" />
     <img alt="Cascadia" src="" />
@@ -11,7 +11,7 @@
   
   <br />
   <figure>
-    <img src="" alt="Demo" />
+    <img src="https://cascadia-twitter-black-web-dev.vercel.app/preview.png" alt="Demo" />
     <figcaption>
       <p align="center">
         Cascadia in action
@@ -45,15 +45,15 @@ Cascadia users can:
 Cascadia uses [yarn](https://yarnpkg.com/) as a package manager, so make sure to [install](https://yarnpkg.com/getting-started/install) it first.
 
 ```bash
-git clone git@github.com:black-web-dev/cascadia-social-app.git
-cd cascadia-social-app
+git clone git@github.com:black-web-dev/cascadia-twitter.git
+cd cascadia-twitter
 yarn install
 yarn dev
 ```
 
 ### Environment Variables
 
-Before running the development server, make sure to create `.env` and `.env.local` files in the root directory of the project and add the required environment variables. You can use the examples provided in the repository as a starting point: [.env.example](https://github.com/black-web-dev/cascadia-social-app/blob/main/.env.axample) and [.env.local.example](https://github.com/black-web-dev/cascadia-social-app/blob/main/.env.local.example).
+Before running the development server, make sure to create `.env` and `.env.local` files in the root directory of the project and add the required environment variables. You can use the examples provided in the repository as a starting point: [.env.example](https://github.com/black-web-dev/cascadia-twitter/blob/main/.env.axample) and [.env.local.example](https://github.com/black-web-dev/cascadia-twitter/blob/main/.env.local.example).
 
 ```bash
 cp .env.example .env
@@ -78,9 +78,9 @@ This ensures that the local database is up-to-date with any changes made to the 
 
 ## Contributing
 
-- Missing something or found a bug? [Report here](https://github.com/black-web-dev/cascadia-social-app/issues).
-- Want to contribute? Check out our [contribution guide](https://github.com/black-web-dev/cascadia-social-app/blob/main/CONTRIBUTING.md).
+- Missing something or found a bug? [Report here](https://github.com/black-web-dev/cascadia-twitter/issues).
+- Want to contribute? Check out our [contribution guide](https://github.com/black-web-dev/cascadia-twitter/blob/main/CONTRIBUTING.md).
 
 ## License
 
-Cascadia is licensed under the [MIT License](https://github.com/black-web-dev/cascadia-social-app/blob/main/LICENSE.md).
+Cascadia is licensed under the [MIT License](https://github.com/black-web-dev/cascadia-twitter/blob/main/LICENSE.md).

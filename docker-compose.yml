@@ -22,7 +22,7 @@ services:
       - postgres-data:/app/postgres-data
     
     environment:
-      DATABASE_URL: postgres://rkkoizyu:yzXLngJBgQ4VCLl-AJKICN9gZ9TsTr8q@peanut.db.elephantsql.com/rkkoizyu?schema=public&connection_limit=10&pool_timeout=2
+      DATABASE_URL: postgres://user:password@localhost:5432/mydatabase?schema=public&connection_limit=10&pool_timeout=2
     ports:
       - 3000:3000
 volumes:
