@@ -71,6 +71,11 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
 
+# Copy scripts
+## ENV replacer
+COPY --chmod=+x ./scripts/setup-env.sh .
+RUN ["chmod", "-R", "777", "./public"]
+
 # Copy ENVs files
 COPY --from=builder /app/.env.production .
 
