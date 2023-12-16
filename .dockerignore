@@ -1,0 +1,12 @@
+Dockerfile
+.dockerignore
+node_modules
+next-env.d.ts
+/**/node_modules
+node_modules_linux
+npm-debug.log
+README.md
+.next
+.git
+*.tsbuildinfo
+.eslintcache
