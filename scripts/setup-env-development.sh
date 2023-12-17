@@ -1,7 +1,7 @@
-#/bin/bash
+#!/bin/bash
 
-touch ./.env.production
-echo -e ./env.production "# Database configuration\n
+touch ./.env
+echo -e ./env "# Database configuration\n
 # Replace with your database URL. For example: postgres://user:password@localhost:5432/mydatabase\n
 DATABASE_URL=\n
 # DATABASE_URL=\"postgres://default:olX96NDYnLtu@ep-quiet-dream-46841484.us-east-1.postgres.vercel-storage.com:5432/verceldb\"\n
@@ -27,7 +27,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=\n
 
 # Node environment\n
 # Set to \"development\" for development mode or \"production\" for production mode\n
-NODE_ENV=\"production\"\n
+NODE_ENV=\"development\"\n
 
 # Vercel KV configuration\n
 KV_URL=\"redis://default:d23ebed4bd2849639c2f86d182aac726@concise-flea-49536.kv.vercel-storage.com:49536\"\n

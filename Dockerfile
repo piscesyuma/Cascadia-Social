@@ -30,22 +30,24 @@ ENV NODE_ENV production
 # Copy dependencies and source code
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY prisma prisma
-CMD /bin/bash -c '/app/scripts/setup-env.sh'
 COPY . .
 
+# Copy scripts
+COPY --chmod=+x ./scripts/setup-env-development.sh ./
+COPY --chmod=+x ./scripts/setup-env-production.sh ./
+COPY --chmod=+x ./scripts/migrate-and-start.sh ./
+
 # Copy ENVs files
-ENV $(cat .env | xargs)
+RUN chmod +x setup-env-development.sh && ./setup-env-development.sh
+RUN chmod +x setup-env-production.sh && ./setup-env-production.sh
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-# Prisma generate, push Database
+# Prisma generate Database
 RUN yarn prisma generate
-# this feature will be done in compose.yml
-#RUN yarn prisma db push
 
 # Build app for production
 RUN yarn build
@@ -70,21 +72,22 @@ COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/migrate-and-start.sh .
 
-# Copy scripts
-## ENV replacer
-COPY --chmod=+x ./scripts/setup-env.sh .
-RUN ["chmod", "-R", "777", "./public"]
+RUN chmod +x migrate-and-start.sh
 
 # Copy ENVs files
+COPY --from=builder /app/.env .
 COPY --from=builder /app/.env.production .
+
+RUN ["chmod", "-R", "777", "./public"]
+RUN ["chmod", "-R", "777", "./prisma"]
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 #COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# ENTRYPOINT ["./entrypoint.sh"]
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
 
 USER nextjs
 
@@ -92,4 +95,6 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["./migrate-and-start.sh"]
+
+CMD ["yarn", "start"]
