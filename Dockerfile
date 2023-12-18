@@ -47,7 +47,7 @@ RUN chmod +x setup-env-production.sh && ./setup-env-production.sh
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # Prisma generate Database
-RUN yarn prisma generate
+RUN yarn prisma generate && chmod -R 777 ./node_modules/.prisma
 
 # Build app for production
 RUN yarn build
@@ -68,6 +68,13 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
@@ -75,19 +82,13 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/migrate-and-start.sh .
 
 RUN chmod +x migrate-and-start.sh
+RUN chmod +x prisma
 
 # Copy ENVs files
 COPY --from=builder /app/.env .
 COPY --from=builder /app/.env.production .
 
 RUN ["chmod", "-R", "777", "./public"]
-RUN ["chmod", "-R", "777", "./prisma"]
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
 
 USER nextjs
 
@@ -96,5 +97,3 @@ EXPOSE 3000
 ENV PORT 3000
 
 CMD ["./migrate-and-start.sh"]
-
-CMD ["yarn", "start"]
