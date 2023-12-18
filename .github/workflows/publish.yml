@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/black-web-dev/cascadia-twitter
+          images: ghcr.io/cascadiaFoundation/social-cascadia
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
