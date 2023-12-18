@@ -11,6 +11,7 @@ import { CloseIcon } from "@/assets/close-icon";
 import { TextInput } from "@/components/elements/text-input";
 
 import { AppleLogo } from "../assets/apple-logo";
+import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
 
 import { AuthButton } from "./AuthButton";
@@ -59,6 +60,15 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
               }}
               icon={<GoogleLogo />}
               text="Sign in with Google"
+            />
+            <AuthButton
+              onClick={() =>
+                signIn("github", {
+                  callbackUrl: "/home",
+                })
+              }
+              icon={<GithubLogo />}
+              text="Sign in with Github"
             />
 
             <AuthButton icon={<AppleLogo />} text="Sign in with Apple" />

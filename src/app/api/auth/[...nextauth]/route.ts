@@ -1,9 +1,15 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from "@/config";
+import {
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+} from "@/config";
 import { prisma } from "@/lib/prisma";
 
 const authOptions: AuthOptions = {
@@ -67,6 +73,10 @@ const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
+    }),
+    GithubProvider({
+      clientId: GITHUB_CLIENT_ID,
+      clientSecret: GITHUB_CLIENT_SECRET,
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')

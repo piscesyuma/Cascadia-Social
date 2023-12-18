@@ -1,6 +1,7 @@
 import { signIn } from "next-auth/react";
 
 import { AppleLogo } from "../assets/apple-logo";
+import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
 
 import { AuthButton } from "./AuthButton";
@@ -23,6 +24,16 @@ export const RegisterForm = () => {
           }
           icon={<GoogleLogo />}
           text="Sign up with Google"
+        />
+
+        <AuthButton
+          onClick={() =>
+            signIn("github", {
+              callbackUrl: "/home",
+            })
+          }
+          icon={<GithubLogo />}
+          text="Sign up with Github"
         />
 
         <AuthButton icon={<AppleLogo />} text="Sign up with Apple" />

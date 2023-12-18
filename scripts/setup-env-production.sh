@@ -18,6 +18,11 @@ NEXTAUTH_SECRET=\n
 GOOGLE_CLIENT_ID=\"391616151250-i942casg5chgefg0veh9f3pifbdkactb.apps.googleusercontent.com\"\n
 GOOGLE_CLIENT_SECRET=\n
 
+# Github OAuth configuration\n
+# Replace with your Github Client ID and Secret. These are obtained from the Github Developer Console.\n
+GITHUB_CLIENT_ID="db15af1e897d0fe912a7"\n
+GITHUB_CLIENT_SECRET=""\n
+
 # Supabase configuration
 # Replace with your Supabase URL. This is obtained from your Supabase project settings.\n
 NEXT_PUBLIC_SUPABASE_URL=\"https://bzquotasibuzwyhlneqp.supabase.co\"\n
