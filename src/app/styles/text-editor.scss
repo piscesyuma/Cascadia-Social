@@ -1,0 +1,11 @@
+@use "main.scss";
+@use "abstracts/media-query" as *;
+
+.rdw-editor-main {
+  height: calc(90vh - 200px) !important;
+  overflow: auto;
+}
+
+.rdw-editor-toolbar {
+  padding: 5px !important;
+}

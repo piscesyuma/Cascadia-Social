@@ -43,6 +43,7 @@ CREATE TABLE "User" (
     "location" TEXT,
     "url" TEXT,
     "description" TEXT,
+    "detail" TEXT,
     "protected" BOOLEAN NOT NULL DEFAULT false,
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,

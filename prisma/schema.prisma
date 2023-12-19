@@ -55,6 +55,7 @@ model User {
   location           String?
   url                String?
   description        String?
+  detail             String?
   protected          Boolean        @default(false)
   verified           Boolean        @default(false)
   email              String?        @unique

@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { DotIcon } from "@/assets/dot-icon";
+import { EditIcon } from "@/assets/edit-icon";
 import { LocationIcon } from "@/assets/location-icon";
 import { MessageIcon } from "@/assets/message-icon";
 import { ReceiveNotificationsIcon } from "@/assets/notifications-icon";
@@ -17,6 +18,7 @@ import { WebsiteIcon } from "../assets/website-icon";
 import { IUser } from "../types";
 import { following } from "../utils/following";
 
+import { EditDetailModal } from "./edit-detail-modal";
 import { EditProfileModal } from "./edit-profile-modal";
 import { InspectImageModal } from "./inspect-image-modal";
 import styles from "./styles/user-info.module.scss";
@@ -26,6 +28,7 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
   const { data: session } = useSession();
 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [isEditDetailModalOpen, setIsEditDetailModalOpen] = useState(false);
 
   const [inspectModal, setInspectModal] = useState({
     isOpen: false,
@@ -128,6 +131,17 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                 </button>
               )}
 
+              <button
+                aria-expanded="false"
+                aria-haspopup="menu"
+                aria-label="Edit Tweet Bio"
+                data-title="Edit Bio"
+                onClick={() => setIsEditDetailModalOpen(true)}
+                className={styles.notifications}
+              >
+                <EditIcon />
+              </button>
+
               <FollowButton
                 user_id={user?.id}
                 session_owner_id={session?.user?.id}
@@ -190,6 +204,13 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
               Followers
             </Link>
           </div>
+
+          {user?.detail && (
+            <div
+              className={styles.bio}
+              dangerouslySetInnerHTML={{ __html: user?.detail }}
+            />
+          )}
         </div>
       </div>
 
@@ -205,6 +226,21 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
             <EditProfileModal
               user={user}
               closeModal={() => setIsEditProfileModalOpen(false)}
+            />
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isEditDetailModalOpen && (
+          <Modal
+            onClose={() => console.log("close")}
+            disableScroll={true}
+            background="var(--clr-modal-background)"
+          >
+            <EditDetailModal
+              user={user}
+              closeModal={() => setIsEditDetailModalOpen(false)}
             />
           </Modal>
         )}

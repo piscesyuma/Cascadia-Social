@@ -59,6 +59,10 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 
+  em {
+    font-style: italic;
+  }
+
   .layout {
     margin: 0 auto;
     display: grid;

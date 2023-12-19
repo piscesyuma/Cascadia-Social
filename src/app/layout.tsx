@@ -5,7 +5,6 @@ import { ToastContainer, Slide } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import "./styles/layout.scss";
 import { Aside } from "@/features/aside";
 import { AuthModalTrigger } from "@/features/auth";
 import { MobileTweetButton } from "@/features/create-tweet";
@@ -18,6 +17,7 @@ import { Hamburger } from "./hamburger";
 import { JoinTwitter } from "./join-twitter";
 import styles from "./styles/toast.module.scss";
 import "./styles/layout.scss";
+import "./styles/text-editor.scss";
 
 export default async function RootLayout({
   children,

@@ -36,6 +36,7 @@ export async function GET(
 
         created_at: true,
         description: true,
+        detail: true,
         location: true,
         url: true,
         verified: true,
@@ -114,6 +115,44 @@ export async function PUT(request: Request) {
         url,
         profile_banner_url,
         profile_image_url,
+      },
+    });
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(error.message, { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  const { user_id, detail } = (await request.json()) as {
+    user_id: string;
+    detail: string;
+  };
+
+  const userSchema = z
+    .object({
+      user_id: z.string().cuid(),
+      detail: z.string(),
+    })
+    .strict();
+
+  const zod = userSchema.safeParse({
+    user_id,
+    detail,
+  });
+
+  if (!zod.success) {
+    return NextResponse.json(zod.error, { status: 400 });
+  }
+
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id: user_id,
+      },
+      data: {
+        detail,
       },
     });
 

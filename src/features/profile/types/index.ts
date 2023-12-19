@@ -33,6 +33,10 @@ export interface IProfile {
   };
 }
 
+export interface IBio {
+  detail: string | undefined;
+}
+
 export interface ILike extends Like {
   user: IUser;
   tweet: ITweet;
