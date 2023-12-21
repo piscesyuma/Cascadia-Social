@@ -12,10 +12,12 @@ import { MobileNavbar } from "@/features/navbar";
 import { Sidebar } from "@/features/sidebar";
 import { NextAuthProvider } from "@/utils/next-auth-provider";
 import { ReactQueryProvider } from "@/utils/react-query-provider";
+import WagmiProvider from "@/utils/wagmi-provider";
 
 import { Hamburger } from "./hamburger";
 import { JoinTwitter } from "./join-twitter";
 import styles from "./styles/toast.module.scss";
+
 import "./styles/layout.scss";
 import "./styles/text-editor.scss";
 
@@ -37,36 +39,38 @@ export default async function RootLayout({
       lang="en"
     >
       <body suppressHydrationWarning={true}>
-        <NextAuthProvider>
-          <ReactQueryProvider>
-            <div className="layout">
-              <MobileNavbar />
-              <MobileTweetButton />
+        <WagmiProvider>
+          <NextAuthProvider>
+            <ReactQueryProvider>
+              <div className="layout">
+                <MobileNavbar />
+                <MobileTweetButton />
 
-              <Sidebar />
+                <Sidebar />
 
-              <main>{children}</main>
+                <main>{children}</main>
 
-              <Aside />
+                <Aside />
 
-              <ToastContainer
-                position="bottom-center"
-                autoClose={2000}
-                hideProgressBar={true}
-                transition={Slide}
-                closeButton={false}
-                closeOnClick={true}
-                className={styles.container}
-                toastClassName={styles.toast}
-                role="alert"
-              />
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={2000}
+                  hideProgressBar={true}
+                  transition={Slide}
+                  closeButton={false}
+                  closeOnClick={true}
+                  className={styles.container}
+                  toastClassName={styles.toast}
+                  role="alert"
+                />
 
-              <AuthModalTrigger />
-              <JoinTwitter />
-              <Hamburger />
-            </div>
-          </ReactQueryProvider>
-        </NextAuthProvider>
+                <AuthModalTrigger />
+                <JoinTwitter />
+                <Hamburger />
+              </div>
+            </ReactQueryProvider>
+          </NextAuthProvider>
+        </WagmiProvider>
         <Analytics />
         <AxiomWebVitals />
       </body>

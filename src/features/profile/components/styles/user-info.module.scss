@@ -67,6 +67,7 @@ $avatar-top: calc(-1 * #{$avatar-size} / 2 - #{$avatar-border});
       justify-content: flex-end;
       padding: 1rem;
       flex-wrap: wrap;
+      column-gap: 10px;
 
       .editProfileButton {
         background-color: var(--clr-background);
@@ -196,6 +197,11 @@ $avatar-top: calc(-1 * #{$avatar-size} / 2 - #{$avatar-border});
             }
           }
         }
+      }
+
+      .detail {
+        padding: 20px 0px;
+        font-size: var(--fs-milli);
       }
 
       .stats {

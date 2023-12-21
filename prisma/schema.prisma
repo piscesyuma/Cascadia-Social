@@ -70,6 +70,8 @@ model User {
   statuses_count     Int            @default(0)
   profile_banner_url String?
   profile_image_url  String?
+  publicAddress      String?           @unique // Added to enable crypto authentication
+  cryptoLoginNonce   CryptoLoginNonce?
   accounts           Account[]
   sessions           Session[]
   tweets             Tweet[]
@@ -180,4 +182,11 @@ model Conversation {
   users      User[]
   messages   Message[]
   created_at DateTime  @default(now())
+}
+
+model CryptoLoginNonce {
+  userId     String   @unique
+  nonce      String
+  expires    DateTime
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

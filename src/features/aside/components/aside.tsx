@@ -8,6 +8,7 @@ import { Connect } from "@/features/connect";
 import { Footer } from "@/features/footer";
 import { Search } from "@/features/search";
 import { Trends } from "@/features/trends";
+import { ConnectWalletButton } from "@/features/web3";
 
 import styles from "./styles/aside.module.scss";
 
@@ -38,6 +39,9 @@ export const Aside = () => {
               <Connect />
             </div>
           )}
+          <div className={styles.connectWallet}>
+            <ConnectWalletButton text="Connect Wallets" />
+          </div>
         </>
       )}
       {!session && (

@@ -9,10 +9,12 @@ import * as Yup from "yup";
 import { CascadiaLogo } from "@/assets/cascadia-logo";
 import { CloseIcon } from "@/assets/close-icon";
 import { TextInput } from "@/components/elements/text-input";
+import { ConnectWalletButton } from "@/features/web3";
 
 import { AppleLogo } from "../assets/apple-logo";
 import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
+import { MetamaskLogo } from "../assets/metamask-logo";
 
 import { AuthButton } from "./AuthButton";
 import styles from "./styles/login-form.module.scss";
@@ -72,6 +74,19 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
             />
 
             <AuthButton icon={<AppleLogo />} text="Sign in with Apple" />
+          </div>
+
+          <div className={styles.divider}>
+            <span className={styles.line}></span>
+            <span className={styles.text}>or</span>
+            <span className={styles.line}></span>
+          </div>
+
+          <div className={styles.authButtons}>
+            <ConnectWalletButton
+              text="Sign in with Metamask"
+              icon={<MetamaskLogo />}
+            />
           </div>
 
           <div className={styles.divider}>
@@ -144,22 +159,6 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
               </form>
             )}
           </Formik>
-
-          {/* <form>
-            <div className={styles.inputContainer}>
-              <TextInput
-                onChange={onChange}
-                value={text}
-                placeholder="Phone, email, or username"
-                id="text"
-                name="Name"
-              />
-            </div>
-
-            <button type="submit" className={styles.submit}>
-              Next
-            </button>
-          </form> */}
 
           <button className={styles.forgotPassword}>Forgot password?</button>
         </div>

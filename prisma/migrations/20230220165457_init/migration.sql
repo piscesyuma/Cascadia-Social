@@ -59,6 +59,7 @@ CREATE TABLE "User" (
     "profile_banner_url" TEXT,
     "profile_image_url" TEXT,
     "pinned_tweet_id" TEXT,
+    "publicAddress" TEXT
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -176,6 +177,14 @@ CREATE TABLE "_ConversationToUser" (
     "B" TEXT NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "CryptoLoginNonce" (
+    "userId" TEXT NOT NULL,
+    "nonce" TEXT NOT NULL,
+    "expires" DATETIME NOT NULL,
+    CONSTRAINT "CryptoLoginNonce_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token");
 
@@ -202,6 +211,9 @@ CREATE UNIQUE INDEX "_ConversationToUser_AB_unique" ON "_ConversationToUser"("A"
 
 -- CreateIndex
 CREATE INDEX "_ConversationToUser_B_index" ON "_ConversationToUser"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "CryptoLoginNonce_userId_key" ON "CryptoLoginNonce"("userId");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -89,16 +89,28 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
         </div>
 
         <div className={styles.editProfile}>
-          {session?.user?.id === user?.id ? (
+          <div className={styles.visitorActions}>
             <button
-              aria-expanded="false"
-              aria-haspopup="menu"
-              aria-label="Edit profile"
-              onClick={() => setIsEditProfileModalOpen(true)}
-              className={styles.editProfileButton}
+              aria-label="Edit Tweet Detail"
+              data-title="Edit Detail"
+              onClick={() => setIsEditDetailModalOpen(true)}
+              className={styles.notifications}
             >
-              Edit Profile
+              <EditIcon />
             </button>
+          </div>
+          {session?.user?.id === user?.id ? (
+            <>
+              <button
+                aria-expanded="false"
+                aria-haspopup="menu"
+                aria-label="Edit profile"
+                onClick={() => setIsEditProfileModalOpen(true)}
+                className={styles.editProfileButton}
+              >
+                Edit Profile
+              </button>
+            </>
           ) : (
             <div className={styles.visitorActions}>
               {session && (
@@ -130,17 +142,6 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                   <ReceiveNotificationsIcon />
                 </button>
               )}
-
-              <button
-                aria-expanded="false"
-                aria-haspopup="menu"
-                aria-label="Edit Tweet Bio"
-                data-title="Edit Bio"
-                onClick={() => setIsEditDetailModalOpen(true)}
-                className={styles.notifications}
-              >
-                <EditIcon />
-              </button>
 
               <FollowButton
                 user_id={user?.id}
@@ -194,6 +195,13 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
             {user?.created_at && <UserJoinDate date={user?.created_at} />}
           </div>
 
+          {user?.detail && (
+            <div
+              className={styles.detail}
+              dangerouslySetInnerHTML={{ __html: user?.detail }}
+            />
+          )}
+
           <div className={styles.stats}>
             <Link href={`/${id}/following`} className={styles.stat}>
               <span className={styles.number}>{user?._count?.following}</span>
@@ -204,13 +212,6 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
               Followers
             </Link>
           </div>
-
-          {user?.detail && (
-            <div
-              className={styles.bio}
-              dangerouslySetInnerHTML={{ __html: user?.detail }}
-            />
-          )}
         </div>
       </div>
 
