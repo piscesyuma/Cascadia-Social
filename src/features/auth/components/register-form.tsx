@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import { AppleLogo } from "../assets/apple-logo";
 import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
+import { TwitterLogo } from "../assets/twitter-logo";
 
 import { AuthButton } from "./AuthButton";
 import styles from "./styles/register-form.module.scss";
@@ -34,6 +35,16 @@ export const RegisterForm = () => {
           }
           icon={<GithubLogo />}
           text="Sign up with Github"
+        />
+
+        <AuthButton
+          onClick={() =>
+            signIn("twitter", {
+              callbackUrl: "/home",
+            })
+          }
+          icon={<TwitterLogo />}
+          text="Sign up with Twitter"
         />
 
         <AuthButton icon={<AppleLogo />} text="Sign up with Apple" />

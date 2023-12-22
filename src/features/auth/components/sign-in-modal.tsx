@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import * as Yup from "yup";
 
 import { CascadiaLogo } from "@/assets/cascadia-logo";
@@ -14,6 +14,7 @@ import { ConnectWalletButton } from "@/features/web3";
 import { AppleLogo } from "../assets/apple-logo";
 import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
+import { TwitterLogo } from "../assets/twitter-logo";
 
 import { AuthButton } from "./AuthButton";
 import styles from "./styles/login-form.module.scss";
@@ -21,6 +22,21 @@ import styles from "./styles/login-form.module.scss";
 export const SignInModal = ({ onClose }: { onClose: () => void }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState({
+    google: false,
+    github: false,
+    twitter: false,
+    apple: false,
+  });
+
+  const handleSignIn = useCallback((provider: string) => {
+    setIsLoading((prev) => ({ ...prev, [provider]: true }));
+    signIn(provider, {
+      callbackUrl: "/home",
+    }).finally(() => {
+      setIsLoading((prev) => ({ ...prev, [provider]: false }));
+    });
+  }, []);
 
   return (
     <motion.div
@@ -54,22 +70,27 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
 
           <div className={styles.authButtons}>
             <AuthButton
-              onClick={() => {
-                signIn("google", {
-                  callbackUrl: "/home",
-                });
-              }}
+              onClick={() => handleSignIn("google")}
               icon={<GoogleLogo />}
               text="Sign in with Google"
+              disabled={isLoading.google}
+              isLoading={isLoading.google}
             />
+
             <AuthButton
-              onClick={() =>
-                signIn("github", {
-                  callbackUrl: "/home",
-                })
-              }
+              onClick={() => handleSignIn("github")}
               icon={<GithubLogo />}
               text="Sign in with Github"
+              disabled={isLoading.github}
+              isLoading={isLoading.github}
+            />
+
+            <AuthButton
+              onClick={() => handleSignIn("twitter")}
+              icon={<TwitterLogo />}
+              text="Sign in with Twitter"
+              disabled={isLoading.twitter}
+              isLoading={isLoading.twitter}
             />
 
             <AuthButton icon={<AppleLogo />} text="Sign in with Apple" />

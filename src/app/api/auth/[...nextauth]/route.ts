@@ -1,9 +1,9 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import TwitterProvider from "next-auth/providers/twitter";
 import { SiweMessage } from "siwe";
 
 import {
@@ -11,17 +11,10 @@ import {
   GITHUB_CLIENT_SECRET,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
+  TWITTER_CLIENT_ID,
+  TWITTER_CLIENT_SECRET,
 } from "@/config";
 import { prisma } from "@/lib/prisma";
-
-const prismaAdapter = PrismaAdapter(prisma);
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-prismaAdapter.createUser = (data: any) => {
-  console.log("Data: ", data);
-  return prisma.user.create({ data });
-};
 
 const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -81,7 +74,7 @@ const authOptions: AuthOptions = {
     // error: "/auth/signin",
   },
 
-  adapter: prismaAdapter,
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
@@ -90,6 +83,10 @@ const authOptions: AuthOptions = {
     GithubProvider({
       clientId: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
+    }),
+    TwitterProvider({
+      clientId: TWITTER_CLIENT_ID,
+      clientSecret: TWITTER_CLIENT_SECRET,
     }),
     CredentialsProvider({
       id: "crypto",

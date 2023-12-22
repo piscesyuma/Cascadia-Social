@@ -1,11 +1,10 @@
-"use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditorState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState } from "react";
+import { ComponentType, JSX, useCallback, useEffect, useState } from "react";
 import { EditorProps } from "react-draft-wysiwyg";
 
 import { BackArrowIcon } from "@/assets/back-arrow-icon";
@@ -18,10 +17,7 @@ import { IBio, IUser } from "../types";
 import styles from "./styles/edit-detail-modal.module.scss";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const Editor = dynamic<EditorProps>(
-  () => import("react-draft-wysiwyg").then((module) => module.Editor),
-  { ssr: false },
-);
+let Editor: ComponentType<EditorProps> | null = null;
 
 export const EditDetailModal = ({
   user,
@@ -54,6 +50,7 @@ export const EditDetailModal = ({
   const [editorState, setEditorState] = useState<EditorState>(() =>
     EditorState.createEmpty(),
   );
+  const [editorLoaded, setEditorLoaded] = useState(false);
   const [profile, setProfile] = useState<IBio>({
     detail: "",
   });
@@ -82,6 +79,14 @@ export const EditDetailModal = ({
     setEditorState(moveFocusState); // update state
   }, [user.detail]);
 
+  useEffect(() => {
+    Editor = dynamic<EditorProps>(
+      () => import("react-draft-wysiwyg").then((module) => module.Editor),
+      { loading: () => <p>Loading...</p>, ssr: false },
+    );
+    setEditorLoaded(true);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -99,7 +104,7 @@ export const EditDetailModal = ({
           {innerWidth <= 700 ? <BackArrowIcon /> : <CloseIcon />}
         </CloseButton>
 
-        <h2>Edit Bio</h2>
+        <h2>Edit Detail</h2>
 
         <button
           aria-label="Save"
@@ -112,17 +117,22 @@ export const EditDetailModal = ({
       </div>
 
       <div className={styles.form}>
-        <Editor
-          editorState={editorState}
-          wrapperClassName="bio-wrapper"
-          editorClassName="bio-editor"
-          onEditorStateChange={handleChange}
-          customStyleMap={{
-            greenBackground: {
-              backgroundColor: "green",
-            },
-          }}
-        />
+        {editorLoaded && Editor ? (
+          <Editor
+            editorState={editorState}
+            wrapperClassName="detail-wrapper"
+            editorClassName="detail-editor"
+            toolbarClassName="detail-toolbar"
+            onEditorStateChange={handleChange}
+            toolbar={
+              {
+                // options: ["link"],
+              }
+            }
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </motion.div>
   );
