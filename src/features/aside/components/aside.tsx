@@ -40,7 +40,7 @@ export const Aside = () => {
             </div>
           )}
           <div className={styles.connectWallet}>
-            <ConnectWalletButton text="Connect Wallets" />
+            <ConnectWalletButton text="Connect Wallet" />
           </div>
         </>
       )}

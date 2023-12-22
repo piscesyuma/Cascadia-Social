@@ -14,7 +14,6 @@ import { ConnectWalletButton } from "@/features/web3";
 import { AppleLogo } from "../assets/apple-logo";
 import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
-import { MetamaskLogo } from "../assets/metamask-logo";
 
 import { AuthButton } from "./AuthButton";
 import styles from "./styles/login-form.module.scss";
@@ -83,10 +82,7 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
           </div>
 
           <div className={styles.authButtons}>
-            <ConnectWalletButton
-              text="Sign in with Metamask"
-              icon={<MetamaskLogo />}
-            />
+            <ConnectWalletButton type="signin" text="Sign in with Wallet" />
           </div>
 
           <div className={styles.divider}>

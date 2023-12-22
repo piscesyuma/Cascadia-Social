@@ -80,6 +80,7 @@
   }
 
   .title {
+    text-align: center;
     font-size: var(--fs-kilo);
     font-weight: var(--fw-500);
     margin-bottom: 1em;
@@ -187,6 +188,6 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    padding-bottom: 8rem;
+    padding-bottom: 4rem;
   }
 }

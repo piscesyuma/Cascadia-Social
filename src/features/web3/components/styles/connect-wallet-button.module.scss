@@ -1,35 +1,16 @@
 .container {
-  width: 100%;
-  padding: 0.7em;
-  border-radius: 100vmax;
-  font-size: var(--fs-milli);
-  font-weight: var(--fw-700);
-  color: var(--clr-dark);
-  background-color: var(--clr-light);
-  border: 1px solid var(--clr-auth-border);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  flex-direction: column;
+  row-gap: 10px;
 
-  &:hover {
-    background-color: var(--clr-auth-button-hover);
-  }
-
-  &:active {
-    background-color: var(--clr-auth-button-active);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--clr-light);
-    background-color: var(--clr-auth-button-hover);
-  }
-
-  svg {
-    width: var(--fs-h2);
-    height: var(--fs-h2);
-    fill: var(--clr-dark);
-    margin-right: 0.5em;
+  .errorMessage {
+    width: 100%;
+    font-size: var(--fs-milli);
+    font-weight: var(--fw-700);
+    padding: 1em 0.6em;
+    border-radius: 0.5rem;
+    font-size: var(--fs-nano);
+    background-color: rgb(241, 60, 60);
+    color: white;
   }
 }

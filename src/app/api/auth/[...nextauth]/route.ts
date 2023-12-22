@@ -105,7 +105,7 @@ const authOptions: AuthOptions = {
           | undefined,
         // req: Pick<RequestInternal, "body" | "headers" | "method" | "query">,
       ) {
-        if (!credentials) return null;
+        if (!credentials) throw new Error("Invalid credentials");
 
         // Get user from database with their generated nonce
         const user = await prisma.user.findUnique({
@@ -113,7 +113,7 @@ const authOptions: AuthOptions = {
           include: { cryptoLoginNonce: true },
         });
 
-        if (!user?.cryptoLoginNonce) return null;
+        if (!user?.cryptoLoginNonce) throw new Error("Invalid Nonce");
 
         // Everything is fine, clear the nonce and return the user
         await prisma.cryptoLoginNonce.delete({ where: { userId: user.id } });
@@ -132,18 +132,14 @@ const authOptions: AuthOptions = {
           // Check that the signer address matches the public address
 
           // Check that the nonce is not expired
-          if (user.cryptoLoginNonce.expires < new Date()) return null;
-          return {
-            id: siwe.address,
-            publicAddress: user.publicAddress,
-          };
+          if (user.cryptoLoginNonce.expires < new Date())
+            throw new Error("Expired Nonce");
+
+          return user;
         } else if (typeof message.chainId === "string") {
-          return {
-            id: message.address,
-            publicAddress: user.publicAddress,
-          };
+          return user;
         } else {
-          return null;
+          throw new Error("The wallet address is incorrect.");
         }
       },
     }),
@@ -179,7 +175,6 @@ const authOptions: AuthOptions = {
           }
         } catch (error) {
           // Return null if user data could not be retrieved
-          console.log(error);
           throw new Error("The username or password you entered is incorrect.");
         }
       },

@@ -14,31 +14,31 @@ import { prisma } from "@/lib/prisma";
 //  the nonce we send back, with that they prove that they are the owners
 //  of the public address they gave.
 export async function POST(request: Request) {
-  const { name, publicAddress } = (await request.json()) as {
+  const { name, email, publicAddress } = (await request.json()) as {
     name: string;
+    email: string;
     publicAddress: string;
   };
 
   const useSchema = z
     .object({
-      name: z.string(),
       publicAddress: z.string(),
     })
     .strict();
 
-  const zod = useSchema.safeParse({ name, publicAddress });
+  const zod = useSchema.safeParse({ publicAddress });
 
   if (!zod.success) {
     return NextResponse.json(zod.error, { status: 400 });
   }
 
   try {
-    const user = await prisma.user.findUnique({
-      where: { name, publicAddress },
-    });
+    const where = name && email ? { name, email } : { publicAddress };
+
+    const user = await prisma.user.findUnique({ where });
 
     if (!user)
-      return NextResponse.json("Invalid wallet address", { status: 402 });
+      return NextResponse.json("Unregisterd wallet address", { status: 402 });
 
     // Note: this nonce is displayed in the user's wallet for them to sign
     //  you can use any other representation of the nonce that you want
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
 
     // Create or update the nonce for the given user
     await prisma.user.upsert({
-      where: { name, publicAddress },
+      where,
       create: {
         name,
         publicAddress,
@@ -62,6 +62,7 @@ export async function POST(request: Request) {
         },
       },
       update: {
+        publicAddress,
         cryptoLoginNonce: {
           upsert: {
             create: {
