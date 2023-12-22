@@ -19,7 +19,8 @@ export const chooseImages = async ({
       return toast("Please choose either 1 GIF or upto 4 photos.");
     }
 
-    for (const file of files) {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
