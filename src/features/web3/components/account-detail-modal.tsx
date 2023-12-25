@@ -87,7 +87,9 @@ const AccountDetailModal = ({
             </div>
           )}
           {session?.user?.publicAddress && !isExistedAddress && (
-            <div>Please switch verified wallet address</div>
+            <div className={styles.errorMessage}>
+              Please switch verified wallet address
+            </div>
           )}
           {error && <div className={styles.errorMessage}>{error}</div>}
           <div className={styles.actions}>
