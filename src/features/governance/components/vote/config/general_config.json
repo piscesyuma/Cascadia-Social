@@ -1,0 +1,20 @@
+{
+  "maintainer": {
+    "name": "Cascadia",
+    "url": "/#"
+  },
+  "github": {
+    "reportIssue": "https://github.com/forbole/big-dipper-2.0-cosmos/issues"
+  },
+  "previewImage": "/images/preview.png",
+  "version": "base-v2.1.0",
+  "chain": {
+    "CHAINID": 11029,
+    "NAME": "cascadia_11029-1",
+    "TOKEN": "aCC",
+    "RPC": "https://testnet.cascadia.foundation",
+    "REST_RPC": "https://lcd.cascadia.foundation",
+    "DENOM": "aCC",
+    "EXPLORER": "https://explorer.cascadia.foundation"
+  }
+}

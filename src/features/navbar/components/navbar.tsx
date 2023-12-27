@@ -5,6 +5,7 @@ import { BellActive, Bell } from "../assets/bell-icon";
 import { Bookmark, BookmarkActive } from "../assets/bookmark-icon";
 import { Envelope, EnvelopeActive } from "../assets/envelope-icon";
 import { Gear, GearActive } from "../assets/gear-icon";
+import { Governance, GovernanceActive } from "../assets/governance-icon";
 import { Hashtag, HashtagActive } from "../assets/hashtag-icon";
 import { HomeActive, Home } from "../assets/home-icon";
 import { User, UserActive } from "../assets/user-icon";
@@ -59,6 +60,17 @@ export const Navbar = () => {
           title={`Bookmarks`}
           path={`bookmarks`}
           isActive={pathname === `/bookmarks`}
+        />
+      )}
+
+      {session && (
+        <NavItem
+          icon={
+            pathname === `/governance` ? <GovernanceActive /> : <Governance />
+          }
+          title={`Governance`}
+          path={`governance`}
+          isActive={pathname === `/governance`}
         />
       )}
 

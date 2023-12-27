@@ -20,8 +20,13 @@ GOOGLE_CLIENT_SECRET=\n
 
 # Github OAuth configuration\n
 # Replace with your Github Client ID and Secret. These are obtained from the Github Developer Console.\n
-GITHUB_CLIENT_ID="db15af1e897d0fe912a7"\n
-GITHUB_CLIENT_SECRET=""\n
+GITHUB_CLIENT_ID=\"db15af1e897d0fe912a7\"\n
+GITHUB_CLIENT_SECRET=\n
+
+# Twitter Auth configuration\n
+# Replace with your Twitter Client ID and Secret. These are obtained from the Twitter Developer Console.\n
+TWITTER_CLIENT_ID=\"UVRXcVJ2T0xySV9wSXZGdGdvMTM6MTpjaQ\"\n
+TWITTER_CLIENT_SECRET=\n
 
 # Supabase configuration
 # Replace with your Supabase URL. This is obtained from your Supabase project settings.\n
@@ -42,4 +47,8 @@ KV_REST_API_READ_ONLY_TOKEN=\n
 
 # @upstash/redis configuration\n
 REDIS_URL=\"https://us1-witty-bulldog-41625.upstash.io\"\n
-REDIS_TOKEN="
+REDIS_TOKEN=\n
+
+NEXT_PUBLIC_REST_RPC=\"https://lcd.cascadia.foundation\"\n
+NEXT_PUBLIC_RPC=\"https://testnet.cascadia.foundation\"\n
+"

@@ -1,0 +1,102 @@
+@use "abstracts/media-query.scss" as *;
+
+.container {
+  position: sticky;
+  top: 56px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  height: fit-content;
+
+  .total {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .totalAmount {
+      font-weight: var(--fw-400);
+      font-size: var(--fs-h3);
+    }
+
+    .totalPercent {
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+
+      .label {
+        font-size: var(--fs-pico);
+      }
+
+      .percent {
+        font-size: var(--fs-pico);
+      }
+    }
+  }
+
+  .currentVP {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    column-gap: 10px;
+  }
+
+  .legend {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1em;
+
+    .voteItem {
+      position: relative;
+      padding-left: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+      justify-content: space-between;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 10px;
+        background: pink;
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+      }
+
+      .label {
+        font-size: var(--fs-pico);
+        text-transform: capitalize;
+      }
+    }
+
+    .yes {
+      &::before {
+        background: #03360d;
+      }
+    }
+
+    .no {
+      &::before {
+        background: #0063c7;
+      }
+    }
+
+    .veto {
+      &::before {
+        background: #c6c6c6;
+      }
+    }
+
+    .abstain {
+      &::before {
+        background: #2f2f2f;
+      }
+    }
+  }
+}

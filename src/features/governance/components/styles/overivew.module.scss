@@ -1,0 +1,49 @@
+@use "abstracts/media-query.scss" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  @include mq("medium") {
+    border-right: 1px solid var(--clr-border);
+    padding-right: 2em;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+    border-bottom: 1px solid var(--clr-border);
+
+    .title {
+      font-weight: var(--fw-700);
+      font-size: var(--fs-h2);
+      cursor: pointer;
+    }
+
+    .tag {
+      text-transform: capitalize;
+      font-weight: var(--fw-700);
+    }
+  }
+
+  .content {
+    display: grid;
+    margin-top: 2em 0;
+    row-gap: 24px;
+
+    .value {
+      text-transform: capitalize;
+    }
+
+    @include mq("xx-large") {
+      grid-template-columns: 200px auto;
+    }
+  }
+
+  @include mq("xx-large") {
+    grid-column: 1/3;
+  }
+}

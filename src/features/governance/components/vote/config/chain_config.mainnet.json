@@ -1,0 +1,37 @@
+{
+  "title": "Validator Explorer",
+  "network": "Cascadia",
+  "icon": "/images/icon.svg",
+  "logo": {
+    "default": "/images/logo.svg",
+    "dark": "/images/logo_dark.svg"
+  },
+  "prefix": {
+    "consensus": "cascadiavalcons",
+    "validator": "cascadiavaloper",
+    "account": "cascadia"
+  },
+  "genesis": {
+    "time": "2021-07-13T08:00:00",
+    "height": 1
+  },
+  "primaryTokenUnit": "aCC",
+  "votingPowerTokenUnit": "bCC",
+  "tokenUnits": {
+    "aCC": {
+      "display": "CC",
+      "exponent": 18
+    },
+    "bCC": {
+      "display": "bCC",
+      "exponent": 18
+    },
+    "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518": {
+      "display": "CC",
+      "exponent": 6
+    }
+  },
+  "extra": {
+    "profile": false
+  }
+}

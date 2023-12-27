@@ -1,0 +1,112 @@
+@use "./abstracts/media-query" as *;
+@use "./abstracts/tooltips" as *;
+
+.container {
+  height: 100%;
+  width: 100%;
+  max-height: 100dvh;
+  background-color: var(--clr-background);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    margin-inline: auto;
+    padding: 0.6em;
+
+    .close {
+      border-radius: 100vmax;
+      padding: 0.5em;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      @include tooltip(bottom, 2px);
+      transition: background 0.2s ease-in-out;
+
+      &:hover {
+        background-color: var(--clr-nav-hover);
+      }
+
+      &:active {
+        background-color: var(--clr-nav-active);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--clr-secondary);
+        background-color: var(--clr-nav-hover);
+      }
+
+      svg {
+        width: var(--fs-h2);
+        height: var(--fs-h2);
+        fill: var(--clr-secondary);
+      }
+    }
+
+    .placeholder {
+      width: var(--fs-kilo);
+      height: var(--fs-kilo);
+    }
+  }
+
+  .wrapper {
+    margin-inline: auto;
+    padding: 0 1em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+
+      .title {
+        font-size: var(--fs-h2);
+        font-weight: var(--fw-700);
+      }
+
+      .reserved {
+        text-align: center;
+        font-size: var(--fs-pico);
+      }
+
+      .smallBalance {
+        text-align: center;
+        font-style: italic;
+        color: red;
+      }
+
+      .txHash {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  @include mq("medium") {
+    width: 500px;
+    height: fit-content;
+    border-radius: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding-bottom: 2rem;
+  }
+}

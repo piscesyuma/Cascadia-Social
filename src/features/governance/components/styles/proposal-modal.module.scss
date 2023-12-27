@@ -1,0 +1,90 @@
+@use "./abstracts/media-query" as *;
+@use "./abstracts/tooltips" as *;
+
+.container {
+  height: 100%;
+  width: 100%;
+  max-height: 90dvh;
+  background-color: var(--clr-background);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+
+  .header {
+    position: sticky;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-inline: auto;
+    padding: 0.6em;
+    background-color: var(--clr-background);
+    z-index: 10;
+
+    .close {
+      border-radius: 100vmax;
+      padding: 0.5em;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      @include tooltip(bottom, 2px);
+      transition: background 0.2s ease-in-out;
+
+      &:hover {
+        background-color: var(--clr-nav-hover);
+      }
+
+      &:active {
+        background-color: var(--clr-nav-active);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--clr-secondary);
+        background-color: var(--clr-nav-hover);
+      }
+
+      svg {
+        width: var(--fs-h2);
+        height: var(--fs-h2);
+        fill: var(--clr-secondary);
+      }
+    }
+
+    .placeholder {
+      width: var(--fs-kilo);
+      height: var(--fs-kilo);
+    }
+  }
+
+  .wrapper {
+    margin-inline: auto;
+    padding: 0 2em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+      width: 100%;
+    }
+
+    @include mq("medium") {
+      padding: 0 3em;
+    }
+  }
+
+  @include mq("medium") {
+    width: 1200px;
+    height: fit-content;
+    border-radius: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding-bottom: 2rem;
+    max-height: 100dvh;
+  }
+}

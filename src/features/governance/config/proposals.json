@@ -1,0 +1,256 @@
+[
+  {
+    "id": 1,
+    "title": "[TCIP-1] Update Voting Period",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.4.",
+    "description": "https://discord.com/channels/932501599035732008/1134507826283282662",
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.parameterChangeProposal",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "changes": [
+          {
+            "subspace": "gov",
+            "key": "votingparams",
+            "value": {
+              "voting_period": "259200000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-11-10T11:56:03.113106581Z",
+    "voting_end_time": "2023-11-10T11:56:03.113106581Z",
+    "voting_start_time": "2023-11-10T10:56:03.113106581Z"
+  },
+  {
+    "id": 2,
+    "title": "[TCIP-2] Upgrade Cascadia to v0.1.4",
+    "summary": "This TCIP seeks to upgrade Cascdia to v0.1.4.",
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.4",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "1774000",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.4/cascadiad-v0.1.4-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmWYzw4Y97SQtng7KFuktChztnK3CZrrZLB7DwG273gusi",
+    "deposit": "0aCC",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-10-20T15:30:00.113106581Z",
+    "voting_end_time": "2023-10-20T15:30:00.113106581Z",
+    "voting_start_time": "2023-10-20T14:30:00.113106581Z"
+  },
+  {
+    "id": 3,
+    "title": "[TCIP-3] Increase Block Max Gas",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.4.",
+    "description": "https://discord.com/channels/932501599035732008/1141260048920752230",
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.parameterChangeProposal",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "changes": [
+          {
+            "subspace": "baseapp",
+            "key": "BlockParams",
+            "value": {
+              "max_bytes": "22020096",
+              "max_gas": "1000000000000000"
+            }
+          }
+        ]
+      }
+    ],
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-09-17T15:26:00.113106581Z",
+    "voting_end_time": "2023-09-17T15:26:00.113106581Z",
+    "voting_start_time": "2023-09-17T14:26:00.113106581Z"
+  },
+  {
+    "id": 4,
+    "title": "[TCIP-4] Upgrade Cascadia to v0.1.5.",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.5.",
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.5",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "2229000",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.5/cascadiad-v0.1.5-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmRMpHk9xyueHw1ZcUwaY12MwupcKxjgr55LAjo958S4p5",
+    "deposit": "0aCC",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-08-01T05:00:00.113106581Z",
+    "voting_end_time": "2023-08-01T05:00:00.113106581Z",
+    "voting_start_time": "2023-08-01T04:00:00.113106581Z"
+  },
+  {
+    "id": 5,
+    "messages": [
+      {
+        "@type": "/cosmos.slashing.v1beta1.MsgUpdateParams",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "params": {
+          "signed_blocks_window": "30000",
+          "min_signed_per_window": "0.500000000000000000",
+          "downtime_jail_duration": "600s",
+          "slash_fraction_double_sign": "0.050000000000000000",
+          "slash_fraction_downtime": "0.010000000000000000"
+        }
+      },
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.6",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "2722000",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.6/cascadiad-v0.1.6-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmbatzgRBP2Y5269i7XUGhfW4exzTAPXmwPKBh3dVtW5GV",
+    "deposit": "0aCC",
+    "title": "[TCIP-5] Upgrade Cascadia to v0.1.6.",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.6.",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-07-08T05:32:00.113106581Z",
+    "voting_end_time": "2023-07-08T05:32:00.113106581Z",
+    "voting_start_time": "2023-07-08T04:32:00.113106581Z"
+  },
+  {
+    "id": 6,
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.7",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "2820000",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.7/cascadiad-v0.1.7-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmeM8bKBz6JrjfimB1neMtfaPersC3WEwZSD1qSFckM7Hi",
+    "deposit": "0aCC",
+    "title": "[TCIP-6] Upgrade Cascadia to v0.1.7.",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.7.",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-06-19T05:51:00.113106581Z",
+    "voting_end_time": "2023-06-19T05:51:00.113106581Z",
+    "voting_start_time": "2023-06-19T04:51:00.113106581Z"
+  },
+  {
+    "id": 7,
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.8",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "3400000",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.8/cascadiad-v0.1.8-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmYj39L88RXnNKMRbgkxBejL15KFgHffTN28TFT1zuF2Q4",
+    "deposit": "0aCC",
+    "title": "[TCIP-7] Upgrade Cascadia to v0.1.8",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.8.",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-05-02T09:21:00.113106581Z",
+    "voting_end_time": "2023-05-02T09:21:00.113106581Z",
+    "voting_start_time": "2023-05-02T08:21:00.113106581Z"
+  },
+  {
+    "id": 8,
+    "messages": [
+      {
+        "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
+        "authority": "cascadia10d07y265gmmuvt4z0w9aw880jnsr700jvahqpw",
+        "plan": {
+          "name": "v0.1.9",
+          "time": "0001-01-01T00:00:00Z",
+          "height": "3319750",
+          "info": "{\"binaries\":{\"linux/amd64\":\"https://github.com/CascadiaFoundation/cascadia/releases/download/v0.1.9/cascadiad-v0.1.9-linux-amd64.tar.gz\"}",
+          "upgraded_client_state": null
+        }
+      }
+    ],
+    "metadata": "ipfs://QmQ1tfjM4MLY6MELK3JBRC8Xzv4Tbrk1dKFRdKbgqK1EH8",
+    "deposit": "0aCC",
+    "title": "[TCIP-8] Upgrade Cascadia to v0.1.9.",
+    "summary": "This TCIP seeks to upgrade Cascadia to v0.1.9.",
+    "final_tally_result": {
+      "yes_count": "1",
+      "abstain_count": "0",
+      "no_count": "0",
+      "no_with_veto_count": "0"
+    },
+    "status": "PROPOSAL_STATUS_PASSED",
+    "submit_time": "2023-03-16T20:31:00.113106581Z",
+    "voting_end_time": "2023-03-16T20:31:00.113106581Z",
+    "voting_start_time": "2023-03-16T19:31:00.113106581Z"
+  }
+]

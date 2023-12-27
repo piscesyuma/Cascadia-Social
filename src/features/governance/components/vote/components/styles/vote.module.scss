@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  .errorMessage {
+    width: 100%;
+    font-size: var(--fs-milli);
+    font-weight: var(--fw-700);
+    padding: 1em 0.6em;
+    border-radius: 0.5rem;
+    font-size: var(--fs-nano);
+    background-color: rgb(241, 60, 60);
+    color: white;
+  }
+}

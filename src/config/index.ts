@@ -16,3 +16,7 @@ export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 export const REDIS_URL = process.env.REDIS_URL as string;
 export const REDIS_TOKEN = process.env.REDIS_TOKEN as string;
+
+export const REST_RPC = process.env.NEXT_PUBLIC_REST_RPC as string;
+
+export const RPC = process.env.NEXT_PUBLIC_RPC as string;

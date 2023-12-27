@@ -1,0 +1,27 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-pico);
+
+  .tr {
+    &:nth-child(even) {
+      background-color: #4642419c;
+    }
+    &:nth-child(odd) {
+      background-color: #141414;
+    }
+  }
+
+  .td {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 50%;
+  }
+
+  .th {
+    background-color: #5d4037;
+    color: white;
+    padding: 10px;
+  }
+}

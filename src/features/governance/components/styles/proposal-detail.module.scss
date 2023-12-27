@@ -1,0 +1,11 @@
+@use "abstracts/media-query" as *;
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content auto;
+  gap: 2em;
+
+  @include mq("xx-large") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
