@@ -104,7 +104,7 @@ export async function GET(request: Request) {
       },
 
       orderBy: {
-        created_at: "desc",
+        vote_count: "desc",
       },
     });
 
