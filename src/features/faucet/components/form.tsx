@@ -1,9 +1,7 @@
 "use client";
 import { AnimatePresence } from "framer-motion";
-import numeral from "numeral";
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
-import { useBalance } from "wagmi";
 
 import { Modal } from "@/components/elements/modal";
 
@@ -18,7 +16,6 @@ export const Form = (): JSX.Element => {
   const [address, setAddress] = useState<`0x${string}`>();
   const [showTweetPopup, setShowTweetPopup] = useState(false);
 
-  const balance = useBalance({ address, watch: true });
   const { mutate, isPending } = useFaucet({ setShowTweetPopup });
 
   const handleSubmit = useCallback(async () => {
@@ -32,13 +29,6 @@ export const Form = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h2>Faucet</h2>
-        {address && (
-          <div>{numeral(balance.data?.formatted).format("0,0.[0]")} CC</div>
-        )}
-      </div>
-
       <div className={styles.form}>
         <Input
           className={styles.input}
@@ -47,9 +37,11 @@ export const Form = (): JSX.Element => {
           onUserInput={(value) => setAddress(value as `0x${string}`)}
         />
 
-        {address && (
-          <ClaimButton isLoading={isPending} onClick={handleSubmit} />
-        )}
+        <ClaimButton
+          isLoading={isPending}
+          disabled={!address}
+          onClick={handleSubmit}
+        />
       </div>
 
       <AnimatePresence>
