@@ -1,8 +1,10 @@
+import axios from "axios";
+
 import { FAUCET_URL } from "@/config";
 
 export const claim = async ({ address }: { address: string }) => {
   try {
-    const response = await fetch(`${FAUCET_URL}/api/faucet`, {
+    const response = await axios.post(`${FAUCET_URL}/api/faucet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -10,7 +12,7 @@ export const claim = async ({ address }: { address: string }) => {
       body: JSON.stringify({ address }),
     });
 
-    const responseData: any = await response.json();
+    const responseData: any = response.data;
 
     return responseData;
   } catch (error: any) {
