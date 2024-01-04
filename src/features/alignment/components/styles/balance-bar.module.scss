@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--clr-search-background);
+  transition: all 0.3s;
+
+  .value {
+    transition: all 0.3s;
+    background: var(--clr-primary);
+  }
+
+  .isOver {
+    background-color: rgb(160, 0, 0);
+  }
+}

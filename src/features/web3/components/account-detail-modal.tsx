@@ -13,7 +13,7 @@ import { Avatar } from "./avatar";
 import CopyButton from "./copy-address-button";
 import DisconnectButton from "./disconnect-button";
 import styles from "./styles/account-detail.module.scss";
-import { WalletButton } from "./walletButton";
+import { WalletButton } from "./wallet-button";
 
 const AccountDetailModal = ({
   onClose,

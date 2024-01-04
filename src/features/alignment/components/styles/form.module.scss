@@ -1,0 +1,25 @@
+.container {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+
+    h2 {
+      color: var(--clr-secondary);
+      font-size: var(--fs-h2);
+      font-weight: var(--fw-700);
+    }
+
+    svg {
+      cursor: pointer;
+      fill: var(--clr-secondary);
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .actions {
+    padding: 0.75rem 1rem;
+  }
+}

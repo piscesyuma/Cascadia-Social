@@ -51,4 +51,7 @@ REDIS_TOKEN=
 
 NEXT_PUBLIC_REST_RPC=\"https://lcd.cascadia.foundation\"\n
 NEXT_PUBLIC_RPC=\"https://testnet.cascadia.foundation\"\n
+
+NEXT_PUBLIC_VOTINGESCROW_ADDRESS=\n
+NEXT_PUBLIC_FEEDISTRIBUTOR_ADDRESS=\n
 "

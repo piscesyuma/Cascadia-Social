@@ -11,8 +11,8 @@ import useSignVerifyWithCrypto from "../hooks/use-sign-verify";
 
 import AccountDetailModal from "./account-detail-modal";
 import styles from "./styles/connect-wallet-button.module.scss";
+import { WalletButton } from "./wallet-button";
 import { WalletModal } from "./wallet-modal";
-import { WalletButton } from "./walletButton";
 
 export const ConnectWalletButton = ({
   text = "Connect Wallet",

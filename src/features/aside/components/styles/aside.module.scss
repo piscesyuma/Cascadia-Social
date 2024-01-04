@@ -30,7 +30,9 @@
     margin-bottom: 11px;
   }
 
+  .alignment,
   .connect,
+  .connectWallet,
   .footer {
     margin-top: 15px;
   }
@@ -46,12 +48,13 @@
     border-radius: 1rem;
   }
 
-  .connectWallet {
-    margin-top: 15px;
-  }
-
   .registerForm {
     padding-top: 1rem;
+  }
+
+  .alignment {
+    background-color: var(--clr-connect-background);
+    border-radius: 1rem;
   }
 
   @include mq("large") {

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1em;
+
+  .header {
+    font-size: var(--fs-pico);
+    font-weight: var(--fw-500);
+  }
+}

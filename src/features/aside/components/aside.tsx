@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+import { Alignment } from "@/features/alignment";
 import { RegisterForm } from "@/features/auth";
 import { Connect } from "@/features/connect";
 import { Footer } from "@/features/footer";
@@ -53,6 +54,12 @@ export const Aside = () => {
       <div className={styles.footer}>
         <Footer />
       </div>
+
+      {session && (
+        <div className={styles.alignment}>
+          <Alignment />
+        </div>
+      )}
     </aside>
   );
 };
