@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { Alignment } from "@/features/alignment";
 import { RegisterForm } from "@/features/auth";
 import { Connect } from "@/features/connect";
+import { Faucet } from "@/features/faucet";
 import { Footer } from "@/features/footer";
 import { Search } from "@/features/search";
 import { Trends } from "@/features/trends";
@@ -58,6 +59,12 @@ export const Aside = () => {
       {session && (
         <div className={styles.alignment}>
           <Alignment />
+        </div>
+      )}
+
+      {session && (
+        <div className={styles.faucet}>
+          <Faucet />
         </div>
       )}
     </aside>

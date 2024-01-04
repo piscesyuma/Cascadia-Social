@@ -20,3 +20,5 @@ export const REDIS_TOKEN = process.env.REDIS_TOKEN as string;
 export const REST_RPC = process.env.NEXT_PUBLIC_REST_RPC as string;
 
 export const RPC = process.env.NEXT_PUBLIC_RPC as string;
+
+export const FAUCET_URL = process.env.NEXT_PUBLIC_FAUCET_BACKEND_URL as string;
