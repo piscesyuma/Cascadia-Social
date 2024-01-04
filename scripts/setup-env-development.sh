@@ -52,8 +52,10 @@ REDIS_TOKEN=\n
 NEXT_PUBLIC_REST_RPC=\"https://lcd.cascadia.foundation\"\n
 NEXT_PUBLIC_RPC=\"https://testnet.cascadia.foundation\"\n
 
+# Alignment smart contract address\n
 NEXT_PUBLIC_VOTINGESCROW_ADDRESS=\"0x6D7149dd7e1085F81e92d9c829A614b37309A194\"\n
 NEXT_PUBLIC_FEEDISTRIBUTOR_ADDRESS=\"0xDd59e8a3c0139A962AE2b41B99c96D5C76389D76\"\n
 
-NEXT_PUBLIC_FAUCET_BACKEND_URL=\"https://faucet.cascadia.foundation\"\n
+# Faucet\n
+FAUCET_BACKEND_URL=\"https://faucet.cascadia.foundation\"\n
 "
