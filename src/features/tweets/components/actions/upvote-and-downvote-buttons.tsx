@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 
-import { UpArrowIcon, UpArrowIconActive } from "@/assets/up-arrow-icon";
 import { DownArrowIcon, DownArrowIconActive } from "@/assets/down-arrow-icon";
+import { UpArrowIcon, UpArrowIconActive } from "@/assets/up-arrow-icon";
 import { useJoinTwitter } from "@/features/auth";
 
 import { useDownvote } from "../../hooks/use-downvote";
