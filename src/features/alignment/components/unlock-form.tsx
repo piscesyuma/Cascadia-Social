@@ -68,7 +68,6 @@ export const UnLockAlignment = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>Actions</div>
       {showCooldown && address && (
         <AlignButton
           text="Realign"

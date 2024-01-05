@@ -1,11 +1,23 @@
 .container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
   padding: 1em;
 
   .header {
     font-size: var(--fs-pico);
     font-weight: var(--fw-500);
+  }
+
+  button {
+    border-radius: 0px;
+  }
+
+  button:first-child {
+    border-top-left-radius: 100vmax;
+    border-bottom-left-radius: 100vmax;
+  }
+
+  button:last-child {
+    border-top-right-radius: 100vmax;
+    border-bottom-right-radius: 100vmax;
   }
 }
