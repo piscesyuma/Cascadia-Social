@@ -29,7 +29,7 @@ TWITTER_CLIENT_ID=\"UVRXcVJ2T0xySV9wSXZGdGdvMTM6MTpjaQ\"\n
 TWITTER_CLIENT_SECRET=\n
 
 # Discord Auth configuration\n
-# Replace with your Twitter Client ID and Secret. These are obtained from the Twitter Developer Console.\n
+# Replace with your Discord Client ID and Secret. These are obtained from the Discord Developer Console.\n
 DISCORD_CLIENT_ID=\"1192864284351406244\"\n
 DISCORD_CLIENT_SECRET=\n
 
