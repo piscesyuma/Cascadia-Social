@@ -1,4 +1,12 @@
-import type { Tweet, Like, Media, Retweet, Bookmark } from "@prisma/client";
+import type {
+  Tweet,
+  Like,
+  Downvote,
+  Upvote,
+  Media,
+  Retweet,
+  Bookmark,
+} from "@prisma/client";
 
 import { IUser } from "@/features/profile";
 
@@ -9,6 +17,8 @@ export interface IFeed {
 export interface ITweet extends Tweet {
   author: IUser;
   likes: ILike[];
+  downvotes: IDownvote[];
+  upvotes: IUpvote[];
   media: IMedia[];
   retweets: IRetweet[];
   quoted_tweet: ITweet;
@@ -26,6 +36,16 @@ export interface ITweet extends Tweet {
 }
 
 export interface ILike extends Like {
+  user: IUser;
+  tweet: ITweet;
+}
+
+export interface IDownvote extends Downvote {
+  user: IUser;
+  tweet: ITweet;
+}
+
+export interface IUpvote extends Upvote {
   user: IUser;
   tweet: ITweet;
 }

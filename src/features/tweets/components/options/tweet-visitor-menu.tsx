@@ -9,6 +9,8 @@ import { EmbedIcon } from "../../assets/embed-icon";
 import { UnfollowIcon } from "../../assets/follow-icon";
 import { MuteIcon } from "../../assets/mute-icon";
 import { ITweet } from "../../types";
+import { useSortByVote } from "../../hooks/use-sort-by-vote";
+import { SortIcon } from "@/assets/sort-icon";
 
 export const TweetVisitorMenu = ({
   tweet,
@@ -18,6 +20,7 @@ export const TweetVisitorMenu = ({
   setIsMenuOpen: (value: boolean) => void;
 }) => {
   const { data: session } = useSession();
+  const mutationSortByVote = useSortByVote();
 
   return (
     <>
@@ -74,6 +77,32 @@ export const TweetVisitorMenu = ({
       >
         <ReportIcon /> Report Tweet
       </MenuItem>
+
+      {session?.user?.sort_by_vote ? (
+        <MenuItem
+          onClick={() => {
+            setIsMenuOpen(false);
+            mutationSortByVote.mutate({
+              userId: session?.user?.id,
+              sort_by_vote: !session?.user?.sort_by_vote,
+            });
+          }}
+        >
+          <SortIcon /> Sort by date
+        </MenuItem>
+      ) : (
+        <MenuItem
+          onClick={() => {
+            setIsMenuOpen(false);
+            mutationSortByVote.mutate({
+              userId: session?.user?.id,
+              sort_by_vote: !session?.user?.sort_by_vote,
+            });
+          }}
+        >
+          <SortIcon /> Sort by vote
+        </MenuItem>
+      )}
     </>
   );
 };

@@ -6,8 +6,10 @@ import { TryAgain } from "@/components/elements/try-again";
 import { useTweets } from "../hooks/use-tweets";
 
 import { InfiniteTweets } from "./infinite-tweets";
+import { useSession } from "next-auth/react";
 
 export const Tweets = () => {
+  const { data: session } = useSession();
   const {
     data: tweets,
     isLoading,
@@ -16,7 +18,7 @@ export const Tweets = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTweets({});
+  } = useTweets({ id: session?.user.id });
 
   if (isLoading) {
     return <LoadingSpinner />;

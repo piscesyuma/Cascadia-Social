@@ -46,6 +46,7 @@ CREATE TABLE "User" (
     "detail" TEXT,
     "protected" BOOLEAN NOT NULL DEFAULT false,
     "verified" BOOLEAN NOT NULL DEFAULT false,
+    "sort_by_vote" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
@@ -86,6 +87,7 @@ CREATE TABLE "Tweet" (
     "reply_count" INTEGER NOT NULL DEFAULT 0,
     "retweet_count" INTEGER NOT NULL DEFAULT 0,
     "favorite_count" INTEGER NOT NULL DEFAULT 0,
+    "vote_count" INTEGER NOT NULL DEFAULT 0,
     "possibly_sensitive" BOOLEAN NOT NULL DEFAULT false,
     "lang" TEXT NOT NULL DEFAULT 'en',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -115,6 +117,26 @@ CREATE TABLE "Like" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Like_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Downvote" (
+    "id" TEXT NOT NULL,
+    "tweet_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Downvote_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Upvote" (
+    "id" TEXT NOT NULL,
+    "tweet_id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Upvote_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -247,6 +269,18 @@ ALTER TABLE "Like" ADD CONSTRAINT "Like_tweet_id_fkey" FOREIGN KEY ("tweet_id") 
 
 -- AddForeignKey
 ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Retweet" ADD CONSTRAINT "Retweet_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
