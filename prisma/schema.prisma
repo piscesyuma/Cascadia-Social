@@ -58,6 +58,7 @@ model User {
   detail             String?
   protected          Boolean        @default(false)
   verified           Boolean        @default(false)
+  sort_by_vote       Boolean        @default(false)
   email              String?        @unique
   emailVerified      DateTime?
   image              String?
@@ -76,8 +77,8 @@ model User {
   sessions           Session[]
   tweets             Tweet[]
   likes              Like[]
-  downvotes               Downvote[]
-  upvotes                 Upvote[]
+  downvotes          Downvote[]
+  upvotes            Upvote[]
   followers          User[]         @relation(name: "Followers")
   following          User[]         @relation(name: "Followers")
   retweets           Retweet[]

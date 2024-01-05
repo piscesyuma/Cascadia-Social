@@ -16,6 +16,10 @@ export async function GET(request: Request) {
   const cursor = cursorQuery ? { id: cursorQuery } : undefined;
 
   try {
+    const user = await prisma.user.findFirst({
+      where: { id },
+    });
+
     const tweets = await prisma.tweet.findMany({
       skip,
       take,
@@ -104,7 +108,9 @@ export async function GET(request: Request) {
       },
 
       orderBy: {
-        vote_count: "desc",
+        ...(user?.sort_by_vote
+          ? { vote_count: "desc" }
+          : { created_at: "desc" }),
       },
     });
 

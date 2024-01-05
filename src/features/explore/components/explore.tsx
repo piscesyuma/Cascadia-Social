@@ -5,8 +5,10 @@ import { Trends } from "@/features/trends";
 import { InfiniteTweets, useTweets } from "@/features/tweets";
 
 import styles from "./styles/explore.module.scss";
+import { useSession } from "next-auth/react";
 
 export const Explore = () => {
+  const { data: session } = useSession();
   const {
     data: tweets,
     isLoading,
@@ -15,7 +17,7 @@ export const Explore = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTweets({});
+  } = useTweets({ id: session?.user?.id });
 
   if (isLoading) {
     return <LoadingSpinner />;
