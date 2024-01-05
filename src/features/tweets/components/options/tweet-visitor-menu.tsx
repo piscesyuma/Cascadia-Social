@@ -2,15 +2,15 @@ import { useSession } from "next-auth/react";
 
 import { ReportIcon } from "@/assets/report-icon";
 import { SadFaceIcon } from "@/assets/sad-face-icon";
+import { SortIcon } from "@/assets/sort-icon";
 import { MenuItem } from "@/components/elements/menu";
 
 import { BlockIcon } from "../../assets/block-icon";
 import { EmbedIcon } from "../../assets/embed-icon";
 import { UnfollowIcon } from "../../assets/follow-icon";
 import { MuteIcon } from "../../assets/mute-icon";
-import { ITweet } from "../../types";
 import { useSortByVote } from "../../hooks/use-sort-by-vote";
-import { SortIcon } from "@/assets/sort-icon";
+import { ITweet } from "../../types";
 
 export const TweetVisitorMenu = ({
   tweet,

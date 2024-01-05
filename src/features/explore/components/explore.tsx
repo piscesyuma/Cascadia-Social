@@ -1,11 +1,13 @@
 "use client";
+
+import { useSession } from "next-auth/react";
+
 import { LoadingSpinner } from "@/components/elements/loading-spinner";
 import { TryAgain } from "@/components/elements/try-again";
 import { Trends } from "@/features/trends";
 import { InfiniteTweets, useTweets } from "@/features/tweets";
 
 import styles from "./styles/explore.module.scss";
-import { useSession } from "next-auth/react";
 
 export const Explore = () => {
   const { data: session } = useSession();
