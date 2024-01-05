@@ -58,6 +58,7 @@ model User {
   detail             String?
   protected          Boolean        @default(false)
   verified           Boolean        @default(false)
+  sort_by_vote       Boolean        @default(false)
   email              String?        @unique
   emailVerified      DateTime?
   image              String?
@@ -76,6 +77,8 @@ model User {
   sessions           Session[]
   tweets             Tweet[]
   likes              Like[]
+  downvotes          Downvote[]
+  upvotes            Upvote[]
   followers          User[]         @relation(name: "Followers")
   following          User[]         @relation(name: "Followers")
   retweets           Retweet[]
@@ -99,6 +102,7 @@ model Tweet {
   reply_count             Int        @default(0)
   retweet_count           Int        @default(0)
   favorite_count          Int        @default(0)
+  vote_count              Int        @default(0)
   possibly_sensitive      Boolean    @default(false)
   lang                    String     @default("en")
   created_at              DateTime   @default(now())
@@ -106,6 +110,8 @@ model Tweet {
   author_id               String
   media                   Media[]
   likes                   Like[]
+  downvotes               Downvote[]
+  upvotes                 Upvote[]
   retweets                Retweet[]
   quotes                  Tweet[]    @relation("quoted_tweet")
   quoted_tweet_id         String?
@@ -129,6 +135,24 @@ model Media {
 }
 
 model Like {
+  id         String   @id @default(cuid())
+  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id   String
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  created_at DateTime @default(now())
+}
+
+model Downvote {
+  id         String   @id @default(cuid())
+  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id   String
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  created_at DateTime @default(now())
+}
+
+model Upvote {
   id         String   @id @default(cuid())
   tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
   tweet_id   String

@@ -1,4 +1,7 @@
 "use client";
+
+import { useSession } from "next-auth/react";
+
 import { LoadingSpinner } from "@/components/elements/loading-spinner";
 import { TryAgain } from "@/components/elements/try-again";
 import { Trends } from "@/features/trends";
@@ -7,6 +10,7 @@ import { InfiniteTweets, useTweets } from "@/features/tweets";
 import styles from "./styles/explore.module.scss";
 
 export const Explore = () => {
+  const { data: session } = useSession();
   const {
     data: tweets,
     isLoading,
@@ -15,7 +19,7 @@ export const Explore = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTweets({});
+  } = useTweets({ id: session?.user?.id });
 
   if (isLoading) {
     return <LoadingSpinner />;

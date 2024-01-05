@@ -7,6 +7,8 @@
 .comment,
 .retweet,
 .like,
+.downvote,
+.upvote,
 .share {
   display: flex;
   align-items: center;
@@ -14,6 +16,11 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   @include tooltip(bottom, 4px);
+}
+
+.voteContainer {
+  display: flex;
+  align-items: center;
 }
 
 .icon {
@@ -33,6 +40,16 @@
 .stats {
   font-size: var(--fs-nano);
   color: var(--clr-tertiary);
+}
+
+.statsDownvoted {
+  font-size: var(--fs-nano);
+  color: var(--clr-blue);
+}
+
+.statsUpvoted {
+  font-size: var(--fs-nano);
+  color: var(--clr-rose);
 }
 
 .comment {
@@ -170,6 +187,72 @@
   }
 }
 
+.downvote {
+  &:hover {
+    .icon {
+      background-color: var(--clr-comment-hover);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+
+  &:active {
+    .icon {
+      background-color: var(--clr-comment-active);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+
+  &:focus-visible {
+    .icon {
+      outline: 2px solid var(--clr-blue);
+      background-color: var(--clr-comment-hover);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+}
+
+.upvote {
+  &:hover {
+    .icon {
+      background-color: var(--clr-heart-hover);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+
+  &:active {
+    .icon {
+      background-color: var(--clr-heart-active);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+
+  &:focus-visible {
+    .icon {
+      outline: 2px solid var(--clr-rose);
+      background-color: var(--clr-heart-hover);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+}
+
 .share {
   &:hover {
     .icon {
@@ -212,6 +295,22 @@
 
   .stats {
     color: var(--clr-rose);
+  }
+}
+
+.downvoted {
+  .icon {
+    svg {
+      fill: var(--clr-blue);
+    }
+  }
+}
+
+.upvoted {
+  .icon {
+    svg {
+      fill: var(--clr-rose);
+    }
   }
 }
 
