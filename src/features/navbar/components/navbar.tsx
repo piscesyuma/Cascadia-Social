@@ -7,6 +7,7 @@ import { Envelope, EnvelopeActive } from "../assets/envelope-icon";
 import { Gear, GearActive } from "../assets/gear-icon";
 import { Governance, GovernanceActive } from "../assets/governance-icon";
 import { Hashtag, HashtagActive } from "../assets/hashtag-icon";
+import { HeartIcon, HeartIconActive } from "../assets/heart-icon";
 import { HomeActive, Home } from "../assets/home-icon";
 import { User, UserActive } from "../assets/user-icon";
 
@@ -71,6 +72,15 @@ export const Navbar = () => {
           title={`Governance`}
           path={`governance`}
           isActive={pathname === `/governance`}
+        />
+      )}
+
+      {session && (
+        <NavItem
+          icon={pathname === `/people` ? <HeartIconActive /> : <HeartIcon />}
+          title={`Follow`}
+          path={`people`}
+          isActive={pathname === `/people`}
         />
       )}
 

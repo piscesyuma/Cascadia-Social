@@ -48,6 +48,9 @@ export const FNumFormats: Record<string, FNumOptions> = {
   token: {
     maximumFractionDigits: 4,
   },
+  tokenFixed: {
+    maximumFractionDigits: 2,
+  },
   fiat: {
     style: "currency",
   },

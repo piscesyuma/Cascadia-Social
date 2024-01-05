@@ -3,10 +3,10 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
-import { LoadingSpinner } from "@/components/elements/loading-spinner";
+import { LoadingCircle } from "@/components/elements/loading-spinner";
 import useHasMounted from "@/hooks/use-mounted";
 
-import { PlusIcon } from "../assets/plus-icon";
+import { SwapIcon } from "../assets/swap-icon";
 import { PRETTY_DATE_FORMAT } from "../config";
 import { useAlign } from "../hooks/use-align";
 import useNumbers, { FNumFormats } from "../hooks/use-numbers";
@@ -53,55 +53,58 @@ export const Balance = ({ changeTab }: { changeTab: () => void }) => {
   return (
     <section aria-label="balance" className={styles.container}>
       <div className={styles.header}>
-        <h2>Alignment</h2>
-        <button onClick={() => changeTab()}>
-          <PlusIcon />
+        <div className={styles.balance}>
+          <div className={styles.title}>Alignment: </div>
+          {isLoading && !!address ? (
+            <LoadingCircle />
+          ) : (
+            <>
+              {address ? (
+                <>
+                  <div className={styles.value}>
+                    {fNum2(veCCLockInfo.lockedAmount, FNumFormats.tokenFixed)}
+                  </div>
+                  <div className={styles.unit}>bCC</div>
+                </>
+              ) : (
+                <div className={styles.value}>---</div>
+              )}
+            </>
+          )}
+        </div>
+        <button className={styles.swap} onClick={() => changeTab()}>
+          <SwapIcon />
         </button>
       </div>
-      <div className={styles.balance}>
-        {isLoading && !!address ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            {address ? (
-              <>
-                <div className={styles.value}>
-                  {fNum2(veCCLockInfo.lockedAmount, FNumFormats.token)}
-                </div>
-                <div className={styles.unit}>bCC</div>
-              </>
-            ) : (
-              <div className={styles.value}>---</div>
-            )}
-          </>
-        )}
-      </div>
-      <div className={styles.detail}>
-        <div className={styles.total}>
-          <div className={styles.value}>
-            {veCCLockInfo?.hasExistingLock
-              ? fNum2(percentVeBAL(), {
-                  style: "percent",
-                  maximumFractionDigits: 4,
-                })
-              : "-"}
-          </div>
-          <div className={styles.label}>% of total bCC</div>
-        </div>
-        <div className={styles.duration}>
-          <div className={styles.value}>
-            {veCCLockInfo?.hasExistingLock && veCCLockInfo.cooldown === 0
-              ? format(
-                  veCCLockInfo.lockedEndDate || new Date(),
-                  PRETTY_DATE_FORMAT,
-                )
-              : "-"}
-          </div>
-          <div className={styles.label}>Duration</div>
-        </div>
-      </div>
 
-      {showCooldown && <TimeCounter countDown={veCCLockInfo.lockedEndDate} />}
+      <div className={styles.wrapper}>
+        <div className={styles.detail}>
+          <div className={styles.total}>
+            <div className={styles.value}>
+              {veCCLockInfo?.hasExistingLock
+                ? fNum2(percentVeBAL(), {
+                    style: "percent",
+                    maximumFractionDigits: 4,
+                  })
+                : "-"}
+            </div>
+            <div className={styles.label}>% of total bCC</div>
+          </div>
+          <div className={styles.duration}>
+            <div className={styles.value}>
+              {veCCLockInfo?.hasExistingLock && veCCLockInfo.cooldown === 0
+                ? format(
+                    veCCLockInfo.lockedEndDate || new Date(),
+                    PRETTY_DATE_FORMAT,
+                  )
+                : "-"}
+            </div>
+            <div className={styles.label}>Duration</div>
+          </div>
+        </div>
+
+        {showCooldown && <TimeCounter countDown={veCCLockInfo.lockedEndDate} />}
+      </div>
     </section>
   );
 };
