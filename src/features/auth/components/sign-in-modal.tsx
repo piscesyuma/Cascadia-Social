@@ -12,6 +12,7 @@ import { TextInput } from "@/components/elements/text-input";
 import { ConnectWalletButton } from "@/features/web3";
 
 import { AppleLogo } from "../assets/apple-logo";
+import { DiscordLogo } from "../assets/discord-logo";
 import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
 import { TwitterLogo } from "../assets/twitter-logo";
@@ -23,6 +24,7 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState({
+    discord: false,
     google: false,
     github: false,
     twitter: false,
@@ -91,6 +93,14 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
               text="Sign in with Twitter"
               disabled={isLoading.twitter}
               isLoading={isLoading.twitter}
+            />
+
+            <AuthButton
+              onClick={() => handleSignIn("discord")}
+              icon={<DiscordLogo />}
+              text="Sign in with Discord"
+              disabled={isLoading.discord}
+              isLoading={isLoading.discord}
             />
 
             <AuthButton icon={<AppleLogo />} text="Sign in with Apple" />
