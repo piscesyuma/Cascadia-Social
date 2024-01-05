@@ -28,6 +28,11 @@ GITHUB_CLIENT_SECRET=\n
 TWITTER_CLIENT_ID=\"UVRXcVJ2T0xySV9wSXZGdGdvMTM6MTpjaQ\"\n
 TWITTER_CLIENT_SECRET=\n
 
+# Discord Auth configuration\n
+# Replace with your Twitter Client ID and Secret. These are obtained from the Twitter Developer Console.\n
+DISCORD_CLIENT_ID=\"1192864284351406244\"\n
+DISCORD_CLIENT_SECRET=\n
+
 # Supabase configuration
 # Replace with your Supabase URL. This is obtained from your Supabase project settings.\n
 NEXT_PUBLIC_SUPABASE_URL=\"https://bzquotasibuzwyhlneqp.supabase.co\"\n
