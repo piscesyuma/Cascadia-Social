@@ -1,12 +1,15 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import { SiweMessage } from "siwe";
 
 import {
+  DISCORD_CLIENT_ID,
+  DISCORD_CLIENT_SECRET,
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
   GOOGLE_CLIENT_ID,
@@ -87,6 +90,10 @@ const authOptions: AuthOptions = {
     TwitterProvider({
       clientId: TWITTER_CLIENT_ID,
       clientSecret: TWITTER_CLIENT_SECRET,
+    }),
+    DiscordProvider({
+      clientId: DISCORD_CLIENT_ID,
+      clientSecret: DISCORD_CLIENT_SECRET,
     }),
     CredentialsProvider({
       id: "crypto",
