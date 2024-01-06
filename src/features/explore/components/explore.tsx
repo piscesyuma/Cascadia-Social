@@ -8,7 +8,7 @@ import { InfiniteTweets, useTweets } from "@/features/tweets";
 import styles from "./styles/explore.module.scss";
 
 export const Explore = () => {
-  const sortByVote = localStorage.getItem("sortByVote") || "";
+  const sortByVote = window?.localStorage?.getItem("sortByVote") || "";
 
   const {
     data: tweets,

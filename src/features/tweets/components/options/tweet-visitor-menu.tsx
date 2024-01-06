@@ -20,10 +20,10 @@ export const TweetVisitorMenu = ({
 }) => {
   const { data: session } = useSession();
 
-  const sortByVote = localStorage.getItem("sortByVote") || "";
+  const sortByVote = window?.localStorage?.getItem("sortByVote") || "";
 
   const saveToLocalStorage = (sortByVote: string) => {
-    localStorage.setItem("sortByVote", sortByVote);
+    window?.localStorage?.setItem("sortByVote", sortByVote);
   };
 
   return (
