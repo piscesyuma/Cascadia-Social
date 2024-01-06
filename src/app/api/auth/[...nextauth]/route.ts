@@ -45,7 +45,6 @@ const authOptions: AuthOptions = {
         session.user.username = token?.screen_name;
         session.user.publicAddress = token?.publicAddress;
         session.user.profile_image_url = token?.profile_image_url;
-        session.user.sort_by_vote = token?.sort_by_vote;
       }
       return session;
     },
@@ -68,7 +67,6 @@ const authOptions: AuthOptions = {
         username: dbUser.screen_name,
         publicAddress: dbUser.publicAddress,
         profile_image_url: dbUser.profile_image_url,
-        sort_by_vote: dbUser.sort_by_vote,
       };
     },
   },

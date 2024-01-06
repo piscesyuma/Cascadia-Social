@@ -4,17 +4,21 @@ export const getTweets = async ({
   limit = 20,
   type,
   id,
+  sortByVote,
 }: {
   pageParam?: string | unknown;
   limit?: number;
   type?: string;
   id?: string;
+  sortByVote?: string;
 }) => {
   try {
     const { data } = await axios.get(
       `/api/tweets?cursor=${pageParam}&limit=${limit}${
         type ? `&type=${type}` : ""
-      }${id ? `&id=${id}` : ""}`,
+      }${id ? `&id=${id}` : ""}${
+        sortByVote ? `&sortByVote=${sortByVote}` : ""
+      }`,
     );
     return data;
   } catch (error: any) {

@@ -13,10 +13,12 @@ export const useTweets = ({
   queryKey = ["tweets"],
   type,
   id,
+  sortByVote,
 }: {
   queryKey?: string[];
   type?: string;
   id?: string;
+  sortByVote?: string;
 }) => {
   return useInfiniteQuery<IInfiniteTweets>({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
@@ -27,6 +29,7 @@ export const useTweets = ({
         limit: 20,
         type,
         id,
+        sortByVote,
       });
     },
     initialPageParam: "",
