@@ -11,15 +11,12 @@ export async function GET(request: Request) {
 
   const cursorQuery = searchParams.get("cursor") || undefined;
   const take = Number(searchParams.get("limit")) || 20;
+  const sortByVote = searchParams.get("sortByVote") || undefined;
 
   const skip = cursorQuery ? 1 : 0;
   const cursor = cursorQuery ? { id: cursorQuery } : undefined;
 
   try {
-    const user = await prisma.user.findFirst({
-      where: { id },
-    });
-
     const tweets = await prisma.tweet.findMany({
       skip,
       take,
@@ -108,7 +105,7 @@ export async function GET(request: Request) {
       },
 
       orderBy: {
-        ...(user?.sort_by_vote
+        ...(sortByVote === "sort_by_vote"
           ? { vote_count: "desc" }
           : { created_at: "desc" }),
       },

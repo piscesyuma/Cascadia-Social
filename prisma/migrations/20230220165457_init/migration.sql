@@ -46,7 +46,6 @@ CREATE TABLE "User" (
     "detail" TEXT,
     "protected" BOOLEAN NOT NULL DEFAULT false,
     "verified" BOOLEAN NOT NULL DEFAULT false,
-    "sort_by_vote" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,

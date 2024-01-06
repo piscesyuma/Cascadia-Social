@@ -58,7 +58,6 @@ model User {
   detail             String?
   protected          Boolean        @default(false)
   verified           Boolean        @default(false)
-  sort_by_vote       Boolean        @default(false)
   email              String?        @unique
   emailVerified      DateTime?
   image              String?

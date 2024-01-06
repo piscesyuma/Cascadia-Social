@@ -10,7 +10,6 @@ import { useUser } from "@/features/profile";
 import { EditIcon } from "../../assets/edit-icon";
 import { EmbedIcon } from "../../assets/embed-icon";
 import { usePinTweet } from "../../hooks/use-pin-tweet";
-import { useSortByVote } from "../../hooks/use-sort-by-vote";
 import { ITweet } from "../../types";
 
 import styles from "./styles/tweet-options.module.scss";
@@ -27,7 +26,14 @@ export const TweetOwnerMenu = ({
   const { data: session } = useSession();
   const { data: user } = useUser({ id: session?.user?.id });
   const pinMutation = usePinTweet();
-  const mutationSortByVote = useSortByVote();
+
+  const sortByVote = localStorage.getItem("sortByVote") || "";
+
+  const saveToLocalStorage = (sortByVote: string) => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      localStorage.setItem("sortByVote", sortByVote);
+    }
+  };
 
   return (
     <>
@@ -102,14 +108,11 @@ export const TweetOwnerMenu = ({
         <EditIcon /> Edit with Premium
       </MenuItem>
 
-      {session?.user?.sort_by_vote ? (
+      {sortByVote === "sort_by_vote" ? (
         <MenuItem
           onClick={() => {
             setIsMenuOpen(false);
-            mutationSortByVote.mutate({
-              userId: session?.user?.id,
-              sort_by_vote: !session?.user?.sort_by_vote,
-            });
+            saveToLocalStorage("sort_by_date");
           }}
         >
           <SortIcon /> Sort by date
@@ -118,10 +121,7 @@ export const TweetOwnerMenu = ({
         <MenuItem
           onClick={() => {
             setIsMenuOpen(false);
-            mutationSortByVote.mutate({
-              userId: session?.user?.id,
-              sort_by_vote: !session?.user?.sort_by_vote,
-            });
+            saveToLocalStorage("sort_by_vote");
           }}
         >
           <SortIcon /> Sort by vote

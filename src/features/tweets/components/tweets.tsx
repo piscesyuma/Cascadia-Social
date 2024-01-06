@@ -1,7 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-
 import { LoadingSpinner } from "@/components/elements/loading-spinner";
 import { TryAgain } from "@/components/elements/try-again";
 
@@ -10,7 +8,7 @@ import { useTweets } from "../hooks/use-tweets";
 import { InfiniteTweets } from "./infinite-tweets";
 
 export const Tweets = () => {
-  const { data: session } = useSession();
+  const sortByVote = localStorage.getItem("sortByVote") || "";
 
   const {
     data: tweets,
@@ -20,7 +18,7 @@ export const Tweets = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTweets({ id: session?.user?.id });
+  } = useTweets({ sortByVote });
 
   if (isLoading) {
     return <LoadingSpinner />;
