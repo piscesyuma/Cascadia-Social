@@ -27,10 +27,15 @@ export const TweetOwnerMenu = ({
   const { data: user } = useUser({ id: session?.user?.id });
   const pinMutation = usePinTweet();
 
-  const sortByVote = window?.localStorage?.getItem("sortByVote") || "";
+  const sortByVote =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("sortByVote") || ""
+      : "";
 
   const saveToLocalStorage = (sortByVote: string) => {
-    window?.localStorage?.setItem("sortByVote", sortByVote);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("sortByVote", sortByVote);
+    }
   };
 
   return (

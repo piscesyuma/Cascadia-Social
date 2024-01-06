@@ -8,7 +8,10 @@ import { useTweets } from "../hooks/use-tweets";
 import { InfiniteTweets } from "./infinite-tweets";
 
 export const Tweets = () => {
-  const sortByVote = window?.localStorage?.getItem("sortByVote") || "";
+  const sortByVote =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("sortByVote") || ""
+      : "";
 
   const {
     data: tweets,
