@@ -11,6 +11,7 @@ import { InfiniteTweets } from "./infinite-tweets";
 
 export const Tweets = () => {
   const { data: session } = useSession();
+
   const {
     data: tweets,
     isLoading,
@@ -19,7 +20,7 @@ export const Tweets = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTweets({ id: session?.user.id });
+  } = useTweets({ id: session?.user?.id });
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -11,6 +11,7 @@ import styles from "./styles/explore.module.scss";
 
 export const Explore = () => {
   const { data: session } = useSession();
+
   const {
     data: tweets,
     isLoading,
