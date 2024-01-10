@@ -1,0 +1,131 @@
+@use "abstracts/tooltips" as *;
+
+.container {
+  position: relative;
+}
+
+.downvote,
+.upvote {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  @include tooltip(bottom, 4px);
+}
+
+.voteContainer {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  outline-offset: -2px;
+
+  svg {
+    fill: var(--clr-tertiary);
+    cursor: pointer;
+  }
+}
+
+.stats {
+  font-size: var(--fs-nano);
+  color: var(--clr-tertiary);
+}
+
+.statsDownvoted {
+  font-size: var(--fs-nano);
+  color: var(--clr-blue);
+}
+
+.statsUpvoted {
+  font-size: var(--fs-nano);
+  color: var(--clr-rose);
+}
+
+.downvote {
+  &:hover {
+    .icon {
+      background-color: var(--clr-comment-hover);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+
+  &:active {
+    .icon {
+      background-color: var(--clr-comment-active);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+
+  &:focus-visible {
+    .icon {
+      outline: 2px solid var(--clr-blue);
+      background-color: var(--clr-comment-hover);
+
+      svg {
+        fill: var(--clr-blue);
+      }
+    }
+  }
+}
+
+.upvote {
+  &:hover {
+    .icon {
+      background-color: var(--clr-heart-hover);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+
+  &:active {
+    .icon {
+      background-color: var(--clr-heart-active);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+
+  &:focus-visible {
+    .icon {
+      outline: 2px solid var(--clr-rose);
+      background-color: var(--clr-heart-hover);
+
+      svg {
+        fill: var(--clr-rose);
+      }
+    }
+  }
+}
+
+.downvoted {
+  .icon {
+    svg {
+      fill: var(--clr-blue);
+    }
+  }
+}
+
+.upvoted {
+  .icon {
+    svg {
+      fill: var(--clr-rose);
+    }
+  }
+}

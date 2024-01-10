@@ -33,7 +33,7 @@ export async function GET(request: Request) {
         email: true,
         profile_image_url: true,
         following: true,
-
+        reputations: true,
         followers: true,
       },
     });
