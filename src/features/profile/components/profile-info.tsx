@@ -155,7 +155,7 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
         </div>
 
         <div className={styles.user}>
-          <div className={styles.container}>
+          <div className={styles.nameContainer}>
             <div className={styles.name}>
               <EllipsisWrapper>
                 <h2>{user?.name}</h2>
