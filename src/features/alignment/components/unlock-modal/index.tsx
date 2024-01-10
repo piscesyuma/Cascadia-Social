@@ -9,7 +9,7 @@ import useLockEndDate from "../../hooks/use-lock-date";
 import { AlignState } from "../../types";
 import { formatDateInput } from "../../utils";
 
-import styles from "./styles/unlock-form.module.scss";
+import styles from "./styles/index.module.scss";
 import { UnLockActions } from "./unlock-actions";
 import UnLockSummary from "./unlock-summary";
 
@@ -29,7 +29,7 @@ export const UnLockModal = ({
   const { veCCLockInfo } = state;
   const [unlockConfirmed, setUnLockConfirmed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
-  const [claimedAmount, setClaimedAmount] = useState<string>("");
+  const [claimStatus, setClaimStatus] = useState<number>(0);
   const [unlockEndDate, setUnLockEndDate] = useState<string>("");
 
   const { maxLockEndDateTimestamp } = useLockEndDate(veCCLockInfo);
@@ -37,10 +37,10 @@ export const UnLockModal = ({
   const handleSuccess = useCallback(async () => {
     onRefetch().then(() => {
       setUnLockConfirmed(true);
-      setClaimedAmount(veCCLockInfo.claimAmount);
+      setClaimStatus(veCCLockInfo.claimStatus);
       onGetVeCC();
     });
-  }, [onGetVeCC, onRefetch, veCCLockInfo.claimAmount]);
+  }, [onGetVeCC, onRefetch, veCCLockInfo.claimStatus]);
 
   useEffect(() => {
     const lockEndDate =
@@ -98,7 +98,7 @@ export const UnLockModal = ({
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <UnLockSummary
-            claimedAmount={claimedAmount}
+            claimStatus={claimStatus}
             unlockEndDate={unlockEndDate}
             unlockType={unlockType}
             veCCLockInfo={veCCLockInfo}

@@ -88,7 +88,7 @@ export const useUnlockAction = () => {
   } = useContractWrite({
     address: FEEDISTRIBUTOR.address as `0x${string}`,
     abi: FEEDISTRIBUTOR.abi,
-    functionName: "claim(address)",
+    functionName: "claim",
     account: address,
     onSuccess: () => {},
     onError: (err) => {

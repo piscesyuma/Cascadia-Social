@@ -14,7 +14,7 @@ import { ActionDetailType, ActionStatusType } from "../../types";
 import { AlignButton } from "../align-button";
 
 import { useUnlockAction } from "./hooks/use-unlock-action";
-import styles from "./styles/lock-actions.module.scss";
+import styles from "./styles/unlock-actions.module.scss";
 
 export const UnLockActions = ({
   unlockType,

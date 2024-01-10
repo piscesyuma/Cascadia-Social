@@ -7,46 +7,45 @@ import { CoinIcon } from "@/assets/coin-icon";
 import { ButtonLoadingSpinner } from "@/components/elements/button-loading-spinner";
 
 import useNumbers, { FNumFormats } from "../hooks/use-numbers";
-import { AlignState } from "../types";
+import { RedeemState } from "../types";
 import { bnum } from "../utils";
 
 import BalanceBar from "./balance-bar";
 import Input from "./numerical-input";
-import styles from "./styles/lock-amount.module.scss";
+import styles from "./styles/amount.module.scss";
 
-interface ILockAmount {
-  state: AlignState;
-  setLockAmount: (amount: string) => void;
+interface IAmount {
+  state: RedeemState;
+  setAmount: (amount: string) => void;
 }
-export const LockAmount = ({
-  state,
-  setLockAmount,
-}: ILockAmount): JSX.Element => {
-  const { balance, lockAmount, isLoading } = state;
+
+export const Amount = ({ state, setAmount }: IAmount): JSX.Element => {
+  const { amount, isLoading, redeemInfo } = state;
+
   const { fNum2 } = useNumbers();
   const { address } = useAccount();
 
   const [isMaxed, setIsMaxed] = useState<boolean>(false);
 
-  const hasAmount = bnum(lockAmount).gt(0);
-  const hasBalance = bnum(balance).gt(0);
+  const hasAmount = bnum(amount).gt(0);
+  const hasBalance = bnum(redeemInfo.cCCBalance).gt(0);
 
-  const amountExceedsTokenBalance = bnum(lockAmount).gt(balance);
+  const amountExceedsTokenBalance = bnum(amount).gt(redeemInfo.cCCBalance);
 
   const maxPercentage =
     !hasBalance || !hasAmount
       ? "0"
-      : bnum(lockAmount).div(balance).times(100).toFixed(2);
+      : bnum(amount).div(redeemInfo.cCCBalance).times(100).toFixed(2);
 
   const barColor = amountExceedsTokenBalance ? "red" : "primary";
 
   const setMax = useCallback(() => {
-    setLockAmount(bnum(balance).minus(0.0005).toString()); // in case of max amount, minus gas price 0.0005 from balance --- temporarily
-  }, [balance, setLockAmount]);
+    setAmount(bnum(redeemInfo.cCCBalance).minus(0.0005).toString()); // in case of max amount, minus gas price 0.0005 from balance --- temporarily
+  }, [redeemInfo.cCCBalance, setAmount]);
 
   useEffect(() => {
-    setIsMaxed(() => balance === lockAmount);
-  }, [balance, lockAmount]);
+    setIsMaxed(() => redeemInfo.cCCBalance === amount);
+  }, [redeemInfo.cCCBalance, amount]);
 
   return (
     <div className={styles.container}>
@@ -58,14 +57,14 @@ export const LockAmount = ({
         <div className={styles.inputToken}>
           <div className={styles.token}>
             <CascadiaLogo />
-            CC
+            cCC
           </div>
           <div className={styles.inputWrapper}>
             <Input
               className={styles.input}
-              value={lockAmount}
+              value={amount}
               onKeyDown={(evt) => evt.key === "e" && evt.preventDefault()}
-              onUserInput={(value) => setLockAmount(value)}
+              onUserInput={(value) => setAmount(value)}
             />
           </div>
         </div>
@@ -77,7 +76,7 @@ export const LockAmount = ({
             {isLoading && !!address ? (
               <ButtonLoadingSpinner width="1" height="1" />
             ) : (
-              <div>{fNum2(balance, FNumFormats.token)}</div>
+              <div>{fNum2(redeemInfo.cCCBalance, FNumFormats.token)}</div>
             )}
             {hasBalance && (
               <div>{!isMaxed ? <span></span> : <span>Max</span>}</div>
@@ -94,7 +93,7 @@ export const LockAmount = ({
           )}
 
           {amountExceedsTokenBalance && (
-            <div className={styles.exceed}>Exceeds CC balance</div>
+            <div className={styles.exceed}>Exceeds cCC balance</div>
           )}
         </div>
       </div>

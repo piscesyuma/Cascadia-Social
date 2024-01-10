@@ -13,10 +13,11 @@
 
       .title {
         font-size: var(--fs-h3);
-        font-weight: var(--fw-700);
+        font-weight: var(--fw-600);
       }
 
       .value {
+        color: var(--clr-primary);
         font-size: var(--fs-h1);
         font-weight: var(--fw-700);
       }

@@ -9,7 +9,7 @@ import { VeCCLockInfo } from "../../types";
 import styles from "./styles/unlock-summary.module.scss";
 
 type Props = {
-  claimedAmount: string;
+  claimStatus: number;
   unlockEndDate: string;
   unlockType: UnLockType[] | undefined;
   veCCLockInfo: VeCCLockInfo;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const UnLockSummary = ({
-  claimedAmount,
+  claimStatus,
   unlockEndDate,
   unlockType,
   veCCLockInfo,
@@ -46,14 +46,7 @@ const UnLockSummary = ({
           </>
         ) : (
           <div className={styles.item}>
-            <div>Claim amount</div>
-            <div>Claim amount</div>
-            <div>
-              {unlockConfirmed
-                ? claimedAmount
-                : fNum2(veCCLockInfo.claimAmount, FNumFormats.token)}{" "}
-              bCC
-            </div>
+            <div>Claim cCC token</div>
           </div>
         )}
       </div>
