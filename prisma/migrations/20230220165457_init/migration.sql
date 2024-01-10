@@ -56,6 +56,7 @@ CREATE TABLE "User" (
     "friends_count" INTEGER NOT NULL DEFAULT 0,
     "favorites_count" INTEGER NOT NULL DEFAULT 0,
     "statuses_count" INTEGER NOT NULL DEFAULT 0,
+    "reputation_count" INTEGER NOT NULL DEFAULT 0,
     "profile_banner_url" TEXT,
     "profile_image_url" TEXT,
     "pinned_tweet_id" TEXT,
@@ -116,6 +117,17 @@ CREATE TABLE "Like" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Like_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Reputation" (
+    "id" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "session_owner_id" TEXT NOT NULL,
+    "reputation_status" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Reputation_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -268,6 +280,9 @@ ALTER TABLE "Like" ADD CONSTRAINT "Like_tweet_id_fkey" FOREIGN KEY ("tweet_id") 
 
 -- AddForeignKey
 ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Reputation" ADD CONSTRAINT "Reputation_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;

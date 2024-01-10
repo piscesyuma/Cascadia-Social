@@ -21,6 +21,7 @@ import { following } from "../utils/following";
 import { EditDetailModal } from "./edit-detail-modal";
 import { EditProfileModal } from "./edit-profile-modal";
 import { InspectImageModal } from "./inspect-image-modal";
+import { ReputationButtons } from "./reputation-buttons";
 import styles from "./styles/user-info.module.scss";
 import { UserJoinDate } from "./user-join-date";
 
@@ -154,14 +155,18 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
         </div>
 
         <div className={styles.user}>
-          <div className={styles.name}>
-            <EllipsisWrapper>
-              <h2>{user?.name}</h2>
-            </EllipsisWrapper>
+          <div className={styles.container}>
+            <div className={styles.name}>
+              <EllipsisWrapper>
+                <h2>{user?.name}</h2>
+              </EllipsisWrapper>
 
-            <EllipsisWrapper>
-              <span>@{user?.email?.split("@")[0]}</span>
-            </EllipsisWrapper>
+              <EllipsisWrapper>
+                <span>@{user?.email?.split("@")[0]}</span>
+              </EllipsisWrapper>
+            </div>
+
+            <ReputationButtons user={user} />
           </div>
 
           {user?.description && (
