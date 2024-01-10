@@ -22,14 +22,14 @@ export const TweetActions = ({
         showStats ? styles.tweet : styles.tweetDetails
       }`}
     >
-      <CommentButton tweet={tweet} showStats={showStats} />
-      <RetweetButton tweet={tweet} showStats={showStats} />
-      {/* <LikeButton tweet={tweet} smallIcons={false} showStats={showStats} /> */}
       <UpvoteAndDownVoteButtons
         tweet={tweet}
         smallIcons={false}
         showStats={showStats}
       />
+      <CommentButton tweet={tweet} showStats={showStats} />
+      <RetweetButton tweet={tweet} showStats={showStats} />
+      {/* <LikeButton tweet={tweet} smallIcons={false} showStats={showStats} /> */}
       <ShareButton tweet={tweet} />
     </div>
   );
