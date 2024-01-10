@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  cursor: pointer;
+
+  .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    width: max-content;
+    right: 50%;
+    margin-bottom: 0.5em;
+    transform: translateX(50%);
+    font-size: var(--fs-pico);
+    background-color: var(--clr-trends-background);
+    border-radius: 1rem;
+    padding: 1em;
+
+    &::before {
+      position: absolute;
+      content: " ";
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 0.5em solid transparent;
+      border-top-color: var(--clr-trends-background);
+    }
+  }
+
+  &:hover {
+    cursor: help;
+
+    .tooltip {
+      display: flex;
+    }
+  }
+}

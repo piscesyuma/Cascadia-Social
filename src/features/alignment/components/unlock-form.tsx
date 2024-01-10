@@ -8,6 +8,7 @@ import { useUnLockModal } from "@/stores/use-unlock-modal";
 
 import { UnLockType } from "../config";
 import { useAlign } from "../hooks/use-align";
+import { bnum } from "../utils";
 
 import { AlignButton } from "./align-button";
 import styles from "./styles/unlock-form.module.scss";
@@ -43,12 +44,16 @@ export const UnLockAlignment = (): JSX.Element => {
       veCCLockInfo.hasExistingLock &&
       veCCLockInfo.cooldown > 0 &&
       veCCLockInfo.lockedEndDate > 0 &&
-      veCCLockInfo.lockedAmount > "0.0001"
+      bnum(veCCLockInfo.lockedAmount).gt(0.0001)
     )
       setCanStartCooldown(true);
     else setCanStartCooldown(false);
 
-    if (Number(veCCLockInfo.claimAmount) > 0) setCanClaim(true);
+    if (
+      bnum(veCCLockInfo.lockedAmount).gt(0.0001) &&
+      veCCLockInfo.claimStatus === 0
+    )
+      setCanClaim(true);
     else setCanClaim(false);
 
     if (
@@ -76,7 +81,7 @@ export const UnLockAlignment = (): JSX.Element => {
       )}
       {canStartCooldown && address && (
         <AlignButton
-          text="Start Cooldown"
+          text="Cooldown"
           onClick={() => handleShowPreviewModal(UnLockType.START_COOLDOWN)}
         />
       )}

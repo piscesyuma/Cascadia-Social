@@ -1,10 +1,11 @@
 .container {
   display: flex;
-  padding: 0.75em 1em;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
 
-  .header {
-    font-size: var(--fs-pico);
-    font-weight: var(--fw-500);
+  .actions {
+    display: flex;
   }
 
   button {

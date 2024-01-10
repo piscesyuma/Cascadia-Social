@@ -2,7 +2,7 @@ export type VeCCLockInfoResult = {
   locked: { amount: bigint; cooldown: bigint; end: bigint } | any;
   epoch: bigint | any;
   totalSupply: bigint | any;
-  claimAmount: bigint | any;
+  claimStatus: number | any;
 };
 
 export type VeCCLockInfo = {
@@ -10,7 +10,7 @@ export type VeCCLockInfo = {
   lockedEndDate: number;
   lockedAmount: string;
   totalSupply: string;
-  claimAmount: string;
+  claimStatus: number;
   epoch: string;
   hasExistingLock: boolean;
   isExpired: boolean;
@@ -22,7 +22,6 @@ export interface AlignState {
   lockEndDate: string;
   lockAmount: string;
   submissionDisabled: boolean;
-  isShowLockModal: boolean;
   veCCLockInfo: VeCCLockInfo;
 }
 

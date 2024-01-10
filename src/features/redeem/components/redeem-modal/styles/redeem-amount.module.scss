@@ -1,0 +1,24 @@
+@use "./abstracts/media-query" as *;
+@use "./abstracts/tooltips" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--clr-border);
+  border-radius: 1em;
+  padding: 0.5em 1em;
+
+  .token {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
