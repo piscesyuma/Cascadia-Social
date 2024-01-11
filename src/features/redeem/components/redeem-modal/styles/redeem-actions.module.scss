@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+
+    .actionItem {
+      position: relative;
+
+      .active {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        border: 1px solid green;
+        padding: 4px;
+
+        svg {
+          width: 25px;
+          height: 25px;
+          fill: green;
+        }
+      }
+
+      .inActive {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        border: 1px solid var(--clr-connect-background);
+        padding: 4px;
+      }
+
+      .loading {
+        position: absolute;
+        inset: 0;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  .hash {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--fs-pico);
+    font-weight: var(--fw-400);
+
+    a {
+      cursor: pointer;
+      color: var(--clr-primary);
+
+      &:hover {
+        color: var(--clr-primary-hover);
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "apiFolder": "src/app/api",
+  "schemaFolders": ["models"],
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Social Cascadia API Doc",
+      "version": "1.0"
+    }
+  }
+}

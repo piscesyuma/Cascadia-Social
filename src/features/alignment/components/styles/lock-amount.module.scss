@@ -1,54 +1,64 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0.75rem 1rem;
+  padding: 0 1rem;
 
-  .inputToken {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    .token {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-
-      svg {
-        width: 25px;
-        height: 25px;
-      }
-    }
-
-    .inputWrapper {
-      flex: auto;
-
-      .input {
-        flex: auto;
-        width: 100%;
-        text-align: right;
-      }
-    }
-  }
-
-  .balance {
+  .wrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    color: var(--clr-secondary);
-    font-size: var(--fs-pico);
-    font-weight: var(--fw-400);
+    gap: 10px;
+    padding: 0.5em 0.75em;
+    border: 1px solid var(--clr-border);
+    border-radius: 12px;
 
-    .btn {
+    &.exceed {
+      border: 1px solid var(--clr-rose);
+    }
+
+    .inputToken {
       display: flex;
       align-items: center;
-      gap: 5px;
-      cursor: pointer;
-    }
-  }
+      gap: 20px;
 
-  .exceed {
-    color: rgb(160, 0, 0);
-    font-size: var(--fs-pico);
+      .token {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+
+      .inputWrapper {
+        flex: auto;
+
+        .input {
+          flex: auto;
+          width: 100%;
+          text-align: right;
+        }
+      }
+    }
+
+    .balance {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: var(--clr-secondary);
+      font-size: var(--fs-pico);
+      font-weight: var(--fw-400);
+
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+    }
+
+    .exceed {
+      color: var(--clr-rose);
+      font-size: var(--fs-pico);
+    }
   }
 }

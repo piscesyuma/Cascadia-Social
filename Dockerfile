@@ -46,6 +46,9 @@ RUN chmod +x setup-env-production.sh && ./setup-env-production.sh
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+# Generate swagger json
+RUN yarn next-swagger-doc-cli next-swagger-doc.json
+
 # Prisma generate Database
 RUN yarn prisma generate && chmod -R 777 ./node_modules/.prisma
 

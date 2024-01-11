@@ -34,7 +34,8 @@
   .connect,
   .connectWallet,
   .faucet,
-  .footer {
+  .footer,
+  .redeem {
     margin-top: 15px;
   }
 
@@ -53,8 +54,9 @@
     padding-top: 1rem;
   }
 
+  .faucet,
   .alignment,
-  .faucet {
+  .redeem {
     background-color: var(--clr-connect-background);
     border-radius: 1rem;
   }

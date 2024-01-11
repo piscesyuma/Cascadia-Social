@@ -50,47 +50,53 @@ export const LockAmount = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputToken}>
-        <div className={styles.token}>
-          <CascadiaLogo />
-          CC
+      <div
+        className={`${amountExceedsTokenBalance && styles.exceed} ${
+          styles.wrapper
+        }`}
+      >
+        <div className={styles.inputToken}>
+          <div className={styles.token}>
+            <CascadiaLogo />
+            CC
+          </div>
+          <div className={styles.inputWrapper}>
+            <Input
+              className={styles.input}
+              value={lockAmount}
+              onKeyDown={(evt) => evt.key === "e" && evt.preventDefault()}
+              onUserInput={(value) => setLockAmount(value)}
+            />
+          </div>
         </div>
-        <div className={styles.inputWrapper}>
-          <Input
-            className={styles.input}
-            value={lockAmount}
-            onKeyDown={(evt) => evt.key === "e" && evt.preventDefault()}
-            onUserInput={(value) => setLockAmount(value)}
-          />
-        </div>
-      </div>
 
-      <div className={styles.balance}>
-        <button className={styles.btn} onClick={() => setMax()}>
-          <CoinIcon />
-          Balance:
-          {isLoading && !!address ? (
-            <ButtonLoadingSpinner width="1" height="1" />
-          ) : (
-            <div>{fNum2(balance, FNumFormats.token)}</div>
-          )}
+        <div className={styles.balance}>
+          <button className={styles.btn} onClick={() => setMax()}>
+            <CoinIcon />
+            Balance:
+            {isLoading && !!address ? (
+              <ButtonLoadingSpinner width="1" height="1" />
+            ) : (
+              <div>{fNum2(balance, FNumFormats.token)}</div>
+            )}
+            {hasBalance && (
+              <div>{!isMaxed ? <span></span> : <span>Max</span>}</div>
+            )}
+          </button>
+
           {hasBalance && (
-            <div>{!isMaxed ? <span></span> : <span>Max</span>}</div>
+            <BalanceBar
+              width={maxPercentage}
+              bufferWidth={0}
+              color={barColor}
+              isOver={amountExceedsTokenBalance}
+            />
           )}
-        </button>
 
-        {hasBalance && (
-          <BalanceBar
-            width={maxPercentage}
-            bufferWidth={0}
-            color={barColor}
-            isOver={amountExceedsTokenBalance}
-          />
-        )}
-
-        {amountExceedsTokenBalance && (
-          <div className={styles.exceed}>Exceeds wallet balance</div>
-        )}
+          {amountExceedsTokenBalance && (
+            <div className={styles.exceed}>Exceeds CC balance</div>
+          )}
+        </div>
       </div>
     </div>
   );

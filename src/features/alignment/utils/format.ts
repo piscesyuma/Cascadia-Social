@@ -30,7 +30,7 @@ export function formatLockInfo(lockInfo: VeCCLockInfoResult) {
     lockedEndDate: lockedEndDateNormalised,
     lockedAmount: formatUnits(lockedAmount, 18),
     totalSupply: formatUnits(lockInfo.totalSupply || 0, 18),
-    claimAmount: formatUnits(lockInfo.claimAmount || 0, 18),
+    claimStatus: lockInfo.claimStatus,
     epoch: lockInfo.epoch.toString(),
     hasExistingLock,
     isExpired,

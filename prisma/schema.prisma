@@ -73,6 +73,7 @@ model User {
   friends_count      Int            @default(0)
   favorites_count    Int            @default(0)
   statuses_count     Int            @default(0)
+  reputation_count   Int            @default(0)
   profile_banner_url String?
   profile_image_url  String?
   publicAddress      String?           @unique // Added to enable crypto authentication
@@ -81,6 +82,7 @@ model User {
   sessions           Session[]
   tweets             Tweet[]
   likes              Like[]
+  reputations        Reputation[]
   downvotes          Downvote[]
   upvotes            Upvote[]
   followers          User[]         @relation(name: "Followers")
@@ -145,6 +147,15 @@ model Like {
   user       User     @relation(fields: [user_id], references: [id])
   user_id    String
   created_at DateTime @default(now())
+}
+
+model Reputation {
+  id                String   @id @default(cuid())
+  user              User     @relation(fields: [user_id], references: [id])
+  user_id           String
+  session_owner_id  String
+  reputation_status String
+  created_at        DateTime @default(now())
 }
 
 model Downvote {

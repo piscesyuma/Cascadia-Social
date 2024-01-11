@@ -1,143 +1,141 @@
 [
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "admin",
+        "type": "address"
+      }
+    ],
     "name": "CommitOwnership",
-    "inputs": [
-      {
-        "name": "admin",
-        "type": "address",
-        "indexed": false
-      }
-    ],
-    "anonymous": false,
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "admin",
+        "type": "address"
+      }
+    ],
     "name": "ApplyOwnership",
-    "inputs": [
-      {
-        "name": "admin",
-        "type": "address",
-        "indexed": false
-      }
-    ],
-    "anonymous": false,
     "type": "event"
   },
   {
-    "name": "Deposit",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
         "name": "provider",
-        "type": "address",
-        "indexed": true
+        "type": "address"
       },
       {
+        "indexed": false,
         "name": "value",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       },
       {
+        "indexed": true,
         "name": "locktime",
-        "type": "uint256",
-        "indexed": true
+        "type": "uint256"
       },
       {
+        "indexed": false,
         "name": "type",
-        "type": "int128",
-        "indexed": false
+        "type": "int128"
       },
       {
+        "indexed": false,
         "name": "ts",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       }
     ],
-    "anonymous": false,
+    "name": "Deposit",
     "type": "event"
   },
   {
-    "name": "Withdraw",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
         "name": "provider",
-        "type": "address",
-        "indexed": true
+        "type": "address"
       },
       {
+        "indexed": false,
         "name": "value",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       },
       {
+        "indexed": false,
         "name": "ts",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       }
     ],
-    "anonymous": false,
+    "name": "Withdraw",
     "type": "event"
   },
   {
-    "name": "Supply",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "name": "prevSupply",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       },
       {
+        "indexed": false,
         "name": "supply",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       }
     ],
-    "anonymous": false,
+    "name": "Supply",
     "type": "event"
   },
   {
-    "name": "LockBot",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "name": "lockbot",
-        "type": "address",
-        "indexed": false
+        "type": "address"
       },
       {
+        "indexed": false,
         "name": "allowed",
-        "type": "bool",
-        "indexed": false
+        "type": "bool"
       }
     ],
-    "anonymous": false,
+    "name": "LockBot",
     "type": "event"
   },
   {
-    "name": "MinTime",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "name": "mintime",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       }
     ],
-    "anonymous": false,
+    "name": "MinTime",
     "type": "event"
   },
   {
-    "name": "MaxTimeDiv",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
         "name": "maxtimediv",
-        "type": "uint256",
-        "indexed": false
+        "type": "uint256"
       }
     ],
-    "anonymous": false,
+    "name": "MaxTimeDiv",
     "type": "event"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "constructor",
     "inputs": [
       {
         "name": "_name",
@@ -152,12 +150,11 @@
         "type": "string"
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "set_lock_bot",
     "inputs": [
       {
         "name": "addr",
@@ -168,98 +165,110 @@
         "type": "bool"
       }
     ],
-    "outputs": []
+    "name": "set_lock_bot",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
+    "inputs": [
+      {
+        "name": "new_week_time",
+        "type": "uint256"
+      }
+    ],
+    "name": "change_week",
+    "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "change_min_time",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "name": "new_min_time",
         "type": "uint256"
       }
     ],
-    "outputs": []
+    "name": "change_min_time",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "change_max_time_div",
     "inputs": [
       {
         "name": "new_max_time_div",
         "type": "uint256"
       }
     ],
-    "outputs": []
+    "name": "change_max_time_div",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
+    "inputs": [],
     "name": "disallow_time_change",
-    "inputs": [],
-    "outputs": []
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      }
+    ],
     "name": "commit_transfer_ownership",
-    "inputs": [
-      {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "outputs": []
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
+    "inputs": [],
     "name": "apply_transfer_ownership",
-    "inputs": [],
-    "outputs": []
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      }
+    ],
     "name": "commit_smart_wallet_checker",
-    "inputs": [
-      {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "outputs": []
-  },
-  {
+    "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "apply_smart_wallet_checker",
-    "inputs": [],
-    "outputs": []
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "get_last_user_slope",
+    "inputs": [],
+    "name": "apply_smart_wallet_checker",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "name": "addr",
         "type": "address"
       }
     ],
+    "name": "get_last_user_slope",
     "outputs": [
       {
         "name": "",
         "type": "int128"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "user_point_history__ts",
     "inputs": [
       {
         "name": "_addr",
@@ -270,65 +279,65 @@
         "type": "uint256"
       }
     ],
+    "name": "user_point_history__ts",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
-  },
-  {
+    ],
     "stateMutability": "view",
-    "type": "function",
-    "name": "locked__end",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "name": "_addr",
         "type": "address"
       }
     ],
+    "name": "locked__end",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "checkpoint",
     "inputs": [],
-    "outputs": []
+    "name": "checkpoint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "stateMutability": "payable",
-    "type": "function",
-    "name": "deposit_for",
     "inputs": [
       {
         "name": "_addr",
         "type": "address"
       }
     ],
-    "outputs": []
+    "name": "deposit_for",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    "stateMutability": "payable",
-    "type": "function",
-    "name": "create_cooldown_lock",
     "inputs": [
       {
         "name": "_cooldown",
         "type": "uint256"
       }
     ],
-    "outputs": []
+    "name": "create_cooldown_lock",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    "stateMutability": "payable",
-    "type": "function",
-    "name": "create_cooldown_lock_for",
     "inputs": [
       {
         "name": "_cooldown",
@@ -339,62 +348,74 @@
         "type": "address"
       }
     ],
-    "outputs": []
+    "name": "create_cooldown_lock_for",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "start_cooldown",
     "inputs": [],
-    "outputs": []
+    "name": "start_cooldown",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
+    "inputs": [
+      {
+        "name": "cooldowns",
+        "type": "uint256"
+      }
+    ],
+    "name": "set_max_cooldowns",
+    "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "renew_cooldown",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "name": "_cooldown",
         "type": "uint256"
       }
     ],
-    "outputs": []
-  },
-  {
-    "stateMutability": "payable",
-    "type": "function",
-    "name": "increase_amount",
-    "inputs": [],
-    "outputs": []
-  },
-  {
+    "name": "renew_cooldown",
+    "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "withdraw",
-    "inputs": [],
-    "outputs": []
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "balanceOf",
+    "inputs": [],
+    "name": "increase_amount",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "name": "addr",
         "type": "address"
       }
     ],
+    "name": "balanceOf",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "balanceOf",
     "inputs": [
       {
         "name": "addr",
@@ -405,17 +426,17 @@
         "type": "uint256"
       }
     ],
+    "name": "balanceOf",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "balanceOfAt",
     "inputs": [
       {
         "name": "addr",
@@ -426,121 +447,132 @@
         "type": "uint256"
       }
     ],
+    "name": "balanceOfAt",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "totalSupply",
     "inputs": [],
+    "name": "totalSupply",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "totalSupply",
     "inputs": [
       {
         "name": "t",
         "type": "uint256"
       }
     ],
+    "name": "totalSupply",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "totalSupplyAt",
     "inputs": [
       {
         "name": "_block",
         "type": "uint256"
       }
     ],
+    "name": "totalSupplyAt",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "min_time",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
+    "inputs": [],
+    "name": "WEEK",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
-    "type": "function",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "max_time_div",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "allow_time_change",
     "inputs": [],
+    "name": "allow_time_change",
     "outputs": [
       {
         "name": "",
         "type": "bool"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "supply",
     "inputs": [],
+    "name": "supply",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "locked",
     "inputs": [
       {
         "name": "arg0",
         "type": "address"
       }
     ],
+    "name": "locked",
     "outputs": [
       {
-        "name": "",
-        "type": "tuple",
         "components": [
           {
             "name": "amount",
@@ -554,36 +586,36 @@
             "name": "end",
             "type": "uint256"
           }
-        ]
+        ],
+        "name": "",
+        "type": "tuple"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "epoch",
     "inputs": [],
+    "name": "epoch",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "point_history",
     "inputs": [
       {
         "name": "arg0",
         "type": "uint256"
       }
     ],
+    "name": "point_history",
     "outputs": [
       {
-        "name": "",
-        "type": "tuple",
         "components": [
           {
             "name": "bias",
@@ -601,14 +633,15 @@
             "name": "blk",
             "type": "uint256"
           }
-        ]
+        ],
+        "name": "",
+        "type": "tuple"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "user_point_history",
     "inputs": [
       {
         "name": "arg0",
@@ -619,10 +652,9 @@
         "type": "uint256"
       }
     ],
+    "name": "user_point_history",
     "outputs": [
       {
-        "name": "",
-        "type": "tuple",
         "components": [
           {
             "name": "bias",
@@ -640,155 +672,195 @@
             "name": "blk",
             "type": "uint256"
           }
-        ]
+        ],
+        "name": "",
+        "type": "tuple"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "user_point_epoch",
     "inputs": [
       {
         "name": "arg0",
         "type": "address"
       }
     ],
+    "name": "user_point_epoch",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "slope_changes",
     "inputs": [
       {
         "name": "arg0",
         "type": "uint256"
       }
     ],
+    "name": "slope_changes",
     "outputs": [
       {
         "name": "",
         "type": "int128"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "name",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "string"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "symbol",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "string"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "version",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "string"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "decimals",
     "inputs": [],
+    "name": "decimals",
     "outputs": [
       {
         "name": "",
         "type": "uint256"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "future_smart_wallet_checker",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "smart_wallet_checker",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "admin",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
+    "inputs": [],
     "name": "future_admin",
-    "inputs": [],
     "outputs": [
       {
         "name": "",
         "type": "address"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "stateMutability": "view",
-    "type": "function",
-    "name": "lock_bot",
     "inputs": [
       {
         "name": "arg0",
         "type": "address"
       }
     ],
+    "name": "lock_bot",
     "outputs": [
       {
         "name": "",
         "type": "bool"
       }
-    ]
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "today",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "cooldowns_today",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "max_cooldowns",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

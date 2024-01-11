@@ -15,13 +15,12 @@ const initialState: AlignState = {
   lockEndDate: "",
   lockAmount: "",
   submissionDisabled: true,
-  isShowLockModal: false,
   veCCLockInfo: {
     cooldown: 0,
     lockedEndDate: 0,
     lockedAmount: "",
     totalSupply: "",
-    claimAmount: "",
+    claimStatus: 0,
     epoch: "",
     hasExistingLock: false,
     isExpired: false,
@@ -66,10 +65,10 @@ export const useAlign = () => {
     enabled: !!address,
   });
 
-  const { data: claimAmount, refetch: refetchClaim } = useContractRead({
+  const { data: claimStatus, refetch: refetchClaim } = useContractRead({
     address: FEEDISTRIBUTOR.address as `0x${string}`,
     abi: FEEDISTRIBUTOR.abi,
-    functionName: "claim",
+    functionName: "get_user_cCC_status",
     args: [address],
     enabled: !!address,
   });
@@ -118,7 +117,7 @@ export const useAlign = () => {
       locked,
       epoch,
       totalSupply,
-      claimAmount,
+      claimStatus,
     });
 
     const lockEndDate = veCCLockInfo?.hasExistingLock
@@ -135,7 +134,7 @@ export const useAlign = () => {
     }));
   }, [
     address,
-    claimAmount,
+    claimStatus,
     epoch,
     locked,
     maxLockEndDateTimestamp,

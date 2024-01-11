@@ -33,6 +33,7 @@ export async function GET(
         email: true,
         profile_image_url: true,
         profile_banner_url: true,
+        reputation_count: true,
 
         created_at: true,
         description: true,
@@ -42,6 +43,7 @@ export async function GET(
         verified: true,
         followers: true,
         following: true,
+        reputations: true,
 
         _count: {
           select: {

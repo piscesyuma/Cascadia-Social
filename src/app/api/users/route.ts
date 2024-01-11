@@ -3,6 +3,15 @@ import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     description: Returns user list
+ *     responses:
+ *       200:
+ *         description: User List
+ */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id") || undefined;
@@ -33,7 +42,7 @@ export async function GET(request: Request) {
         email: true,
         profile_image_url: true,
         following: true,
-
+        reputations: true,
         followers: true,
       },
     });

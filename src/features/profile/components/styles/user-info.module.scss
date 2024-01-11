@@ -140,17 +140,21 @@ $avatar-top: calc(-1 * #{$avatar-size} / 2 - #{$avatar-border});
       flex-direction: column;
       gap: 1rem;
 
-      .name {
-        h2 {
-          font-size: var(--fs-h2);
-          font-weight: var(--fw-700);
-          color: var(--clr-secondary);
-          margin-bottom: 0.2rem;
-        }
+      .container {
+        display: flex;
 
-        span {
-          font-size: var(--fs-milli);
-          color: var(--clr-tertiary);
+        .name {
+          h2 {
+            font-size: var(--fs-h2);
+            font-weight: var(--fw-700);
+            color: var(--clr-secondary);
+            margin-bottom: 0.2rem;
+          }
+
+          span {
+            font-size: var(--fs-milli);
+            color: var(--clr-tertiary);
+          }
         }
       }
 

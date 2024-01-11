@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import { Alignment } from "@/features/alignment";
 import { RegisterForm } from "@/features/auth";
 import { Faucet } from "@/features/faucet";
+import { Redeem } from "@/features/redeem";
 import { Search } from "@/features/search";
-import { Trends } from "@/features/trends";
 import { ConnectWalletButton } from "@/features/web3";
 
 import styles from "./styles/aside.module.scss";
@@ -27,15 +27,15 @@ export const Aside = () => {
                 <Search />
               </div>
             )}
-          {pathname !== "/" &&
+          {/* Disabled connect section temporarily */}
+          {/* {pathname !== "/" &&
             pathname !== "/explore" &&
             pathname !== "/trends" && (
               <div className={styles.trends}>
                 <Trends />
               </div>
             )}
-          {/* Disabled connect section temporarily */}
-          {/* {pathname !== `/people` && (
+          {pathname !== `/people` && (
             <div className={styles.connect}>
               <Connect />
             </div>
@@ -50,6 +50,10 @@ export const Aside = () => {
 
           <div className={styles.alignment}>
             <Alignment />
+          </div>
+
+          <div className={styles.redeem}>
+            <Redeem />
           </div>
         </>
       )}
