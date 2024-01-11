@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 import { Modal } from "@/components/elements/modal";
-import { ConnectWalletButton } from "@/features/web3";
 import useHasMounted from "@/hooks/use-mounted";
 import { useRedeemModal } from "@/stores/use-redeem-modal";
 
@@ -98,7 +97,7 @@ export const Redeem = () => {
             />
           </>
         ) : (
-          <ConnectWalletButton text="Connect Wallet" />
+          <div className={styles.connect}>Please connect your wallet.</div>
         )}
       </div>
 
