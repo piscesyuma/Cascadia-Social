@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Social Cascadia API Doc",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/users?id={id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The user ID"
+          }
+        ],
+        "summary": "get user By ID.",
+        "description": "Returns user by ID",
+        "responses": {
+          "200": {
+            "description": "User Detail"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "description": "Returns user list",
+        "responses": {
+          "200": {
+            "description": "User List"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
