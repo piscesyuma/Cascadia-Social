@@ -9,6 +9,7 @@ enum ITheme {
   LIGHT = "theme-light",
   DIM = "theme-dim",
   DARK = "theme-dark",
+  DEFAULT = "theme-default",
 }
 
 export const ThemePicker = () => {
@@ -16,11 +17,11 @@ export const ThemePicker = () => {
 
   const prefersDarkMode =
     typeof window !== "undefined"
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? window.matchMedia("(prefers-color-scheme: default)").matches
       : false;
 
   const [currentTheme, setCurrentTheme] = useState(
-    theme ?? (prefersDarkMode ? "theme-dark" : "theme-light"),
+    theme ?? (prefersDarkMode ? "theme-default" : "theme-light"),
   );
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +49,7 @@ export const ThemePicker = () => {
       <ul className={styles.themes}>
         <Theme
           value="theme-light"
-          label="Default"
+          label="Light"
           checked={currentTheme === "theme-light"}
           onChange={handleThemeChange}
         />
@@ -62,8 +63,15 @@ export const ThemePicker = () => {
 
         <Theme
           value="theme-dark"
-          label="Lights out"
+          label="Dark"
           checked={currentTheme === "theme-dark"}
+          onChange={handleThemeChange}
+        />
+
+        <Theme
+          value="theme-default"
+          label="Default"
+          checked={currentTheme === "theme-default"}
           onChange={handleThemeChange}
         />
       </ul>
