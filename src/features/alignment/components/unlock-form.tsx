@@ -69,7 +69,7 @@ export const UnLockAlignment = (): JSX.Element => {
     handleGetVeCC();
   }, [handleGetVeCC]);
 
-  if (!hasMounted) return <div></div>;
+  if (!hasMounted || !address) return <div></div>;
 
   return (
     <div className={styles.container}>

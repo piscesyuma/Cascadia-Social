@@ -5,7 +5,6 @@ import { useAccount } from "wagmi";
 
 import { BackArrowIcon } from "@/assets/back-arrow-icon";
 import { Modal } from "@/components/elements/modal";
-import { ConnectWalletButton } from "@/features/web3";
 import useHasMounted from "@/hooks/use-mounted";
 import { useLockModal } from "@/stores/use-lock-modal";
 
@@ -54,7 +53,7 @@ export const AddAlignment = ({ changeTab }: { changeTab: () => void }) => {
             onClick={() => openLockModal()}
           />
         ) : (
-          <ConnectWalletButton text="Connect Wallet" />
+          <div className={styles.connect}>Please connect your wallet.</div>
         )}
       </div>
 
