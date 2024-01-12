@@ -131,23 +131,14 @@ CREATE TABLE "Reputation" (
 );
 
 -- CreateTable
-CREATE TABLE "Downvote" (
+CREATE TABLE "Vote" (
     "id" TEXT NOT NULL,
     "tweet_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
+    "vote_status" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Downvote_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Upvote" (
-    "id" TEXT NOT NULL,
-    "tweet_id" TEXT NOT NULL,
-    "user_id" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "Upvote_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Vote_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -285,16 +276,10 @@ ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") RE
 ALTER TABLE "Reputation" ADD CONSTRAINT "Reputation_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Vote" ADD CONSTRAINT "Vote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Vote" ADD CONSTRAINT "Vote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Retweet" ADD CONSTRAINT "Retweet_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
