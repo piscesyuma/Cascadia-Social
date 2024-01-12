@@ -79,7 +79,7 @@ export async function GET(request: Request) {
         },
 
         likes: true,
-        // votes: true,
+        votes: true,
         media: true,
         retweets: true,
 
