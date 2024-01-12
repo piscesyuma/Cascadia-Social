@@ -86,6 +86,7 @@ model User {
   votes              Vote[]
   followers          User[]         @relation(name: "Followers")
   following          User[]         @relation(name: "Followers")
+  transactions       Transaction[]
   retweets           Retweet[]
   bookmarks          Bookmark[]
   sent_messages      Message[]      @relation("receiver")
@@ -93,6 +94,17 @@ model User {
   conversations      Conversation[]
   pinned_tweet       Tweet?         @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
   pinned_tweet_id    String?
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [follower_id], references: [id])
+  user_id     String
+  follower_id String
+  balance     Float
+  amount      Float
+  description String
+  createdAt   DateTime @default(now())
 }
 
 model Tweet {

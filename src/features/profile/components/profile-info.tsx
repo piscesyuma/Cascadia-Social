@@ -10,13 +10,14 @@ import { EditIcon } from "@/assets/edit-icon";
 import { LocationIcon } from "@/assets/location-icon";
 import { MessageIcon } from "@/assets/message-icon";
 import { ReceiveNotificationsIcon } from "@/assets/notifications-icon";
+import { BuyFollowerButton } from "@/components/elements/buy-follower-button";
 import { EllipsisWrapper } from "@/components/elements/ellipsis-wrapper";
 import { FollowButton } from "@/components/elements/follow-button";
 import { Modal } from "@/components/elements/modal";
 
 import { WebsiteIcon } from "../assets/website-icon";
 import { IUser } from "../types";
-import { following } from "../utils/following";
+import { following, buying, getAmount } from "../utils/following";
 
 import { EditDetailModal } from "./edit-detail-modal";
 import { EditProfileModal } from "./edit-profile-modal";
@@ -41,6 +42,13 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
     user: user,
     session_owner_id: session?.user?.id,
   });
+
+  const isBuying = buying({
+    user: user,
+    session_owner_id: session?.user?.id,
+  });
+
+  const amount = getAmount({ user: user });
 
   return (
     <div className={styles.container}>
@@ -148,6 +156,14 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                 user_id={user?.id}
                 session_owner_id={session?.user?.id}
                 isFollowing={isFollowing}
+                username={user?.email?.split("@")[0]}
+              />
+
+              <BuyFollowerButton
+                user_id={user?.id}
+                session_owner_id={session?.user?.id}
+                isBuying={isBuying}
+                amount={amount}
                 username={user?.email?.split("@")[0]}
               />
             </div>
