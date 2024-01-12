@@ -79,8 +79,7 @@ export async function GET(request: Request) {
         },
 
         likes: true,
-        upvotes: true,
-        downvotes: true,
+        // votes: true,
         media: true,
         retweets: true,
 

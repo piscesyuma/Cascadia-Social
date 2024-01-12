@@ -83,8 +83,7 @@ model User {
   tweets             Tweet[]
   likes              Like[]
   reputations        Reputation[]
-  downvotes          Downvote[]
-  upvotes            Upvote[]
+  votes              Vote[]
   followers          User[]         @relation(name: "Followers")
   following          User[]         @relation(name: "Followers")
   retweets           Retweet[]
@@ -116,8 +115,7 @@ model Tweet {
   author_id               String
   media                   Media[]
   likes                   Like[]
-  downvotes               Downvote[]
-  upvotes                 Upvote[]
+  votes                   Vote[]
   retweets                Retweet[]
   quotes                  Tweet[]    @relation("quoted_tweet")
   quoted_tweet_id         String?
@@ -158,22 +156,14 @@ model Reputation {
   created_at        DateTime @default(now())
 }
 
-model Downvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
-}
-
-model Upvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
+model Vote {
+  id          String   @id @default(cuid())
+  tweet       Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id    String
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  vote_status String
+  created_at  DateTime @default(now())
 }
 
 model Retweet {

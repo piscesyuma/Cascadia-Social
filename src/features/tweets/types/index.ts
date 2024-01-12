@@ -1,8 +1,7 @@
 import type {
   Tweet,
   Like,
-  Downvote,
-  Upvote,
+  Vote,
   Media,
   Retweet,
   Bookmark,
@@ -17,8 +16,7 @@ export interface IFeed {
 export interface ITweet extends Tweet {
   author: IUser;
   likes: ILike[];
-  downvotes: IDownvote[];
-  upvotes: IUpvote[];
+  votes: IVote[];
   media: IMedia[];
   retweets: IRetweet[];
   quoted_tweet: ITweet;
@@ -40,12 +38,7 @@ export interface ILike extends Like {
   tweet: ITweet;
 }
 
-export interface IDownvote extends Downvote {
-  user: IUser;
-  tweet: ITweet;
-}
-
-export interface IUpvote extends Upvote {
+export interface IVote extends Vote {
   user: IUser;
   tweet: ITweet;
 }
