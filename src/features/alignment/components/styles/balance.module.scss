@@ -28,7 +28,7 @@
       }
     }
 
-    .swap {
+    .next {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -36,6 +36,7 @@
       svg {
         cursor: pointer;
         fill: var(--clr-secondary);
+        transform: rotate(180deg);
         width: 25px;
         height: 25px;
       }

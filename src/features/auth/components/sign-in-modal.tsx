@@ -11,9 +11,7 @@ import { CloseIcon } from "@/assets/close-icon";
 import { TextInput } from "@/components/elements/text-input";
 import { ConnectWalletButton } from "@/features/web3";
 
-import { AppleLogo } from "../assets/apple-logo";
 import { DiscordLogo } from "../assets/discord-logo";
-import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
 import { TwitterLogo } from "../assets/twitter-logo";
 
@@ -80,14 +78,6 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
             />
 
             <AuthButton
-              onClick={() => handleSignIn("github")}
-              icon={<GithubLogo />}
-              text="Sign in with Github"
-              disabled={isLoading.github}
-              isLoading={isLoading.github}
-            />
-
-            <AuthButton
               onClick={() => handleSignIn("twitter")}
               icon={<TwitterLogo />}
               text="Sign in with Twitter"
@@ -102,8 +92,6 @@ export const SignInModal = ({ onClose }: { onClose: () => void }) => {
               disabled={isLoading.discord}
               isLoading={isLoading.discord}
             />
-
-            <AuthButton icon={<AppleLogo />} text="Sign in with Apple" />
           </div>
 
           <div className={styles.divider}>
