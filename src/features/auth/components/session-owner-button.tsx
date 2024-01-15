@@ -3,10 +3,13 @@ import { AnimatePresence } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 
-import { DotIcon } from "@/assets/dot-icon";
 import { EllipsisWrapper } from "@/components/elements/ellipsis-wrapper";
 import { Modal } from "@/components/elements/modal";
 import { Avatar, UserName, UserScreenName } from "@/features/profile";
+
+import { DiscordLogo } from "../assets/discord-logo";
+import { GoogleLogo } from "../assets/google-logo";
+import { TwitterLogo } from "../assets/twitter-logo";
 
 import { SessionOwnerModal } from "./session-owner-modal";
 import styles from "./styles/session-owner-button.module.scss";
@@ -46,7 +49,9 @@ export const SessionOwnerButton = () => {
           </EllipsisWrapper>
         </div>
         <div className={styles.options}>
-          <DotIcon />
+          {session?.user.provider === "google" && <GoogleLogo />}
+          {session?.user.provider === "discord" && <DiscordLogo />}
+          {session?.user.provider === "twitter" && <TwitterLogo />}
         </div>
       </button>
 

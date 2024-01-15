@@ -65,9 +65,15 @@ model User {
   verified           Boolean        @default(false)
   email              String?        @unique
   emailVerified      DateTime?
-  discord_id   String?        @unique
+  google_id          String?        @unique
+  google_username    String?        @unique
+  google_email       String?        @unique
+  discord_id         String?        @unique
   discord_username   String?        @unique
   discord_email      String?        @unique
+  twitter_id         String?        @unique
+  twitter_username   String?        @unique
+  twitter_email      String?        @unique
   image              String?
   password           String?
   role               UserRole       @default(USER)

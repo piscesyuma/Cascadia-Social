@@ -16,6 +16,9 @@ export const google = {
       screen_name: profile.name,
       email: profile.email,
       image: profile.picture || "",
+      google_id: profile.sub,
+      google_username: profile.name,
+      google_email: profile.email,
     };
   },
 };

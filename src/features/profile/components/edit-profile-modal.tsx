@@ -68,6 +68,7 @@ export const EditProfileModal = ({
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
   const [isLoading, setIsLoading] = useState({
+    google: false,
     discord: false,
     twitter: false,
   });
@@ -279,6 +280,26 @@ export const EditProfileModal = ({
 
         <div className={styles.socials}>
           <div className={styles.link}>
+            <div className={styles.title}>Google</div>
+            {user.google_username && user.google_email && (
+              <div className={styles.detail}>
+                <div className={styles.item}>
+                  <div>Name</div>
+                  <div>{user.google_username}</div>
+                </div>
+                <div className={styles.item}>
+                  <div>Email</div>
+                  <div>{user.google_email}</div>
+                </div>
+              </div>
+            )}
+            <SocialButton
+              text="Link Google"
+              isLoading={isLoading.google}
+              onClick={() => handleSignIn("google")}
+            />
+          </div>
+          <div className={styles.link}>
             <div className={styles.title}>Discord</div>
             {user.discord_username && user.discord_email && (
               <div className={styles.detail}>
@@ -293,26 +314,30 @@ export const EditProfileModal = ({
               </div>
             )}
             <SocialButton
-              text="Sign in with Discord"
+              text="Link Discord"
               isLoading={isLoading.discord}
               onClick={() => handleSignIn("discord")}
             />
           </div>
           <div className={styles.link}>
             <div className={styles.title}>Twitter</div>
-            {user.discord_username && user.discord_email && (
+            {user.twitter_username && user.twitter_email && (
               <div className={styles.detail}>
                 <div className={styles.item}>
                   <div>Name</div>
-                  <div>{user.discord_username}</div>
+                  <div>{user.twitter_username}</div>
                 </div>
                 <div className={styles.item}>
                   <div>Email</div>
-                  <div>{user.discord_email}</div>
+                  <div>{user.twitter_email}</div>
                 </div>
               </div>
             )}
-            <SocialButton text="Sign in with Twitter" />
+            <SocialButton
+              text="Link Twitter"
+              isLoading={isLoading.twitter}
+              onClick={() => handleSignIn("twitter")}
+            />
           </div>
         </div>
       </div>

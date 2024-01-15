@@ -67,8 +67,6 @@ export const authOptions: AuthOptions = {
         }
       }
 
-      const isAllowedToSignIn = true;
-
       if (account && profile && account.provider === "discord") {
         const discordEmail = profile.email;
         // find user with discordEmail in the DB
@@ -84,6 +82,38 @@ export const authOptions: AuthOptions = {
         }
       }
 
+      if (account && profile && account.provider === "twitter") {
+        const twitterEmail = profile.email;
+        // find user with twitterEmail in the DB
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            twitter_email: twitterEmail,
+          },
+        });
+
+        // if twitterEmail is not same with normal email, use normal user
+        if (existingUser) {
+          user.email = existingUser.email;
+        }
+      }
+
+      if (account && profile && account.provider === "google") {
+        const googleEmail = profile.email;
+        // find user with googleEmail in the DB
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            google_email: googleEmail,
+          },
+        });
+
+        // if googleEmail is not same with normal email, use normal user
+        if (existingUser) {
+          user.email = existingUser.email;
+        }
+      }
+
+      const isAllowedToSignIn = true;
+
       if (isAllowedToSignIn) {
         return true;
       } else {
@@ -98,13 +128,15 @@ export const authOptions: AuthOptions = {
         session.user.email = token?.email;
         session.user.role = token?.role;
         session.user.username = token?.screen_name;
+        session.user.provider = token?.provider;
         session.user.publicAddress = token?.publicAddress;
         session.user.profile_image_url = token?.profile_image_url;
       }
+
       return session;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       const dbUser = await prisma.user.findFirst({
         where: { email: token?.email },
       });
@@ -114,15 +146,54 @@ export const authOptions: AuthOptions = {
         return token;
       }
 
-      return {
-        id: dbUser.id,
-        name: dbUser.name,
-        email: dbUser.email,
-        role: dbUser.role,
-        username: dbUser.screen_name,
-        publicAddress: dbUser.publicAddress,
-        profile_image_url: dbUser.profile_image_url,
-      };
+      const provider = account?.provider || token?.provider;
+
+      switch (provider) {
+        case "google":
+          return {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.google_email,
+            role: dbUser.role,
+            username: dbUser.google_username,
+            provider,
+            publicAddress: dbUser.publicAddress,
+            profile_image_url: dbUser.profile_image_url,
+          };
+        case "discord":
+          return {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.discord_email,
+            role: dbUser.role,
+            username: dbUser.discord_username,
+            provider,
+            publicAddress: dbUser.publicAddress,
+            profile_image_url: dbUser.profile_image_url,
+          };
+        case "twitter":
+          return {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.twitter_email,
+            role: dbUser.role,
+            username: dbUser.twitter_username,
+            provider,
+            publicAddress: dbUser.publicAddress,
+            profile_image_url: dbUser.profile_image_url,
+          };
+        default:
+          return {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: dbUser.email,
+            role: dbUser.role,
+            username: dbUser.screen_name,
+            provider: account?.provider || token?.provider,
+            publicAddress: dbUser.publicAddress,
+            profile_image_url: dbUser.profile_image_url,
+          };
+      }
     },
   },
 
