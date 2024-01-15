@@ -17,7 +17,7 @@ export const ConfirmationModal = ({
   paragraph: string;
   confirmButtonText: string;
   confirmButtonClick: () => void;
-  confirmButtonStyle: "delete" | "unfollow" | "logout";
+  confirmButtonStyle: "delete" | "unfollow" | "buyfollower" | "logout";
   cancelButtonText: string;
   cancelButtonClick: () => void;
   logo?: React.ReactNode;
@@ -48,9 +48,14 @@ export const ConfirmationModal = ({
         <button
           onClick={confirmButtonClick}
           className={`${styles.confirm} ${
-            styles[confirmButtonStyle as "delete" | "unfollow" | "logout"]
-          }
-        }`}
+            styles[
+              confirmButtonStyle as
+                | "delete"
+                | "unfollow"
+                | "buyfollower"
+                | "logout"
+            ]
+          }`}
         >
           {confirmButtonText}
         </button>

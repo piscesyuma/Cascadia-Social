@@ -16,6 +16,7 @@ export * from "./components/followers";
 export * from "./components/following";
 export * from "./types";
 export * from "./hooks/use-follow";
+export * from "./hooks/use-buy-follower";
 export * from "./hooks/use-user";
 export * from "./hooks/use-users";
 export * from "./utils/following";

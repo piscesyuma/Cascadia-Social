@@ -86,10 +86,10 @@ model User {
   tweets             Tweet[]
   likes              Like[]
   reputations        Reputation[]
-  downvotes          Downvote[]
-  upvotes            Upvote[]
+  votes              Vote[]
   followers          User[]         @relation(name: "Followers")
   following          User[]         @relation(name: "Followers")
+  transactions       Transaction[]
   retweets           Retweet[]
   bookmarks          Bookmark[]
   sent_messages      Message[]      @relation("receiver")
@@ -97,6 +97,17 @@ model User {
   conversations      Conversation[]
   pinned_tweet       Tweet?         @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
   pinned_tweet_id    String?
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [follower_id], references: [id])
+  user_id     String
+  follower_id String
+  balance     Float
+  amount      Float
+  description String
+  createdAt   DateTime @default(now())
 }
 
 model Tweet {
@@ -119,8 +130,7 @@ model Tweet {
   author_id               String
   media                   Media[]
   likes                   Like[]
-  downvotes               Downvote[]
-  upvotes                 Upvote[]
+  votes                   Vote[]
   retweets                Retweet[]
   quotes                  Tweet[]    @relation("quoted_tweet")
   quoted_tweet_id         String?
@@ -161,22 +171,14 @@ model Reputation {
   created_at        DateTime @default(now())
 }
 
-model Downvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
-}
-
-model Upvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
+model Vote {
+  id          String   @id @default(cuid())
+  tweet       Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id    String
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  vote_status String
+  created_at  DateTime @default(now())
 }
 
 model Retweet {
