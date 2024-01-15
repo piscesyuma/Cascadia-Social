@@ -133,6 +133,39 @@
     gap: 1rem;
   }
 
+  .socials {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+
+    .link {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title {
+        font-weight: var(--fw-600);
+      }
+
+      .detail {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid var(--clr-border);
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .item {
+        display: flex;
+        gap: 10px;
+        font-size: var(--fs-pico);
+        font-weight: var(--fw-400);
+      }
+    }
+  }
+
   @include mq("medium") {
     max-width: 600px;
     height: fit-content;

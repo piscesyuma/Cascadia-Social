@@ -1,23 +1,21 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { AuthOptions } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
-import { SiweMessage } from "siwe";
 
-import {
-  DISCORD_CLIENT_ID,
-  DISCORD_CLIENT_SECRET,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET,
-  TWITTER_CLIENT_ID,
-  TWITTER_CLIENT_SECRET,
-} from "@/config";
 import { prisma } from "@/lib/prisma";
 
-import { google } from "./auth-providers/google";
+import {
+  credentials,
+  crypto,
+  discord,
+  github,
+  google,
+  twitter,
+} from "./auth-providers";
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -27,8 +25,65 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async signIn() {
+    async signIn(params) {
+      const { account, user, profile } = params;
+
+      if (account && account.provider === "crypto") {
+        return "/";
+      }
+
+      const currentSession = await getServerSession(authOptions);
+
+      const currentUserId = currentSession?.user.id as string;
+
+      if (user.email && account && currentUserId) {
+        // Fetch the user with this email
+        const existingUser = await prisma.user.findUnique({
+          where: { id: currentUserId },
+        });
+
+        // If the user exists update their discord_email
+        if (existingUser?.id) {
+          const currentUser: any = user;
+
+          await prisma.user.update({
+            where: { id: existingUser.id },
+            data: {
+              ...user,
+              id: existingUser.id,
+              email: existingUser.email,
+              name: existingUser.name,
+              screen_name: existingUser.screen_name || currentUser.screen_name,
+              image: existingUser.image || currentUser.image,
+              profile_image_url:
+                existingUser.profile_image_url || currentUser.profile_image_url,
+              profile_banner_url:
+                existingUser.profile_banner_url ||
+                currentUser.profile_banner_url,
+            },
+          });
+
+          return "/";
+        }
+      }
+
       const isAllowedToSignIn = true;
+
+      if (account && profile && account.provider === "discord") {
+        const discordEmail = profile.email;
+        // find user with discordEmail in the DB
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            discord_email: discordEmail,
+          },
+        });
+
+        // if discordEmail is not same with normal email, use normal user
+        if (existingUser) {
+          user.email = existingUser.email;
+        }
+      }
+
       if (isAllowedToSignIn) {
         return true;
       } else {
@@ -80,105 +135,10 @@ export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider(google),
-    GithubProvider({
-      clientId: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-    }),
-    TwitterProvider({
-      clientId: TWITTER_CLIENT_ID,
-      clientSecret: TWITTER_CLIENT_SECRET,
-    }),
-    DiscordProvider({
-      clientId: DISCORD_CLIENT_ID,
-      clientSecret: DISCORD_CLIENT_SECRET,
-    }),
-    CredentialsProvider({
-      id: "crypto",
-      name: "Crypto Wallet Auth",
-      credentials: {
-        message: { label: "Message", type: "text" },
-        publicAddress: { label: "Public Address", type: "text" },
-        signedNonce: { label: "Signed Nonce", type: "text" },
-      },
-      async authorize(
-        credentials:
-          | Record<"message" | "publicAddress" | "signedNonce", string>
-          | undefined,
-        // req: Pick<RequestInternal, "body" | "headers" | "method" | "query">,
-      ) {
-        if (!credentials) throw new Error("Invalid credentials");
-
-        // Get user from database with their generated nonce
-        const user = await prisma.user.findUnique({
-          where: { publicAddress: credentials.publicAddress },
-          include: { cryptoLoginNonce: true },
-        });
-
-        if (!user?.cryptoLoginNonce) throw new Error("Invalid Nonce");
-
-        // Everything is fine, clear the nonce and return the user
-        await prisma.cryptoLoginNonce.delete({ where: { userId: user.id } });
-
-        // Compute the signer address from the saved nonce and the received signature
-        const message: any = JSON.parse(credentials?.message);
-        if (message.chainId && typeof message.chainId === "number") {
-          const siwe = new SiweMessage(message);
-          const result = await siwe.verify({
-            signature: credentials.signedNonce,
-            nonce: user.cryptoLoginNonce.nonce,
-          });
-
-          if (!result.success) throw new Error("Invalid Signature");
-
-          // Check that the signer address matches the public address
-
-          // Check that the nonce is not expired
-          if (user.cryptoLoginNonce.expires < new Date())
-            throw new Error("Expired Nonce");
-
-          return user;
-        } else if (typeof message.chainId === "string") {
-          return user;
-        } else {
-          throw new Error("The wallet address is incorrect.");
-        }
-      },
-    }),
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      id: "credentials",
-      name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        email: { label: "Email", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        try {
-          const user = await prisma.user.findFirst({
-            where: { email: credentials?.email },
-          });
-
-          // If no error and we have user data, return it
-          if (user) {
-            return user;
-          } else {
-            throw new Error("Invalid user");
-          }
-        } catch (error) {
-          // Return null if user data could not be retrieved
-          throw new Error("The username or password you entered is incorrect.");
-        }
-      },
-    }),
+    GithubProvider(github),
+    TwitterProvider(twitter),
+    DiscordProvider(discord),
+    CredentialsProvider(crypto),
+    CredentialsProvider(credentials),
   ],
 };

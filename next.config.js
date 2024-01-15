@@ -8,6 +8,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "bzquotasibuzwyhlneqp.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+      },
     ],
   },
 

@@ -48,6 +48,9 @@ CREATE TABLE "User" (
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "discord_id" TEXT,
+    "discord_username" TEXT,
+    "discord_email" TEXT,
     "image" TEXT,
     "password" TEXT,
     "role" TEXT NOT NULL DEFAULT 'user',
@@ -235,6 +238,15 @@ CREATE UNIQUE INDEX "User_screen_name_key" ON "User"("screen_name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_username_key" ON "User"("discord_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_id_key" ON "User"("discord_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_email_key" ON "User"("discord_email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Hashtag_hashtag_key" ON "Hashtag"("hashtag");
