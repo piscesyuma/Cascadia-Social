@@ -8,7 +8,9 @@ export const following = ({
   session_owner_id: string;
 }): boolean => {
   return user
-    ? user?.followers?.some((follower) => follower.id === session_owner_id)
+    ? user?.followers?.some(
+        (follower) => follower.followed_id === session_owner_id,
+      )
     : false;
 };
 

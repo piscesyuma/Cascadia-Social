@@ -23,7 +23,7 @@ export const PersonDetails = ({ author }: { author: IUser }) => {
     user: author,
     session_owner_id: session?.user?.id,
   });
-
+  console.table(author);
   return (
     <div
       role="button"
