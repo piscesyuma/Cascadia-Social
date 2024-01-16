@@ -6,7 +6,8 @@ import {
   VOTINESCROW,
 } from "../../../config";
 
-const cooldownTimestamp = MAX_LOCK_PERIOD_IN_DAYS * 24 * 60 * 60;
+// const cooldownTimestamp = MAX_LOCK_PERIOD_IN_DAYS * 24 * 60 * 60;
+const cooldownTimestamp = 600;
 
 export const useUnlockAction = () => {
   const { address } = useAccount();

@@ -185,7 +185,7 @@ export const RedeemActions = ({
     address: FEEDISTRIBUTOR.address as `0x${string}`,
     abi: FEEDISTRIBUTOR.abi,
     functionName: "burn",
-    args: [parseEther(amount)],
+    args: [address, parseEther(amount)],
     account: address,
     onSuccess: () => {},
     onError: (err) => {
@@ -267,14 +267,32 @@ export const RedeemActions = ({
           case RedeemType.REDEEM:
             isActive = isSuccessWriteRedeem && isSuccessRedeem;
             isLoading = !!isLoadingWriteRedeem || !!isLoadingRedeem;
-            disabled = !address || !!isLoadingWriteRedeem || !!isLoadingRedeem;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              (wETHAllowance &&
+                bnum(wETHAllowance.toString()).lt(
+                  parseEther(wETHAmount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteRedeem ||
+              !!isLoadingRedeem;
             onSubmit = writeRedeem;
             hash = redeem?.hash || "";
             break;
           case RedeemType.BURN:
             isActive = isSuccessWriteBurn && isSuccessBurn;
             isLoading = !!isLoadingWriteBurn || !!isLoadingBurn;
-            disabled = !address || !!isLoadingWriteBurn || !!isLoadingBurn;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteBurn ||
+              !!isLoadingBurn;
             onSubmit = writeBurn;
             hash = burn?.hash || "";
             break;

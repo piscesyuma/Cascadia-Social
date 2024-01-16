@@ -30,7 +30,7 @@ export const Price = ({ state }: { state: RedeemState }): JSX.Element => {
         <div>
           {`( $ ${numeral(
             bnum(state.wETHAmount).times(state.redeemInfo.wETHPrice),
-          ).format("0,0.0[000000]")} )`}
+          ).format("0,0.0[0000]")} )`}
         </div>
       </div>
     </div>
