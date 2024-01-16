@@ -31,6 +31,8 @@ export async function GET(
         name: true,
         screen_name: true,
         email: true,
+        discord_username: true,
+        discord_email: true,
         profile_image_url: true,
         profile_banner_url: true,
         reputation_count: true,

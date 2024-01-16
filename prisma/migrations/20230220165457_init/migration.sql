@@ -48,6 +48,15 @@ CREATE TABLE "User" (
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "google_id" TEXT,
+    "google_username" TEXT,
+    "google_email" TEXT,
+    "discord_id" TEXT,
+    "discord_username" TEXT,
+    "discord_email" TEXT,
+    "twitter_id" TEXT,
+    "twitter_username" TEXT,
+    "twitter_email" TEXT,
     "image" TEXT,
     "password" TEXT,
     "role" TEXT NOT NULL DEFAULT 'user',
@@ -226,6 +235,33 @@ CREATE UNIQUE INDEX "User_screen_name_key" ON "User"("screen_name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_google_id_key" ON "User"("google_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_google_username_key" ON "User"("google_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_google_email_key" ON "User"("google_email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_id_key" ON "User"("discord_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_username_key" ON "User"("discord_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_email_key" ON "User"("discord_email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_id_key" ON "User"("twitter_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_username_key" ON "User"("twitter_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_email_key" ON "User"("twitter_email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Hashtag_hashtag_key" ON "Hashtag"("hashtag");

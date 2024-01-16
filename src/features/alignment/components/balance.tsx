@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import { LoadingCircle } from "@/components/elements/loading-spinner";
 import useHasMounted from "@/hooks/use-mounted";
 
-import { SwapIcon } from "../assets/swap-icon";
+import { BackArrowIcon } from "../assets/back-arrow-icon";
 import { PRETTY_DATE_FORMAT } from "../config";
 import { useAlign } from "../hooks/use-align";
 import useNumbers, { FNumFormats } from "../hooks/use-numbers";
@@ -72,8 +72,8 @@ export const Balance = ({ changeTab }: { changeTab: () => void }) => {
             </>
           )}
         </div>
-        <button className={styles.swap} onClick={() => changeTab()}>
-          <SwapIcon />
+        <button className={styles.next} onClick={() => changeTab()}>
+          <BackArrowIcon />
         </button>
       </div>
 
