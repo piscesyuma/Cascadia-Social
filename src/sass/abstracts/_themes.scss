@@ -121,69 +121,69 @@
 
   // Dark theme
   @media (prefers-color-scheme: dark) {
-    --clr-background: #{$default-background};
+    --clr-background: #{$dark-background};
 
-    --clr-primary: #{$default-primary};
-    --clr-primary-hover: #{$default-primary-hover};
-    --clr-primary-active: #{$default-primary-active};
-    --clr-primary-disabled: #{$default-primary-disabled};
-    --clr-primary-opacity: #{$default-primary-opacity};
+    --clr-primary: #{$dark-primary};
+    --clr-primary-hover: #{$dark-primary-hover};
+    --clr-primary-active: #{$dark-primary-active};
+    --clr-primary-disabled: #{$dark-primary-disabled};
+    --clr-primary-opacity: #{$dark-primary-opacity};
 
-    --clr-secondary: #{$default-secondary};
-    --clr-secondary-hover: #{$default-secondary-hover};
-    --clr-secondary-active: #{$default-secondary-active};
+    --clr-secondary: #{$dark-secondary};
+    --clr-secondary-hover: #{$dark-secondary-hover};
+    --clr-secondary-active: #{$dark-secondary-active};
 
-    --clr-tertiary: #{$default-tertiary};
+    --clr-tertiary: #{$dark-tertiary};
 
-    --clr-nav-hover: #{$default-nav-hover};
-    --clr-nav-active: #{$default-nav-active};
+    --clr-nav-hover: #{$dark-nav-hover};
+    --clr-nav-active: #{$dark-nav-active};
 
-    --clr-trends-background: #{$default-trends-background};
-    --clr-trends-hover: #{$default-trends-hover};
-    --clr-trends-active: #{$default-trends-active};
+    --clr-trends-background: #{$dark-trends-background};
+    --clr-trends-hover: #{$dark-trends-hover};
+    --clr-trends-active: #{$dark-trends-active};
 
-    --clr-connect-background: #{$default-connect-background};
-    --clr-connect-hover: #{$default-connect-hover};
-    --clr-connect-active: #{$default-connect-active};
+    --clr-connect-background: #{$dark-connect-background};
+    --clr-connect-hover: #{$dark-connect-hover};
+    --clr-connect-active: #{$dark-connect-active};
 
-    --clr-connect-button-hover: #{$default-connect-button-hover};
-    --clr-connect-button-active: #{$default-connect-button-active};
+    --clr-connect-button-hover: #{$dark-connect-button-hover};
+    --clr-connect-button-active: #{$dark-connect-button-active};
 
-    --clr-options-hover: #{$default-options-hover};
-    --clr-options-active: #{$default-options-active};
+    --clr-options-hover: #{$dark-options-hover};
+    --clr-options-active: #{$dark-options-active};
 
-    --clr-tweet-hover: #{$default-tweet-hover};
+    --clr-tweet-hover: #{$dark-tweet-hover};
 
-    --clr-comment-hover: #{$default-comment-hover};
-    --clr-comment-active: #{$default-comment-active};
+    --clr-comment-hover: #{$dark-comment-hover};
+    --clr-comment-active: #{$dark-comment-active};
 
-    --clr-heart-hover: #{$default-heart-hover};
-    --clr-heart-active: #{$default-heart-active};
+    --clr-heart-hover: #{$dark-heart-hover};
+    --clr-heart-active: #{$dark-heart-active};
 
-    --clr-retweet-hover: #{$default-retweet-hover};
-    --clr-retweet-active: #{$default-retweet-active};
+    --clr-retweet-hover: #{$dark-retweet-hover};
+    --clr-retweet-active: #{$dark-retweet-active};
 
-    --clr-search-background: #{$default-search-background};
+    --clr-search-background: #{$dark-search-background};
 
-    --clr-logo: #{$default-logo};
-    --clr-logo-hover: #{$default-logo-hover};
-    --clr-logo-active: #{$default-logo-active};
+    --clr-logo: #{$dark-logo};
+    --clr-logo-hover: #{$dark-logo-hover};
+    --clr-logo-active: #{$dark-logo-active};
 
-    --clr-border: #{$default-border};
-    --clr-auth-border: #{$default-auth-border};
+    --clr-border: #{$dark-border};
+    --clr-auth-border: #{$dark-auth-border};
 
-    --clr-signout-background: #{$default-signout-background};
-    --clr-signout-logout-hover: #{$default-signout-logout-hover};
-    --clr-signout-logout-active: #{$default-signout-logout-active};
-    --clr-signout-cancel-hover: #{$default-signout-cancel-hover};
-    --clr-signout-cancel-active: #{$default-signout-cancel-active};
+    --clr-signout-background: #{$dark-signout-background};
+    --clr-signout-logout-hover: #{$dark-signout-logout-hover};
+    --clr-signout-logout-active: #{$dark-signout-logout-active};
+    --clr-signout-cancel-hover: #{$dark-signout-cancel-hover};
+    --clr-signout-cancel-active: #{$dark-signout-cancel-active};
 
-    --clr-message-background: #{$default-message-background};
-    --clr-conversation-actions-hover: #{$default-conversation-actions-hover};
-    --clr-conversation-actions-active: #{$default-conversation-actions-active};
-    --clr-conversation-delete-hover: #{$default-conversation-delete-hover};
-    --clr-conversation-delete-active: #{$default-conversation-delete-active};
-    --clr-message-input-background: #{$default-message-input-background};
+    --clr-message-background: #{$dark-message-background};
+    --clr-conversation-actions-hover: #{$dark-conversation-actions-hover};
+    --clr-conversation-actions-active: #{$dark-conversation-actions-active};
+    --clr-conversation-delete-hover: #{$dark-conversation-delete-hover};
+    --clr-conversation-delete-active: #{$dark-conversation-delete-active};
+    --clr-message-input-background: #{$dark-message-input-background};
   }
 
   // Default color

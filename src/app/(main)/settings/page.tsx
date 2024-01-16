@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { VerifiedIcon } from "@/assets/verified-icon";
 import { EllipsisWrapper } from "@/components/elements/ellipsis-wrapper";
-import { ColorPicker } from "@/features/color-picker";
 import { FontSizeCustomization } from "@/features/font-size-customization";
 import { Header, SettingsHeader } from "@/features/header";
 import { Avatar } from "@/features/profile";
@@ -51,7 +50,7 @@ const Settings = () => {
         </article>
 
         <FontSizeCustomization />
-        <ColorPicker />
+        {/* <ColorPicker /> */}
         <ThemePicker />
       </div>
     </div>

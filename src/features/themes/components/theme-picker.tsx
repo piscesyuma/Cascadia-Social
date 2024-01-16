@@ -21,7 +21,7 @@ export const ThemePicker = () => {
       : false;
 
   const [currentTheme, setCurrentTheme] = useState(
-    theme ?? (prefersDarkMode ? "theme-default" : "theme-light"),
+    theme ?? (prefersDarkMode ? "theme-dark" : "theme-light"),
   );
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
