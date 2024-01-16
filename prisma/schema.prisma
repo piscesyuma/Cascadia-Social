@@ -4,7 +4,7 @@ generator client {
 
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
-  output = "../public/docs"
+  output   = "../public/docs"
 }
 
 datasource db {
@@ -54,26 +54,26 @@ enum UserRole {
 }
 
 model User {
-  id                 String         @id @default(cuid())
+  id                 String            @id @default(cuid())
   name               String
-  screen_name        String         @unique @default(cuid())
+  screen_name        String            @unique @default(cuid())
   location           String?
   url                String?
   description        String?
   detail             String?
-  protected          Boolean        @default(false)
-  verified           Boolean        @default(false)
-  email              String?        @unique
+  protected          Boolean           @default(false)
+  verified           Boolean           @default(false)
+  email              String?           @unique
   emailVerified      DateTime?
   image              String?
   password           String?
-  role               UserRole       @default(USER)
-  created_at         DateTime       @default(now())
-  followers_count    Int            @default(0)
-  friends_count      Int            @default(0)
-  favorites_count    Int            @default(0)
-  statuses_count     Int            @default(0)
-  reputation_count   Int            @default(0)
+  role               UserRole          @default(USER)
+  created_at         DateTime          @default(now())
+  followers_count    Int               @default(0)
+  friends_count      Int               @default(0)
+  favorites_count    Int               @default(0)
+  statuses_count     Int               @default(0)
+  reputation_count   Int               @default(0)
   profile_banner_url String?
   profile_image_url  String?
   publicAddress      String?           @unique // Added to enable crypto authentication
@@ -84,16 +84,25 @@ model User {
   likes              Like[]
   reputations        Reputation[]
   votes              Vote[]
-  followers          User[]         @relation(name: "Followers")
-  following          User[]         @relation(name: "Followers")
+  followers          Follower[]        @relation("follower")
+  following          Follower[]        @relation("followed")
   transactions       Transaction[]
   retweets           Retweet[]
   bookmarks          Bookmark[]
-  sent_messages      Message[]      @relation("receiver")
-  received_messages  Message[]      @relation("sender")
+  sent_messages      Message[]         @relation("receiver")
+  received_messages  Message[]         @relation("sender")
   conversations      Conversation[]
-  pinned_tweet       Tweet?         @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
+  pinned_tweet       Tweet?            @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
   pinned_tweet_id    String?
+}
+
+model Follower {
+  id          String   @id @default(cuid())
+  follower    User     @relation(name: "follower", fields: [follower_id], references: [id])
+  follower_id String
+  followed    User     @relation(name: "followed", fields: [followed_id], references: [id])
+  followed_id String
+  created_at  DateTime @default(now())
 }
 
 model Transaction {
@@ -104,7 +113,7 @@ model Transaction {
   balance     Float
   amount      Float
   description String
-  createdAt   DateTime @default(now())
+  created_at  DateTime @default(now())
 }
 
 model Tweet {
@@ -226,8 +235,8 @@ model Conversation {
 }
 
 model CryptoLoginNonce {
-  userId     String   @unique
-  nonce      String
-  expires    DateTime
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String   @unique
+  nonce   String
+  expires DateTime
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

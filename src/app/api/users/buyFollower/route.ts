@@ -71,7 +71,7 @@ export async function PUT(request: Request) {
     // Get the last transaction of the buyer from the database
     const buyerLastTransaction = await prisma.transaction.findFirst({
       where: { user_id: session_owner_id },
-      orderBy: { createdAt: "desc" },
+      orderBy: { created_at: "desc" },
     });
 
     // If last transaction of buyer does not exist, initialize balance
@@ -105,7 +105,7 @@ export async function PUT(request: Request) {
     // Get the last transaction of the follower from the database
     const followerLastTransaction = await prisma.transaction.findFirst({
       where: { user_id: user_id },
-      orderBy: { createdAt: "desc" },
+      orderBy: { created_at: "desc" },
     });
 
     if (followerLastTransaction) {
@@ -125,7 +125,7 @@ export async function PUT(request: Request) {
     // Get the last transaction of the system from the database
     const followerSystemTransaction = await prisma.transaction.findFirst({
       where: { user_id: "Cascadia" },
-      orderBy: { createdAt: "desc" },
+      orderBy: { created_at: "desc" },
     });
 
     if (followerSystemTransaction) {
@@ -254,7 +254,7 @@ const processTransaction = async (
       balance: balance,
       amount: amount,
       description: description,
-      createdAt: new Date(),
+      created_at: new Date(),
     },
   });
 

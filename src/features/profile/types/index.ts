@@ -1,12 +1,12 @@
-import { User, Like, Reputation, Transaction } from "@prisma/client";
+import { User, Like, Reputation, Transaction, Follower } from "@prisma/client";
 
 import { ITweet } from "@/features/tweets";
 import { IBookmark } from "@/features/tweets";
 
 export interface IUser extends User {
   tweets: ITweet[];
-  followers: User[];
-  following: User[];
+  followers: Follower[];
+  following: Follower[];
   transactions: ITransaction[];
   likes: ILike[];
   bookmarks: IBookmark[];
