@@ -48,6 +48,15 @@ CREATE TABLE "User" (
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "google_id" TEXT,
+    "google_username" TEXT,
+    "google_email" TEXT,
+    "discord_id" TEXT,
+    "discord_username" TEXT,
+    "discord_email" TEXT,
+    "twitter_id" TEXT,
+    "twitter_username" TEXT,
+    "twitter_email" TEXT,
     "image" TEXT,
     "password" TEXT,
     "role" TEXT NOT NULL DEFAULT 'user',
@@ -56,7 +65,7 @@ CREATE TABLE "User" (
     "friends_count" INTEGER NOT NULL DEFAULT 0,
     "favorites_count" INTEGER NOT NULL DEFAULT 0,
     "statuses_count" INTEGER NOT NULL DEFAULT 0,
-    "reputation_count" INTEGER NOT NULL DEFAULT 0,
+    "reputation_count" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "profile_banner_url" TEXT,
     "profile_image_url" TEXT,
     "pinned_tweet_id" TEXT,
@@ -131,23 +140,14 @@ CREATE TABLE "Reputation" (
 );
 
 -- CreateTable
-CREATE TABLE "Downvote" (
+CREATE TABLE "Vote" (
     "id" TEXT NOT NULL,
     "tweet_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
+    "vote_status" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Downvote_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Upvote" (
-    "id" TEXT NOT NULL,
-    "tweet_id" TEXT NOT NULL,
-    "user_id" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "Upvote_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Vote_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -237,6 +237,33 @@ CREATE UNIQUE INDEX "User_screen_name_key" ON "User"("screen_name");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_google_id_key" ON "User"("google_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_google_username_key" ON "User"("google_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_google_email_key" ON "User"("google_email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_id_key" ON "User"("discord_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_username_key" ON "User"("discord_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_discord_email_key" ON "User"("discord_email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_id_key" ON "User"("twitter_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_username_key" ON "User"("twitter_username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_twitter_email_key" ON "User"("twitter_email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Hashtag_hashtag_key" ON "Hashtag"("hashtag");
 
 -- CreateIndex
@@ -285,16 +312,10 @@ ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") RE
 ALTER TABLE "Reputation" ADD CONSTRAINT "Reputation_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Vote" ADD CONSTRAINT "Vote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Downvote" ADD CONSTRAINT "Downvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Upvote" ADD CONSTRAINT "Upvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Vote" ADD CONSTRAINT "Vote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Retweet" ADD CONSTRAINT "Retweet_tweet_id_fkey" FOREIGN KEY ("tweet_id") REFERENCES "Tweet"("id") ON DELETE CASCADE ON UPDATE CASCADE;

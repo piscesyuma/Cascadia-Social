@@ -18,7 +18,7 @@ import { AlignButton } from "../align-button";
 import styles from "./styles/lock-actions.module.scss";
 
 // const cooldownTimestamp = MAX_LOCK_PERIOD_IN_DAYS * 24 * 60 * 60;
-const cooldownTimestamp = 300;
+const cooldownTimestamp = 600;
 
 export const LockActions = ({
   lockType,
@@ -213,23 +213,24 @@ export const LockActions = ({
   return (
     <div className={styles.container}>
       <div className={styles.actions}>
-        {actionsStatus.map((status: ActionStatusType, index: number) => (
-          <div key={index} className={styles.actionItem}>
-            {!status.isActive && (
-              <div className={styles.inActive}>{index + 1}</div>
-            )}
-            {status.isActive && (
-              <div className={styles.active}>
-                <CheckIcon />
-              </div>
-            )}
-            {status.isLoading && (
-              <div className={styles.loading}>
-                <LoadingCircle size="40px" strokewidth={1} />
-              </div>
-            )}
-          </div>
-        ))}
+        {actionsStatus.length > 1 &&
+          actionsStatus.map((status: ActionStatusType, index: number) => (
+            <div key={index} className={styles.actionItem}>
+              {!status.isActive && (
+                <div className={styles.inActive}>{index + 1}</div>
+              )}
+              {status.isActive && (
+                <div className={styles.active}>
+                  <CheckIcon />
+                </div>
+              )}
+              {status.isLoading && (
+                <div className={styles.loading}>
+                  <LoadingCircle size="40px" strokewidth={1} />
+                </div>
+              )}
+            </div>
+          ))}
       </div>
 
       {actionsStatus.map((status: ActionStatusType, index: number) => (

@@ -29,12 +29,14 @@ export const RedeemActions = ({
   amount,
   wETHAmount,
   setAmount,
+  redeemConfirmed,
   onConfirm,
 }: {
   redeemType: RedeemType[] | undefined;
   amount: string;
   wETHAmount: string;
   setAmount: (lockAmount: string) => void;
+  redeemConfirmed: boolean;
   onConfirm: () => void;
 }) => {
   const [actionDetails, setActionDetails] = useState<ActionDetailType[]>([]);
@@ -177,6 +179,29 @@ export const RedeemActions = ({
     });
 
   const {
+    data: redeemAll,
+    writeAsync: writeRedeemAll,
+    isSuccess: isSuccessWriteRedeemAll,
+    isLoading: isLoadingWriteRedeemAll,
+  } = useContractWrite({
+    address: REDEEM.address as `0x${string}`,
+    abi: REDEEM.abi,
+    functionName: "redeemAllCCToken",
+    args: [],
+    account: address,
+    onSuccess: () => {},
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  const { isLoading: isLoadingRedeemAll, isSuccess: isSuccessRedeemAll } =
+    useWaitForTransaction({
+      hash: redeemAll?.hash,
+      enabled: redeemAll && isSuccessWriteRedeemAll,
+    });
+
+  const {
     data: burn,
     writeAsync: writeBurn,
     isSuccess: isSuccessWriteBurn,
@@ -185,7 +210,7 @@ export const RedeemActions = ({
     address: FEEDISTRIBUTOR.address as `0x${string}`,
     abi: FEEDISTRIBUTOR.abi,
     functionName: "burn",
-    args: [parseEther(amount)],
+    args: [address, parseEther(amount)],
     account: address,
     onSuccess: () => {},
     onError: (err) => {
@@ -197,6 +222,29 @@ export const RedeemActions = ({
     useWaitForTransaction({
       hash: burn?.hash,
       enabled: burn && isSuccessWriteBurn,
+    });
+
+  const {
+    data: burnAll,
+    writeAsync: writeBurnAll,
+    isSuccess: isSuccessWriteBurnAll,
+    isLoading: isLoadingWriteBurnAll,
+  } = useContractWrite({
+    address: FEEDISTRIBUTOR.address as `0x${string}`,
+    abi: FEEDISTRIBUTOR.abi,
+    functionName: "burn_all",
+    args: [address],
+    account: address,
+    onSuccess: () => {},
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  const { isLoading: isLoadingBurnAll, isSuccess: isSuccessBurnAll } =
+    useWaitForTransaction({
+      hash: burnAll?.hash,
+      enabled: burnAll && isSuccessWriteBurnAll,
     });
 
   const handleSubmit = useCallback(() => {
@@ -222,10 +270,11 @@ export const RedeemActions = ({
           case RedeemType.APPROVE_CCC_REDEEM:
             isActive =
               (cCCAllowanceRedeem &&
-                bnum(cCCAllowanceRedeem.toString()).gt(
+                bnum(cCCAllowanceRedeem.toString()).gte(
                   parseEther(amount).toString(),
                 )) ||
-              (isSuccessWriteApproveCCCRedeem && isSuccessApproveCCCRedeem);
+              (isSuccessWriteApproveCCCRedeem && isSuccessApproveCCCRedeem) ||
+              redeemConfirmed;
             isLoading =
               !!isLoadingWriteApproveCCCRedeem || !!isLoadingApproveCCCRedeem;
             disabled =
@@ -238,10 +287,11 @@ export const RedeemActions = ({
           case RedeemType.APPROVE_CCC_FEE:
             isActive =
               (cCCAllowanceFee &&
-                bnum(cCCAllowanceFee.toString()).gt(
+                bnum(cCCAllowanceFee.toString()).gte(
                   parseEther(amount).toString(),
                 )) ||
-              (isSuccessWriteApproveCCCFee && isSuccessApproveCCCFee);
+              (isSuccessWriteApproveCCCFee && isSuccessApproveCCCFee) ||
+              redeemConfirmed;
             isLoading =
               !!isLoadingWriteApproveCCCFee || !!isLoadingApproveCCCFee;
             disabled =
@@ -254,10 +304,11 @@ export const RedeemActions = ({
           case RedeemType.APPROVE_WETH:
             isActive =
               (wETHAllowance &&
-                bnum(wETHAllowance.toString()).gt(
+                bnum(wETHAllowance.toString()).gte(
                   parseEther(wETHAmount).toString(),
                 )) ||
-              (isSuccessWriteApproveWETH && isSuccessApproveWETH);
+              (isSuccessWriteApproveWETH && isSuccessApproveWETH) ||
+              redeemConfirmed;
             isLoading = !!isLoadingWriteApproveWETH || !!isLoadingApproveWETH;
             disabled =
               !address || !!isLoadingWriteApproveWETH || !!isLoadingApproveWETH;
@@ -265,18 +316,72 @@ export const RedeemActions = ({
             hash = approveWETH?.hash || "";
             break;
           case RedeemType.REDEEM:
-            isActive = isSuccessWriteRedeem && isSuccessRedeem;
+            isActive =
+              (isSuccessWriteRedeem && isSuccessRedeem) || redeemConfirmed;
             isLoading = !!isLoadingWriteRedeem || !!isLoadingRedeem;
-            disabled = !address || !!isLoadingWriteRedeem || !!isLoadingRedeem;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              (wETHAllowance &&
+                bnum(wETHAllowance.toString()).lt(
+                  parseEther(wETHAmount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteRedeem ||
+              !!isLoadingRedeem;
             onSubmit = writeRedeem;
             hash = redeem?.hash || "";
             break;
+          case RedeemType.REDEEMALL:
+            isActive =
+              (isSuccessWriteRedeemAll && isSuccessRedeemAll) ||
+              redeemConfirmed;
+            isLoading = !!isLoadingWriteRedeemAll || !!isLoadingRedeemAll;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              (wETHAllowance &&
+                bnum(wETHAllowance.toString()).lt(
+                  parseEther(wETHAmount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteRedeemAll ||
+              !!isLoadingRedeemAll;
+            onSubmit = writeRedeemAll;
+            hash = redeemAll?.hash || "";
+            break;
           case RedeemType.BURN:
-            isActive = isSuccessWriteBurn && isSuccessBurn;
+            isActive = (isSuccessWriteBurn && isSuccessBurn) || redeemConfirmed;
             isLoading = !!isLoadingWriteBurn || !!isLoadingBurn;
-            disabled = !address || !!isLoadingWriteBurn || !!isLoadingBurn;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteBurn ||
+              !!isLoadingBurn;
             onSubmit = writeBurn;
             hash = burn?.hash || "";
+            break;
+          case RedeemType.BURNALL:
+            isActive =
+              (isSuccessWriteBurnAll && isSuccessBurnAll) || redeemConfirmed;
+            isLoading = !!isLoadingWriteBurnAll || !!isLoadingBurnAll;
+            disabled =
+              (cCCAllowanceFee &&
+                bnum(cCCAllowanceFee.toString()).lt(
+                  parseEther(amount).toString(),
+                )) ||
+              !address ||
+              !!isLoadingWriteBurnAll ||
+              !!isLoadingBurnAll;
+            onSubmit = writeBurnAll;
+            hash = burnAll?.hash || "";
             break;
           default:
             break;
@@ -328,6 +433,17 @@ export const RedeemActions = ({
     isLoadingWriteApproveCCCFee,
     isLoadingApproveCCCFee,
     approveCCCFee?.hash,
+    isSuccessWriteRedeemAll,
+    isSuccessRedeemAll,
+    isLoadingWriteRedeemAll,
+    isLoadingRedeemAll,
+    redeemAll?.hash,
+    isSuccessWriteBurnAll,
+    isSuccessBurnAll,
+    isLoadingWriteBurnAll,
+    isLoadingBurnAll,
+    burnAll?.hash,
+    redeemConfirmed,
   ]);
 
   useEffect(() => {
@@ -356,9 +472,19 @@ export const RedeemActions = ({
           tooltip = "Confirm Redeem";
           break;
 
+        case RedeemType.REDEEMALL:
+          label = "Confirm";
+          tooltip = "Confirm Redeem All";
+          break;
+
         case RedeemType.BURN:
           label = "Confirm";
           tooltip = "Confirm Burn";
+          break;
+
+        case RedeemType.BURNALL:
+          label = "Confirm";
+          tooltip = "Confirm Burn All";
           break;
 
         default:

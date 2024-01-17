@@ -11,8 +11,12 @@
   --clr-dark-hover: #0e0f11;
   --clr-dark-active: #061f30;
 
+  --clr-default: #09142f;
+  --clr-default-hover: #0d1d47;
+  --clr-default-active: #06102b;
+
   --clr-dim: #15202b;
-  --clr-dim-hover: #162d3f;
+  --clr-dim-hover: #19364d;
   --clr-dim-active: #173952;
 
   --clr-blue: #1d9bf0;
@@ -386,6 +390,72 @@
   --clr-conversation-delete-hover: #{$dim-conversation-delete-hover};
   --clr-conversation-delete-active: #{$dim-conversation-delete-active};
   --clr-message-input-background: #{$dim-message-input-background};
+}
+
+.theme-default {
+  --clr-background: #{$default-background};
+
+  --clr-primary: #{$default-primary};
+  --clr-primary-hover: #{$default-primary-hover};
+  --clr-primary-active: #{$default-primary-active};
+  --clr-primary-disabled: #{$default-primary-disabled};
+  --clr-primary-opacity: #{$default-primary-opacity};
+
+  --clr-secondary: #{$default-secondary};
+  --clr-secondary-hover: #{$default-secondary-hover};
+  --clr-secondary-active: #{$default-secondary-active};
+
+  --clr-tertiary: #{$default-tertiary};
+
+  --clr-nav-hover: #{$default-nav-hover};
+  --clr-nav-active: #{$default-nav-active};
+
+  --clr-trends-background: #{$default-trends-background};
+  --clr-trends-hover: #{$default-trends-hover};
+  --clr-trends-active: #{$default-trends-active};
+
+  --clr-connect-background: #{$default-connect-background};
+  --clr-connect-hover: #{$default-connect-hover};
+  --clr-connect-active: #{$default-connect-active};
+
+  --clr-connect-button-hover: #{$default-connect-button-hover};
+  --clr-connect-button-active: #{$default-connect-button-active};
+
+  --clr-options-hover: #{$default-options-hover};
+  --clr-options-active: #{$default-options-active};
+
+  --clr-tweet-hover: #{$default-tweet-hover};
+
+  --clr-comment-hover: #{$default-comment-hover};
+  --clr-comment-active: #{$default-comment-active};
+
+  --clr-heart-hover: #{$default-heart-hover};
+  --clr-heart-active: #{$default-heart-active};
+
+  --clr-retweet-hover: #{$default-retweet-hover};
+  --clr-retweet-active: #{$default-retweet-active};
+
+  --clr-search-background: #{$default-search-background};
+
+  --clr-logo: #{$default-logo};
+  --clr-logo-hover: #{$default-logo-hover};
+  --clr-logo-active: #{$default-logo-active};
+
+  --clr-border: #{$default-border};
+  --clr-auth-border: #{$default-auth-border};
+
+  --clr-signout-background: #{$default-signout-background};
+  --clr-signout-logout-hover: #{$default-signout-logout-hover};
+  --clr-signout-logout-active: #{$default-signout-logout-active};
+  --clr-signout-cancel-hover: #{$default-signout-cancel-hover};
+  --clr-signout-cancel-active: #{$default-signout-cancel-active};
+
+  --clr-message-background: #{$default-message-background};
+  --clr-conversation-actions-hover: #{$default-conversation-actions-hover};
+  --clr-conversation-actions-active: #{$default-conversation-actions-active};
+  --clr-conversation-delete-hover: #{$default-conversation-delete-hover};
+  --clr-conversation-delete-active: #{$default-conversation-delete-active};
+  --clr-message-input-background: #{$default-message-input-background};
 }
 
 // PRIMARY COLORS

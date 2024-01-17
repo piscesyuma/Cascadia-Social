@@ -23,14 +23,14 @@ export const Price = ({ state }: { state: RedeemState }): JSX.Element => {
           <Tooltip
             text={`${state.amount} * ${state.redeemInfo.ccPrice} * 100 / ${state.redeemInfo.wETHPrice} / ${state.redeemInfo.discount}`}
           >
-            {numeral(state.wETHAmount).format("0,0.0[0000]")}
+            {numeral(state.wETHAmount).format("0,0.0[000]")}
           </Tooltip>
         </div>
 
         <div>
           {`( $ ${numeral(
             bnum(state.wETHAmount).times(state.redeemInfo.wETHPrice),
-          ).format("0,0.0[000000]")} )`}
+          ).format("0,0.0[000]")} )`}
         </div>
       </div>
     </div>

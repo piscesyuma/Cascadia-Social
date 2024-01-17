@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 
 import { CommentIcon } from "@/assets/comment-icon";
 import { PinIcon } from "@/assets/pin-icon";
-import { SortIcon } from "@/assets/sort-icon";
 import { TrashIcon } from "@/assets/trash-icon";
 import { MenuItem } from "@/components/elements/menu";
 import { useUser } from "@/features/profile";
@@ -26,17 +25,6 @@ export const TweetOwnerMenu = ({
   const { data: session } = useSession();
   const { data: user } = useUser({ id: session?.user?.id });
   const pinMutation = usePinTweet();
-
-  const sortByVote =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem("sortByVote") || ""
-      : "";
-
-  const saveToLocalStorage = (sortByVote: string) => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("sortByVote", sortByVote);
-    }
-  };
 
   return (
     <>
@@ -110,26 +98,6 @@ export const TweetOwnerMenu = ({
       >
         <EditIcon /> Edit with Premium
       </MenuItem>
-
-      {sortByVote === "sort_by_vote" ? (
-        <MenuItem
-          onClick={() => {
-            setIsMenuOpen(false);
-            saveToLocalStorage("sort_by_date");
-          }}
-        >
-          <SortIcon /> Sort by date
-        </MenuItem>
-      ) : (
-        <MenuItem
-          onClick={() => {
-            setIsMenuOpen(false);
-            saveToLocalStorage("sort_by_vote");
-          }}
-        >
-          <SortIcon /> Sort by vote
-        </MenuItem>
-      )}
     </>
   );
 };

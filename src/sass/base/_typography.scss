@@ -1,5 +1,7 @@
 @use "./font-size" as *;
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
 @font-face {
   font-family: "TwitterCascadia";
   src: url("/fonts/Cascadia-Light.woff2") format("woff2");
@@ -41,7 +43,7 @@
 }
 
 :root {
-  --ff-base: "TwitterCascadia", sans-serif;
+  --ff-base: "Inter", "TwitterCascadia", sans-serif;
   --ff-icons: "Material Icons", sans-serif;
 
   // font weights

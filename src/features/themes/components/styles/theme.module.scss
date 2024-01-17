@@ -89,6 +89,23 @@
     }
   }
 
+  .theme-default {
+    background-color: var(--clr-default);
+    color: var(--clr-light);
+
+    &:hover {
+      .circle {
+        background-color: var(--clr-default-hover);
+      }
+    }
+
+    &:active {
+      .circle {
+        background-color: var(--clr-default-active);
+      }
+    }
+  }
+
   input[type="radio"] {
     position: absolute;
 
@@ -125,6 +142,12 @@
     &:active + .theme_dark {
       .circle {
         background-color: var(--clr-dark-active);
+      }
+    }
+
+    &:active + .theme_default {
+      .circle {
+        background-color: var(--clr-default-active);
       }
     }
 

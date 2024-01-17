@@ -61,17 +61,24 @@ export async function PUT(request: Request) {
   }
 
   try {
-    await prisma.user.update({
-      where: {
-        id: user_id,
-      },
+    // await prisma.user.update({
+    //   where: {
+    //     id: user_id,
+    //   },
 
+    //   data: {
+    //     followers: {
+    //       connect: {
+    //         id: session_owner_id,
+    //       },
+    //     },
+    //   },
+    // });
+
+    await prisma.follower.create({
       data: {
-        followers: {
-          connect: {
-            id: session_owner_id,
-          },
-        },
+        follower_id: user_id,
+        followed_id: session_owner_id,
       },
     });
 
@@ -108,19 +115,35 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    await prisma.user.update({
-      where: {
-        id: user_id,
-      },
+    // await prisma.user.update({
+    //   where: {
+    //     id: user_id,
+    //   },
 
-      data: {
-        followers: {
-          disconnect: {
-            id: session_owner_id,
-          },
-        },
+    //   data: {
+    //     followers: {
+    //       disconnect: {
+    //         id: session_owner_id,
+    //       },
+    //     },
+    //   },
+    // });
+
+    const delFollower = await prisma.follower.findFirst({
+      where: {
+        follower_id: user_id,
+        followed_id: session_owner_id,
       },
+      orderBy: { created_at: "desc" },
     });
+
+    if (delFollower) {
+      await prisma.follower.delete({
+        where: {
+          id: delFollower.id,
+        },
+      });
+    }
 
     return NextResponse.json(
       {

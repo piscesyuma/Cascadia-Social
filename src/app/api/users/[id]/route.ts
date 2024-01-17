@@ -31,6 +31,8 @@ export async function GET(
         name: true,
         screen_name: true,
         email: true,
+        discord_username: true,
+        discord_email: true,
         profile_image_url: true,
         profile_banner_url: true,
         reputation_count: true,
@@ -43,12 +45,14 @@ export async function GET(
         verified: true,
         followers: true,
         following: true,
+        transactions: true,
         reputations: true,
 
         _count: {
           select: {
             followers: true,
             following: true,
+            transactions: true,
           },
         },
       },

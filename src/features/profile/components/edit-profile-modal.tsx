@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useCallback, useRef, useState } from "react";
 
 import { BackArrowIcon } from "@/assets/back-arrow-icon";
 import { CloseIcon } from "@/assets/close-icon";
@@ -12,6 +14,7 @@ import { updateProfile } from "../api/update-profile";
 import { CameraIcon } from "../assets/camera-icon";
 import { IProfile, IUser } from "../types";
 
+import { SocialButton } from "./social-button";
 import styles from "./styles/edit-profile-modal.module.scss";
 
 export const EditProfileModal = ({
@@ -22,6 +25,8 @@ export const EditProfileModal = ({
   closeModal: () => void;
 }) => {
   const innerWidth = window.innerWidth;
+
+  const pathname = usePathname();
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -62,6 +67,12 @@ export const EditProfileModal = ({
   const bannerInputRef = useRef<HTMLInputElement>(null);
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
+  const [isLoading, setIsLoading] = useState({
+    google: false,
+    discord: false,
+    twitter: false,
+  });
+
   const chooseImage = async (event: any, type: string) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -83,6 +94,20 @@ export const EditProfileModal = ({
 
     reader.readAsDataURL(file);
   };
+
+  const handleSignIn = useCallback(
+    (provider: string) => {
+      setIsLoading((prev) => ({ ...prev, [provider]: true }));
+
+      signIn(provider, {
+        callbackUrl: pathname,
+        redirect: false,
+      }).finally(() => {
+        setIsLoading((prev) => ({ ...prev, [provider]: false }));
+      });
+    },
+    [pathname],
+  );
 
   return (
     <motion.div
@@ -252,6 +277,69 @@ export const EditProfileModal = ({
           }}
           maxLength={100}
         />
+
+        <div className={styles.socials}>
+          <div className={styles.link}>
+            <div className={styles.title}>Google</div>
+            {user.google_username && user.google_email && (
+              <div className={styles.detail}>
+                <div className={styles.item}>
+                  <div>Name</div>
+                  <div>{user.google_username}</div>
+                </div>
+                <div className={styles.item}>
+                  <div>Email</div>
+                  <div>{user.google_email}</div>
+                </div>
+              </div>
+            )}
+            <SocialButton
+              text="Link Google"
+              isLoading={isLoading.google}
+              onClick={() => handleSignIn("google")}
+            />
+          </div>
+          <div className={styles.link}>
+            <div className={styles.title}>Discord</div>
+            {user.discord_username && user.discord_email && (
+              <div className={styles.detail}>
+                <div className={styles.item}>
+                  <div>Name</div>
+                  <div>{user.discord_username}</div>
+                </div>
+                <div className={styles.item}>
+                  <div>Email</div>
+                  <div>{user.discord_email}</div>
+                </div>
+              </div>
+            )}
+            <SocialButton
+              text="Link Discord"
+              isLoading={isLoading.discord}
+              onClick={() => handleSignIn("discord")}
+            />
+          </div>
+          <div className={styles.link}>
+            <div className={styles.title}>Twitter</div>
+            {user.twitter_username && user.twitter_email && (
+              <div className={styles.detail}>
+                <div className={styles.item}>
+                  <div>Name</div>
+                  <div>{user.twitter_username}</div>
+                </div>
+                <div className={styles.item}>
+                  <div>Email</div>
+                  <div>{user.twitter_email}</div>
+                </div>
+              </div>
+            )}
+            <SocialButton
+              text="Link Twitter"
+              isLoading={isLoading.twitter}
+              onClick={() => handleSignIn("twitter")}
+            />
+          </div>
+        </div>
       </div>
     </motion.div>
   );

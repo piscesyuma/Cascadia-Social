@@ -79,8 +79,7 @@ export async function GET(request: Request) {
         },
 
         likes: true,
-        upvotes: true,
-        downvotes: true,
+        votes: true,
         media: true,
         retweets: true,
 
@@ -105,9 +104,9 @@ export async function GET(request: Request) {
       },
 
       orderBy: {
-        ...(sortByVote === "sort_by_vote"
-          ? { vote_count: "desc" }
-          : { created_at: "desc" }),
+        ...(sortByVote === "sort_by_date"
+          ? { created_at: "desc" }
+          : { vote_count: "desc" }),
       },
     });
 

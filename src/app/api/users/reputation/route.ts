@@ -35,12 +35,12 @@ export async function POST(request: Request) {
     );
   }
 
+  if (user_id === session_owner_id) {
+    return NextResponse.json({ message: "You can't vote for yourself!" });
+  }
+
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: user_id,
-      },
-    });
+    const user = await findUser(user_id);
 
     const reputation = await prisma.reputation.findFirst({
       where: {
@@ -57,30 +57,20 @@ export async function POST(request: Request) {
         },
       });
 
+      const sessionUser = await findUser(session_owner_id);
+
+      if (sessionUser) {
+        await updateSessionUser(
+          session_owner_id,
+          sessionUser.reputation_count,
+          -0.3,
+        );
+      }
+
       if (user && reputation.reputation_status === "up") {
-        await prisma.user.update({
-          where: {
-            id: user_id,
-          },
-
-          data: {
-            reputation_count: {
-              decrement: 1,
-            },
-          },
-        });
+        await decrementUserReputation(user_id, 1);
       } else if (user && reputation.reputation_status === "down") {
-        await prisma.user.update({
-          where: {
-            id: user_id,
-          },
-
-          data: {
-            reputation_count: {
-              increment: 1,
-            },
-          },
-        });
+        await incrementUserReputation(user_id, 1);
       }
 
       return NextResponse.json({ message: "User reputation changed" });
@@ -105,29 +95,9 @@ export async function POST(request: Request) {
 
       if (user && opositeReputation) {
         if (opositeReputation.reputation_status === "down") {
-          await prisma.user.update({
-            where: {
-              id: user_id,
-            },
-
-            data: {
-              reputation_count: {
-                increment: 2,
-              },
-            },
-          });
+          await incrementUserReputation(user_id, 2);
         } else if (opositeReputation.reputation_status === "up") {
-          await prisma.user.update({
-            where: {
-              id: user_id,
-            },
-
-            data: {
-              reputation_count: {
-                decrement: 2,
-              },
-            },
-          });
+          await decrementUserReputation(user_id, 2);
         }
 
         await prisma.reputation.delete({
@@ -137,29 +107,19 @@ export async function POST(request: Request) {
         });
       } else if (user) {
         if (reputation_status === "up") {
-          await prisma.user.update({
-            where: {
-              id: user_id,
-            },
-
-            data: {
-              reputation_count: {
-                increment: 1,
-              },
-            },
-          });
+          await incrementUserReputation(user_id, 1);
         } else if (reputation_status === "down") {
-          await prisma.user.update({
-            where: {
-              id: user_id,
-            },
+          await decrementUserReputation(user_id, 1);
+        }
 
-            data: {
-              reputation_count: {
-                decrement: 1,
-              },
-            },
-          });
+        const sessionUser = await findUser(session_owner_id);
+
+        if (sessionUser) {
+          await updateSessionUser(
+            session_owner_id,
+            sessionUser.reputation_count,
+            +0.3,
+          );
         }
       }
 
@@ -171,4 +131,61 @@ export async function POST(request: Request) {
       error: error.message,
     });
   }
+}
+
+async function findUser(id: string) {
+  return prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+}
+
+async function updateSessionUser(
+  session_owner_id: string,
+  reputation_count: number,
+  changeReputationAmount: number,
+) {
+  await prisma.user.update({
+    where: {
+      id: session_owner_id,
+    },
+
+    data: {
+      reputation_count: {
+        set:
+          Math.round(
+            (reputation_count + changeReputationAmount + Number.EPSILON) * 100,
+          ) / 100,
+      },
+    },
+  });
+}
+
+async function decrementUserReputation(id: string, count: number) {
+  await prisma.user.update({
+    where: {
+      id: id,
+    },
+
+    data: {
+      reputation_count: {
+        decrement: count,
+      },
+    },
+  });
+}
+
+async function incrementUserReputation(id: string, count: number) {
+  await prisma.user.update({
+    where: {
+      id: id,
+    },
+
+    data: {
+      reputation_count: {
+        increment: count,
+      },
+    },
+  });
 }

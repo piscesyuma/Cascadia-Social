@@ -10,18 +10,20 @@ import { EditIcon } from "@/assets/edit-icon";
 import { LocationIcon } from "@/assets/location-icon";
 import { MessageIcon } from "@/assets/message-icon";
 import { ReceiveNotificationsIcon } from "@/assets/notifications-icon";
+import { BuyFollowerButton } from "@/components/elements/buy-follower-button";
 import { EllipsisWrapper } from "@/components/elements/ellipsis-wrapper";
 import { FollowButton } from "@/components/elements/follow-button";
 import { Modal } from "@/components/elements/modal";
 
 import { WebsiteIcon } from "../assets/website-icon";
 import { IUser } from "../types";
-import { following } from "../utils/following";
+import { following, buying, getAmount } from "../utils/following";
 
 import { EditDetailModal } from "./edit-detail-modal";
 import { EditProfileModal } from "./edit-profile-modal";
 import { InspectImageModal } from "./inspect-image-modal";
 import { ReputationButtons } from "./reputation-buttons";
+import { ReputationModal } from "./reputation-modal";
 import styles from "./styles/user-info.module.scss";
 import { UserJoinDate } from "./user-join-date";
 
@@ -30,6 +32,7 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [isEditDetailModalOpen, setIsEditDetailModalOpen] = useState(false);
+  const [isReputationModalOpen, setIsReputationModalOpen] = useState(false);
 
   const [inspectModal, setInspectModal] = useState({
     isOpen: false,
@@ -41,6 +44,19 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
     user: user,
     session_owner_id: session?.user?.id,
   });
+
+  const isBuying = buying({
+    user: user,
+    session_owner_id: session?.user?.id,
+  });
+
+  const amount = getAmount({ user: user });
+
+  const saveToLocalStorage = () => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("userReputation", "userReputation");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -150,12 +166,20 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                 isFollowing={isFollowing}
                 username={user?.email?.split("@")[0]}
               />
+
+              <BuyFollowerButton
+                user_id={user?.id}
+                session_owner_id={session?.user?.id}
+                isBuying={isBuying}
+                amount={amount}
+                username={user?.email?.split("@")[0]}
+              />
             </div>
           )}
         </div>
 
         <div className={styles.user}>
-          <div className={styles.container}>
+          <div className={styles.nameContainer}>
             <div className={styles.name}>
               <EllipsisWrapper>
                 <h2>{user?.name}</h2>
@@ -166,7 +190,10 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
               </EllipsisWrapper>
             </div>
 
-            <ReputationButtons user={user} />
+            <ReputationButtons
+              user={user}
+              setIsReputationModalOpen={setIsReputationModalOpen}
+            />
           </div>
 
           {user?.description && (
@@ -274,6 +301,26 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                   source: "",
                   sourceType: "",
                 });
+              }}
+            />
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isReputationModalOpen && (
+          <Modal
+            onClose={() => {
+              saveToLocalStorage();
+              setIsEditProfileModalOpen(false);
+            }}
+            disableScroll={true}
+            background="var(--clr-modal-background)"
+          >
+            <ReputationModal
+              setIsReputationModalOpen={() => {
+                saveToLocalStorage();
+                setIsReputationModalOpen(false);
               }}
             />
           </Modal>

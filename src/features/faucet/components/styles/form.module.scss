@@ -1,41 +1,17 @@
 .container {
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-
-    h2 {
-      color: var(--clr-secondary);
-      font-size: var(--fs-h2);
-      font-weight: var(--fw-700);
-    }
-
-    svg {
-      cursor: pointer;
-      fill: var(--clr-secondary);
-      width: 25px;
-      height: 25px;
-    }
-  }
-
   .form {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding: 1rem;
+    padding: 1rem 0.75em;
 
     .input {
       width: 100%;
       font-size: var(--fs-micro);
       font-weight: var(--fw-500);
-      border-radius: 1.5em;
+      border-radius: 10px;
       border: 1px solid var(--clr-border);
       padding: 1em;
     }
-  }
-
-  .actions {
-    padding: 0.75rem 1rem;
   }
 }

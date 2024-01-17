@@ -3,7 +3,7 @@
 
 .container {
   margin-bottom: 11px;
-  border-radius: 100vmax;
+  border-radius: 10px;
   padding: 0.75em;
   cursor: pointer;
   display: flex;
@@ -46,8 +46,8 @@
 
     .options {
       display: block;
-      width: var(--fs-h3);
-      height: var(--fs-h3);
+      width: var(--fs-h1);
+      height: var(--fs-h1);
       margin-left: auto;
 
       svg {

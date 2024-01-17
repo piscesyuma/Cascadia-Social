@@ -1,8 +1,7 @@
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 
-import { AppleLogo } from "../assets/apple-logo";
 import { DiscordLogo } from "../assets/discord-logo";
-import { GithubLogo } from "../assets/github-logo";
 import { GoogleLogo } from "../assets/google-logo";
 import { TwitterLogo } from "../assets/twitter-logo";
 
@@ -12,7 +11,10 @@ import styles from "./styles/register-form.module.scss";
 export const RegisterForm = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>New to Cascadia?</h2>
+      <div className={styles.title}>
+        <h2>New to Cascadia?</h2>
+        <Image src="/hippo.png" alt="hippo" width={40} height={40} />
+      </div>
       <p className={styles.description}>
         Sign up now to get your own personalized timeline!
       </p>
@@ -26,16 +28,6 @@ export const RegisterForm = () => {
           }
           icon={<GoogleLogo />}
           text="Sign up with Google"
-        />
-
-        <AuthButton
-          onClick={() =>
-            signIn("github", {
-              callbackUrl: "/home",
-            })
-          }
-          icon={<GithubLogo />}
-          text="Sign up with Github"
         />
 
         <AuthButton
@@ -57,15 +49,6 @@ export const RegisterForm = () => {
           icon={<DiscordLogo />}
           text="Sign up with Discord"
         />
-
-        <AuthButton icon={<AppleLogo />} text="Sign up with Apple" />
-
-        <AuthButton icon={<GoogleLogo />} text="Create account" />
-      </div>
-
-      <div className={styles.terms}>
-        By signing up, you agree to the <a href="/">Terms of Service</a> and{" "}
-        <a href="/">Privacy Policy</a>, including <a href="/">Cookie Use</a>.
       </div>
     </div>
   );

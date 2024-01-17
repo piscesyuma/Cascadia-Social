@@ -29,10 +29,11 @@
   }
 
   .navItem {
+    width: 100%;
     padding: 0.75em;
     color: var(--clr-secondary);
     fill: var(--clr-secondary);
-    border-radius: 100vmax;
+    border-radius: 10px;
     display: grid;
     transition: all 0.1s ease-in-out;
 
@@ -47,7 +48,7 @@
     }
 
     .text {
-      font-size: var(--fs-h2);
+      font-size: var(--fs-h3);
       display: none;
     }
 

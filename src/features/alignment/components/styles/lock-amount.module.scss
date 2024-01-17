@@ -1,5 +1,5 @@
 .container {
-  padding: 0 1rem;
+  padding: 0 0.75rem;
 
   .wrapper {
     display: flex;
@@ -7,10 +7,10 @@
     gap: 10px;
     padding: 0.5em 0.75em;
     border: 1px solid var(--clr-border);
-    border-radius: 12px;
+    border-radius: 10px;
 
     &.exceed {
-      border: 1px solid var(--clr-rose);
+      border: 1px solid var(--clr-red);
     }
 
     .inputToken {
@@ -57,7 +57,7 @@
     }
 
     .exceed {
-      color: var(--clr-rose);
+      color: var(--clr-red);
       font-size: var(--fs-pico);
     }
   }

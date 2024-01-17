@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   padding: 0.7em;
-  border-radius: 100vmax;
+  border-radius: 10px;
   font-size: var(--fs-milli);
   font-weight: var(--fw-700);
   color: var(--clr-dark);
@@ -19,6 +19,7 @@
   }
 
   &:active {
+    transform: scale(0.95);
     background-color: var(--clr-auth-button-active);
   }
 

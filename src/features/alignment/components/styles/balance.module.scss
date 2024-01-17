@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
+    margin: 0.75rem 1rem;
 
     .balance {
       display: flex;
@@ -28,7 +28,7 @@
       }
     }
 
-    .swap {
+    .next {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -36,6 +36,7 @@
       svg {
         cursor: pointer;
         fill: var(--clr-secondary);
+        transform: rotate(180deg);
         width: 25px;
         height: 25px;
       }
@@ -46,7 +47,7 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-    padding: 1em;
+    margin: 1em 0.75em;
 
     .detail {
       display: flex;
@@ -60,7 +61,7 @@
         justify-content: center;
         flex-direction: column;
         padding: 0.5em;
-        border-radius: 15px;
+        border-radius: 10px;
         width: 100%;
         border: 1px solid var(--clr-border);
 
@@ -79,7 +80,7 @@
         justify-content: center;
         flex-direction: column;
         padding: 0.5em;
-        border-radius: 15px;
+        border-radius: 10px;
         width: 100%;
         border: 1px solid var(--clr-border);
 

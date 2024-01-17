@@ -58,7 +58,8 @@
   .alignment,
   .redeem {
     background-color: var(--clr-connect-background);
-    border-radius: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--clr-border);
   }
 
   @include mq("large") {

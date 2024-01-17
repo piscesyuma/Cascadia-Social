@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 import { Modal } from "@/components/elements/modal";
-import { ConnectWalletButton } from "@/features/web3";
 import useHasMounted from "@/hooks/use-mounted";
 import { useRedeemModal } from "@/stores/use-redeem-modal";
 
@@ -38,8 +37,17 @@ export const Redeem = () => {
     redeemInfo.wETHBalance,
   );
 
+  const isMaxAmount =
+    bnum(amount).gt(0) && bnum(amount).eq(redeemInfo.cCCBalance);
+
   const handleOpenModal = useCallback(
-    ({ isBurn = false }: { isBurn?: boolean }) => {
+    ({
+      isBurn = false,
+      isMaxAmount = false,
+    }: {
+      isBurn?: boolean;
+      isMaxAmount?: boolean;
+    }) => {
       const newRedeemType = () => {
         if (isBurn) {
           return [RedeemType.APPROVE_CCC_FEE, RedeemType.BURN];
@@ -49,10 +57,13 @@ export const Redeem = () => {
           return [
             RedeemType.APPROVE_CCC_REDEEM,
             RedeemType.APPROVE_WETH,
-            RedeemType.REDEEM,
+            isMaxAmount ? RedeemType.REDEEMALL : RedeemType.REDEEM,
           ];
         } else if (redeemInfo.claimStatus === 1) {
-          return [RedeemType.APPROVE_CCC_FEE, RedeemType.BURN];
+          return [
+            RedeemType.APPROVE_CCC_FEE,
+            isMaxAmount ? RedeemType.BURNALL : RedeemType.BURN,
+          ];
         }
         return [];
       };
@@ -78,27 +89,36 @@ export const Redeem = () => {
 
       <Price state={state} />
 
+      {redeemInfo.claimStatus === 1 && (
+        <div className={styles.error}>
+          cCC token claim has expired. Please burn cCC.
+        </div>
+      )}
+
       <div className={styles.actions}>
         {address ? (
           <>
+            {redeemInfo.claimStatus !== 1 && (
+              <RedeemButton
+                text={isMaxAmount ? "Convert All" : "Convert"}
+                disabled={
+                  state.redeemInfo.claimStatus !== 2 ||
+                  amountExceedsCCCTokenBalance ||
+                  amountExceedsWETHTokenBalance ||
+                  !bnum(amount).gt(0) ||
+                  !bnum(wETHAmount).gt(0)
+                }
+                onClick={() => handleOpenModal({ isMaxAmount })}
+              />
+            )}
             <RedeemButton
-              disabled={
-                state.redeemInfo.claimStatus !== 2 ||
-                amountExceedsCCCTokenBalance ||
-                amountExceedsWETHTokenBalance ||
-                !bnum(amount).gt(0) ||
-                !bnum(wETHAmount).gt(0)
-              }
-              onClick={() => handleOpenModal({})}
-            />
-            <RedeemButton
-              text="Burn"
+              text={isMaxAmount ? "Burn All" : "Burn"}
               disabled={amountExceedsCCCTokenBalance || !bnum(amount).gt(0)}
-              onClick={() => handleOpenModal({ isBurn: true })}
+              onClick={() => handleOpenModal({ isBurn: true, isMaxAmount })}
             />
           </>
         ) : (
-          <ConnectWalletButton text="Connect Wallet" />
+          <div className={styles.connect}>Please connect your wallet.</div>
         )}
       </div>
 

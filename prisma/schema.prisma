@@ -4,7 +4,7 @@ generator client {
 
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
-  output = "../public/docs"
+  output   = "../public/docs"
 }
 
 datasource db {
@@ -54,26 +54,35 @@ enum UserRole {
 }
 
 model User {
-  id                 String         @id @default(cuid())
+  id                 String            @id @default(cuid())
   name               String
-  screen_name        String         @unique @default(cuid())
+  screen_name        String            @unique @default(cuid())
   location           String?
   url                String?
   description        String?
   detail             String?
-  protected          Boolean        @default(false)
-  verified           Boolean        @default(false)
-  email              String?        @unique
+  protected          Boolean           @default(false)
+  verified           Boolean           @default(false)
+  email              String?           @unique
   emailVerified      DateTime?
+  google_id          String?           @unique
+  google_username    String?           @unique
+  google_email       String?           @unique
+  discord_id         String?           @unique
+  discord_username   String?           @unique
+  discord_email      String?           @unique
+  twitter_id         String?           @unique
+  twitter_username   String?           @unique
+  twitter_email      String?           @unique
   image              String?
   password           String?
-  role               UserRole       @default(USER)
-  created_at         DateTime       @default(now())
-  followers_count    Int            @default(0)
-  friends_count      Int            @default(0)
-  favorites_count    Int            @default(0)
-  statuses_count     Int            @default(0)
-  reputation_count   Int            @default(0)
+  role               UserRole          @default(USER)
+  created_at         DateTime          @default(now())
+  followers_count    Int               @default(0)
+  friends_count      Int               @default(0)
+  favorites_count    Int               @default(0)
+  statuses_count     Int               @default(0)
+  reputation_count   Float             @default(0)
   profile_banner_url String?
   profile_image_url  String?
   publicAddress      String?           @unique // Added to enable crypto authentication
@@ -83,17 +92,37 @@ model User {
   tweets             Tweet[]
   likes              Like[]
   reputations        Reputation[]
-  downvotes          Downvote[]
-  upvotes            Upvote[]
-  followers          User[]         @relation(name: "Followers")
-  following          User[]         @relation(name: "Followers")
+  votes              Vote[]
+  followers          Follower[]        @relation("follower")
+  following          Follower[]        @relation("followed")
+  transactions       Transaction[]
   retweets           Retweet[]
   bookmarks          Bookmark[]
-  sent_messages      Message[]      @relation("receiver")
-  received_messages  Message[]      @relation("sender")
+  sent_messages      Message[]         @relation("receiver")
+  received_messages  Message[]         @relation("sender")
   conversations      Conversation[]
-  pinned_tweet       Tweet?         @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
+  pinned_tweet       Tweet?            @relation("pinned_tweet", fields: [pinned_tweet_id], references: [id])
   pinned_tweet_id    String?
+}
+
+model Follower {
+  id          String   @id @default(cuid())
+  follower    User     @relation(name: "follower", fields: [follower_id], references: [id])
+  follower_id String
+  followed    User     @relation(name: "followed", fields: [followed_id], references: [id])
+  followed_id String
+  created_at  DateTime @default(now())
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [follower_id], references: [id])
+  user_id     String
+  follower_id String
+  balance     Float
+  amount      Float
+  description String
+  created_at  DateTime @default(now())
 }
 
 model Tweet {
@@ -116,8 +145,7 @@ model Tweet {
   author_id               String
   media                   Media[]
   likes                   Like[]
-  downvotes               Downvote[]
-  upvotes                 Upvote[]
+  votes                   Vote[]
   retweets                Retweet[]
   quotes                  Tweet[]    @relation("quoted_tweet")
   quoted_tweet_id         String?
@@ -158,22 +186,14 @@ model Reputation {
   created_at        DateTime @default(now())
 }
 
-model Downvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
-}
-
-model Upvote {
-  id         String   @id @default(cuid())
-  tweet      Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
-  tweet_id   String
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
+model Vote {
+  id          String   @id @default(cuid())
+  tweet       Tweet    @relation(fields: [tweet_id], references: [id], onDelete: Cascade)
+  tweet_id    String
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  vote_status String
+  created_at  DateTime @default(now())
 }
 
 model Retweet {
@@ -224,8 +244,8 @@ model Conversation {
 }
 
 model CryptoLoginNonce {
-  userId     String   @unique
-  nonce      String
-  expires    DateTime
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String   @unique
+  nonce   String
+  expires DateTime
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

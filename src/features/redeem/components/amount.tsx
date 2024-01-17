@@ -25,8 +25,6 @@ export const Amount = ({ state, setAmount }: IAmount): JSX.Element => {
   const { fNum2 } = useNumbers();
   const { address } = useAccount();
 
-  const [isMaxed, setIsMaxed] = useState<boolean>(false);
-
   const hasAmount = bnum(amount).gt(0);
   const hasBalance = bnum(redeemInfo.cCCBalance).gt(0);
 
@@ -40,12 +38,8 @@ export const Amount = ({ state, setAmount }: IAmount): JSX.Element => {
   const barColor = amountExceedsTokenBalance ? "red" : "primary";
 
   const setMax = useCallback(() => {
-    setAmount(bnum(redeemInfo.cCCBalance).minus(0.0005).toString()); // in case of max amount, minus gas price 0.0005 from balance --- temporarily
+    setAmount(redeemInfo.cCCBalance);
   }, [redeemInfo.cCCBalance, setAmount]);
-
-  useEffect(() => {
-    setIsMaxed(() => redeemInfo.cCCBalance === amount);
-  }, [redeemInfo.cCCBalance, amount]);
 
   return (
     <div className={styles.container}>
@@ -77,9 +71,6 @@ export const Amount = ({ state, setAmount }: IAmount): JSX.Element => {
               <ButtonLoadingSpinner width="1" height="1" />
             ) : (
               <div>{fNum2(redeemInfo.cCCBalance, FNumFormats.token)}</div>
-            )}
-            {hasBalance && (
-              <div>{!isMaxed ? <span></span> : <span>Max</span>}</div>
             )}
           </button>
 

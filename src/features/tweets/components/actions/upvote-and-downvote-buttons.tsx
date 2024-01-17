@@ -4,8 +4,7 @@ import { DownArrowIcon, DownArrowIconActive } from "@/assets/down-arrow-icon";
 import { UpArrowIcon, UpArrowIconActive } from "@/assets/up-arrow-icon";
 import { useJoinTwitter } from "@/features/auth";
 
-import { useDownvote } from "../../hooks/use-downvote";
-import { useUpvote } from "../../hooks/use-upvote";
+import { useVote } from "../../hooks/use-vote";
 import { ITweet } from "../../types";
 
 import styles from "./styles/actions.module.scss";
@@ -20,67 +19,22 @@ export const UpvoteAndDownVoteButtons = ({
   showStats?: boolean;
 }) => {
   const { data: session } = useSession();
-  const hasDownvoted = tweet?.downvotes?.some(
-    (downvote) => downvote.user_id === session?.user?.id,
+  const hasDownvoted = tweet?.votes?.some(
+    (votes) =>
+      votes.user_id === session?.user?.id && votes.vote_status === "down",
   );
 
-  const hasUpvoted = tweet?.upvotes?.some(
-    (upvote) => upvote.user_id === session?.user?.id,
+  const hasUpvoted = tweet?.votes?.some(
+    (votes) =>
+      votes.user_id === session?.user?.id && votes.vote_status === "up",
   );
 
   const setJoinTwitterData = useJoinTwitter((state) => state.setData);
 
-  const mutationDownvote = useDownvote();
-  const mutationUpvote = useUpvote();
+  const mutation = useVote();
 
   return (
     <div className={styles.voteContainer}>
-      <button
-        aria-label={hasDownvoted ? "Undownvote" : "Downvote"}
-        data-title={hasDownvoted ? "Undownvote" : "Downvote"}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          e.stopPropagation();
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (!session) {
-            setJoinTwitterData({
-              isModalOpen: true,
-              action: "downvote",
-              user: tweet?.author?.name || "user",
-            });
-          }
-          mutationDownvote.mutate({
-            tweetId: tweet?.id,
-            userId: session?.user?.id,
-          });
-        }}
-        className={`${styles.container} ${styles.downvote} ${
-          hasDownvoted ? styles.downvoted : ""
-        } `}
-      >
-        <span
-          className={`${styles.icon} ${
-            smallIcons ? styles.smallIcon : styles.bigIcons
-          }`}
-        >
-          {hasDownvoted ? <DownArrowIconActive /> : <DownArrowIcon />}
-        </span>
-      </button>
-      {showStats && tweet?.vote_count !== undefined && (
-        <span
-          className={
-            hasDownvoted
-              ? styles.statsDownvoted
-              : hasUpvoted
-                ? styles.statsUpvoted
-                : styles.stats
-          }
-        >
-          {tweet?.vote_count}
-        </span>
-      )}
       <button
         aria-label={hasUpvoted ? "Unupvote" : "Upvote"}
         data-title={hasUpvoted ? "Unupvote" : "Upvote"}
@@ -97,14 +51,13 @@ export const UpvoteAndDownVoteButtons = ({
               user: tweet?.author?.name || "user",
             });
           }
-          mutationUpvote.mutate({
+          mutation.mutate({
             tweetId: tweet?.id,
             userId: session?.user?.id,
+            vote_status: "up",
           });
         }}
-        className={`${styles.container} ${styles.upvote} ${
-          hasUpvoted ? styles.upvoted : ""
-        } `}
+        className={`${styles.container} ${styles.upvote}`}
       >
         <span
           className={`${styles.icon} ${
@@ -112,6 +65,41 @@ export const UpvoteAndDownVoteButtons = ({
           }`}
         >
           {hasUpvoted ? <UpArrowIconActive /> : <UpArrowIcon />}
+        </span>
+      </button>
+      {showStats && tweet?.vote_count !== undefined && (
+        <span className={styles.stats}>{tweet?.vote_count}</span>
+      )}
+      <button
+        aria-label={hasDownvoted ? "Undownvote" : "Downvote"}
+        data-title={hasDownvoted ? "Undownvote" : "Downvote"}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!session) {
+            setJoinTwitterData({
+              isModalOpen: true,
+              action: "downvote",
+              user: tweet?.author?.name || "user",
+            });
+          }
+          mutation.mutate({
+            tweetId: tweet?.id,
+            userId: session?.user?.id,
+            vote_status: "down",
+          });
+        }}
+        className={`${styles.container} ${styles.downvote}`}
+      >
+        <span
+          className={`${styles.icon} ${
+            smallIcons ? styles.smallIcon : styles.bigIcons
+          }`}
+        >
+          {hasDownvoted ? <DownArrowIconActive /> : <DownArrowIcon />}
         </span>
       </button>
     </div>

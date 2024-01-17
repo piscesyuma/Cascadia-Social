@@ -71,6 +71,7 @@ export const useAlign = () => {
     functionName: "get_user_cCC_status",
     args: [address],
     enabled: !!address,
+    watch: true,
   });
 
   const setLockAmount = useCallback(
