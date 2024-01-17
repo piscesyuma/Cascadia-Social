@@ -65,7 +65,7 @@ CREATE TABLE "User" (
     "friends_count" INTEGER NOT NULL DEFAULT 0,
     "favorites_count" INTEGER NOT NULL DEFAULT 0,
     "statuses_count" INTEGER NOT NULL DEFAULT 0,
-    "reputation_count" INTEGER NOT NULL DEFAULT 0,
+    "reputation_count" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "profile_banner_url" TEXT,
     "profile_image_url" TEXT,
     "pinned_tweet_id" TEXT,

@@ -24,13 +24,11 @@ export const UpArrowIcon = () => {
 export const UpArrowIconActive = () => {
   return (
     <svg
-      fill="#000000"
       width="24px"
       height="24px"
-      viewBox="0 0 20.00 20.00"
+      viewBox="-51.2 -51.2 614.40 614.40"
       xmlns="http://www.w3.org/2000/svg"
-      stroke="#000000"
-      strokeWidth="0.4"
+      fill="#000000"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -39,7 +37,8 @@ export const UpArrowIconActive = () => {
         strokeLinejoin="round"
       ></g>
       <g id="SVGRepo_iconCarrier">
-        <path d="M7 10v8h6v-8h5l-8-8-8 8h5z"></path>
+        {" "}
+        <path d="M 352.062 496 h -192 V 295.993 L 16.047 296 l -0.047 -36 L 256.318 17.364 L 496 257.7 v 38.278 l -143.938 0.006 Z Z"></path>{" "}
       </g>
     </svg>
   );

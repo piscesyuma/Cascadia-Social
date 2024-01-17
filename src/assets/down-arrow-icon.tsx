@@ -24,13 +24,11 @@ export const DownArrowIcon = () => {
 export const DownArrowIconActive = () => {
   return (
     <svg
-      fill="#000000"
       width="24px"
       height="24px"
-      viewBox="0 0 20 20"
+      viewBox="-51.2 -51.2 614.40 614.40"
       xmlns="http://www.w3.org/2000/svg"
-      stroke="#000000"
-      strokeWidth="0.42000000000000004"
+      fill="#000000"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
@@ -39,7 +37,8 @@ export const DownArrowIconActive = () => {
         strokeLinejoin="round"
       ></g>
       <g id="SVGRepo_iconCarrier">
-        <path d="M7 10V2h6v8h5l-8 8-8-8h5z"></path>
+        {" "}
+        <path d="M 255.682 494.636 L 16 254.3 V 216.024 l 143.937 -0.007 V 16 h 192 V 216.007 L 495.952 216 l -0.035 38.688 Z Z"></path>{" "}
       </g>
     </svg>
   );
