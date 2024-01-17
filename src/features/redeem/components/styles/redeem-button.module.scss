@@ -19,6 +19,7 @@
   }
 
   &:active {
+    transform: scale(0.95);
     background-color: var(--clr-auth-button-active);
   }
 

@@ -82,6 +82,7 @@ export const RedeemModal = ({
             amount={amount}
             wETHAmount={wETHAmount}
             redeemType={redeemType}
+            redeemConfirmed={redeemConfirmed}
             onConfirm={handleSuccess}
             setAmount={setAmount}
           />
