@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  padding: 0.75em 1em;
+  padding: 0.75em 0.75em 1em 0.75em;
 
   .header {
     font-size: var(--fs-pico);
@@ -14,10 +14,12 @@
   button:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    transform-origin: right;
   }
 
   button:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    transform-origin: left;
   }
 }

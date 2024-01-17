@@ -29,7 +29,6 @@ export const UnLockModal = ({
   const { veCCLockInfo } = state;
   const [unlockConfirmed, setUnLockConfirmed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
-  const [claimStatus, setClaimStatus] = useState<number>(0);
   const [unlockEndDate, setUnLockEndDate] = useState<string>("");
 
   const { maxLockEndDateTimestamp } = useLockEndDate(veCCLockInfo);
@@ -37,10 +36,9 @@ export const UnLockModal = ({
   const handleSuccess = useCallback(async () => {
     onRefetch().then(() => {
       setUnLockConfirmed(true);
-      setClaimStatus(veCCLockInfo.claimStatus);
       onGetVeCC();
     });
-  }, [onGetVeCC, onRefetch, veCCLockInfo.claimStatus]);
+  }, [onGetVeCC, onRefetch]);
 
   useEffect(() => {
     const lockEndDate =
@@ -98,7 +96,6 @@ export const UnLockModal = ({
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <UnLockSummary
-            claimStatus={claimStatus}
             unlockEndDate={unlockEndDate}
             unlockType={unlockType}
             veCCLockInfo={veCCLockInfo}

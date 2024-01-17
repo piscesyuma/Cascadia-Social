@@ -2,10 +2,13 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
+import { CoinIcon } from "@/assets/coin-icon";
 import { Modal } from "@/components/elements/modal";
 import useHasMounted from "@/hooks/use-mounted";
 import { useUnLockModal } from "@/stores/use-unlock-modal";
 
+import { ClockIcon } from "../assets/clock-icon";
+import { DownIcon } from "../assets/down-icon";
 import { UnLockType } from "../config";
 import { useAlign } from "../hooks/use-align";
 import { bnum } from "../utils";
@@ -81,17 +84,23 @@ export const UnLockAlignment = (): JSX.Element => {
       )}
       {canStartCooldown && address && (
         <AlignButton
+          direction="col"
           text="Cooldown"
+          icon={<ClockIcon />}
           onClick={() => handleShowPreviewModal(UnLockType.START_COOLDOWN)}
         />
       )}
       <AlignButton
         text="Claim"
+        direction="col"
+        icon={<CoinIcon />}
         disabled={!canClaim || !address}
         onClick={() => handleShowPreviewModal(UnLockType.CLAIM)}
       />
       <AlignButton
         text="Withdraw"
+        direction="col"
+        icon={<DownIcon />}
         disabled={!canWithdraw || !address}
         onClick={() => handleShowPreviewModal(UnLockType.WITHDRAW)}
       />
