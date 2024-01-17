@@ -23,6 +23,7 @@ import { EditDetailModal } from "./edit-detail-modal";
 import { EditProfileModal } from "./edit-profile-modal";
 import { InspectImageModal } from "./inspect-image-modal";
 import { ReputationButtons } from "./reputation-buttons";
+import { ReputationModal } from "./reputation-modal";
 import styles from "./styles/user-info.module.scss";
 import { UserJoinDate } from "./user-join-date";
 
@@ -31,6 +32,7 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
 
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [isEditDetailModalOpen, setIsEditDetailModalOpen] = useState(false);
+  const [isReputationModalOpen, setIsReputationModalOpen] = useState(false);
 
   const [inspectModal, setInspectModal] = useState({
     isOpen: false,
@@ -49,6 +51,12 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
   });
 
   const amount = getAmount({ user: user });
+
+  const saveToLocalStorage = () => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("userReputation", "userReputation");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -182,7 +190,10 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
               </EllipsisWrapper>
             </div>
 
-            <ReputationButtons user={user} />
+            <ReputationButtons
+              user={user}
+              setIsReputationModalOpen={setIsReputationModalOpen}
+            />
           </div>
 
           {user?.description && (
@@ -290,6 +301,26 @@ export const ProfileInfo = ({ user, id }: { user: IUser; id: string }) => {
                   source: "",
                   sourceType: "",
                 });
+              }}
+            />
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isReputationModalOpen && (
+          <Modal
+            onClose={() => {
+              saveToLocalStorage();
+              setIsEditProfileModalOpen(false);
+            }}
+            disableScroll={true}
+            background="var(--clr-modal-background)"
+          >
+            <ReputationModal
+              setIsReputationModalOpen={() => {
+                saveToLocalStorage();
+                setIsReputationModalOpen(false);
               }}
             />
           </Modal>

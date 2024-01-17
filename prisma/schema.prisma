@@ -82,7 +82,7 @@ model User {
   friends_count      Int               @default(0)
   favorites_count    Int               @default(0)
   statuses_count     Int               @default(0)
-  reputation_count   Int               @default(0)
+  reputation_count   Float             @default(0)
   profile_banner_url String?
   profile_image_url  String?
   publicAddress      String?           @unique // Added to enable crypto authentication

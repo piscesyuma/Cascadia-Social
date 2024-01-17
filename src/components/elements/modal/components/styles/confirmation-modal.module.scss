@@ -74,6 +74,23 @@
       }
     }
 
+    .reputation {
+      background-color: var(--clr-secondary);
+      color: var(--clr-background);
+
+      &:hover {
+        background-color: var(--clr-secondary-hover);
+      }
+
+      &:active {
+        background-color: var(--clr-secondary-active);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--clr-secondary);
+      }
+    }
+
     .unfollow {
       background-color: var(--clr-secondary);
       color: var(--clr-background);

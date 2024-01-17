@@ -57,9 +57,7 @@ export const UpvoteAndDownVoteButtons = ({
             vote_status: "up",
           });
         }}
-        className={`${styles.container} ${styles.upvote} ${
-          hasUpvoted ? styles.upvoted : ""
-        } `}
+        className={`${styles.container} ${styles.upvote}`}
       >
         <span
           className={`${styles.icon} ${
@@ -70,17 +68,7 @@ export const UpvoteAndDownVoteButtons = ({
         </span>
       </button>
       {showStats && tweet?.vote_count !== undefined && (
-        <span
-          className={
-            hasDownvoted
-              ? styles.statsDownvoted
-              : hasUpvoted
-                ? styles.statsUpvoted
-                : styles.stats
-          }
-        >
-          {tweet?.vote_count}
-        </span>
+        <span className={styles.stats}>{tweet?.vote_count}</span>
       )}
       <button
         aria-label={hasDownvoted ? "Undownvote" : "Downvote"}
@@ -104,9 +92,7 @@ export const UpvoteAndDownVoteButtons = ({
             vote_status: "down",
           });
         }}
-        className={`${styles.container} ${styles.downvote} ${
-          hasDownvoted ? styles.downvoted : ""
-        } `}
+        className={`${styles.container} ${styles.downvote}`}
       >
         <span
           className={`${styles.icon} ${

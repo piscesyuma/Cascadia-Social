@@ -193,7 +193,7 @@
       background-color: var(--clr-comment-hover);
 
       svg {
-        fill: var(--clr-blue);
+        fill: var(--clr-tertiary);
       }
     }
   }
@@ -203,18 +203,18 @@
       background-color: var(--clr-comment-active);
 
       svg {
-        fill: var(--clr-blue);
+        fill: var(--clr-tertiary);
       }
     }
   }
 
   &:focus-visible {
     .icon {
-      outline: 2px solid var(--clr-blue);
+      outline: 2px solid var(--clr-tertiary);
       background-color: var(--clr-comment-hover);
 
       svg {
-        fill: var(--clr-blue);
+        fill: var(--clr-tertiary);
       }
     }
   }
@@ -223,31 +223,31 @@
 .upvote {
   &:hover {
     .icon {
-      background-color: var(--clr-heart-hover);
+      background-color: var(--clr-comment-hover);
 
       svg {
-        fill: var(--clr-rose);
+        fill: var(--clr-tertiary);
       }
     }
   }
 
   &:active {
     .icon {
-      background-color: var(--clr-heart-active);
+      background-color: var(--clr-comment-active);
 
       svg {
-        fill: var(--clr-rose);
+        fill: var(--clr-tertiary);
       }
     }
   }
 
   &:focus-visible {
     .icon {
-      outline: 2px solid var(--clr-rose);
-      background-color: var(--clr-heart-hover);
+      outline: 2px solid var(--clr-tertiary);
+      background-color: var(--clr-comment-hover);
 
       svg {
-        fill: var(--clr-rose);
+        fill: var(--clr-tertiary);
       }
     }
   }
@@ -295,22 +295,6 @@
 
   .stats {
     color: var(--clr-rose);
-  }
-}
-
-.downvoted {
-  .icon {
-    svg {
-      fill: var(--clr-blue);
-    }
-  }
-}
-
-.upvoted {
-  .icon {
-    svg {
-      fill: var(--clr-rose);
-    }
   }
 }
 
