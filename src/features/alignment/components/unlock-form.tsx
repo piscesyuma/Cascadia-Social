@@ -78,7 +78,9 @@ export const UnLockAlignment = (): JSX.Element => {
     <div className={styles.container}>
       {showCooldown && address && (
         <AlignButton
+          direction="col"
           text="Realign"
+          icon={<ClockIcon />}
           onClick={() => handleShowPreviewModal(UnLockType.RELOCK)}
         />
       )}
